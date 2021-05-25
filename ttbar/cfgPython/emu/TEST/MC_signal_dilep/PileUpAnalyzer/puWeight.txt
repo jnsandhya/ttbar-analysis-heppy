@@ -1,0 +1,1 @@
+Average puWeight       :   0.9606 +-   0.0478
