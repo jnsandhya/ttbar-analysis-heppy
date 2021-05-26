@@ -481,7 +481,7 @@ from CMGTools.ttbar.analyzers.GenAnalyzer               import GenAnalyzer
 from CMGTools.ttbar.analyzers.GenMatcherAnalyzer        import GenMatcherAnalyzer
 from CMGTools.ttbar.analyzers.MCWeighter                import MCWeighter
 from CMGTools.ttbar.analyzers.NJetsAnalyzer             import NJetsAnalyzer
-#from CMGTools.ttbar.analyzers.METAnalyzer               import METAnalyzer
+from CMGTools.ttbar.analyzers.METAnalyzer               import METAnalyzer
 
 #"genmatcher = cfg.Analyzer(
 #    GenMatcherAnalyzer, 
@@ -499,12 +499,12 @@ gen_particles = cfg.Analyzer(GenAnalyzer,
                              genPtCut=8.
                              )
 
-#pfmetana = cfg.Analyzer(METAnalyzer,
-#                        name='PFMetana',
-#                        recoil_correction_file='HTT-utilities/RecoilCorrections/data/Type1_PFMET_2017.root',
-#                        met = 'pfmet',
-#                        apply_recoil_correction= True,#Recommendation states loose pfjetID for jet multiplicity but this WP is not supported anymore?
-#                        runFixEE2017= True)
+pfmetana = cfg.Analyzer(METAnalyzer,
+                        name='PFMetana',
+                        recoil_correction_file='HTT-utilities/RecoilCorrections/data/Type1_PFMET_2017.root',
+                        met = 'pfmet',
+                        apply_recoil_correction= True,#Recommendation states loose pfjetID for jet multiplicity but this WP is not supported anymore?
+                        runFixEE2017= True)
 
 lheweight = cfg.Analyzer(LHEWeightAnalyzer,
                          name="LHEWeightAnalyzer",
@@ -592,7 +592,7 @@ sequence = cfg.Sequence([
     pileup,
     njets_ana,
 #Met
-#    pfmetana,
+    pfmetana,
 # Ntple
     #debugger,
     ntuple

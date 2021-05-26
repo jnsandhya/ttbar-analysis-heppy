@@ -39,11 +39,11 @@ jets30 = Block(
     dijet_m = v(lambda x: (x[0].p4()+x[1].p4()).M() if len(x)>1 else default),
 )
 
-#metvars = Block(
-#    'metvars', lambda x: x.pfmet,
-#    met = v(lambda x: x.pt()),
-#    metphi = v(lambda x: x.phi()),
-#)
+metvars = Block(
+    'metvars', lambda x: x.pfmet,
+    met = v(lambda x: x.pt()),
+    metphi = v(lambda x: x.phi()),
+)
 
 weights = Block(
     'weights', lambda x: x, 
@@ -175,13 +175,11 @@ dilepton = Block(
 
 
 common2016 = EventContent(
-    [event, weights, syst, jets30, bjets, electron, muon, dilepton, #metvars, 
-    triggers2016]
+    [event, weights, syst, jets30, bjets, electron, muon, dilepton, metvars, triggers2016]
 )
 
 common2017 = EventContent(
-    [event, weights, syst, jets30, bjets, electron, muon, dilepton, #metvars, 
-    triggers2017]
+    [event, weights, syst, jets30, bjets, electron, muon, dilepton, metvars, triggers2017]
 )
 
 ################################################################################
