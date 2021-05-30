@@ -139,7 +139,7 @@ if test:
     comp.files           = [comp.files[0]]
     comp.splitFactor     = 1
     comp.fineSplitFactor = 1
-    #selectedComponents = mc_test
+    selectedComponents = mc_test
 
 ############################################################################
 # Analyzers 
