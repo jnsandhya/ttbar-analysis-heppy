@@ -28,7 +28,7 @@ for i in range(100):
 for j in jobs:
     if j.find('Chunk') == -1 :
         continue
-    cmd = 'tail '+directory+'/'+j+'/slurm*.out -n 1'
+    cmd = 'tail '+directory+'/'+j+'/local.output -n 10'
     output = subprocess.check_output(cmd, shell=True)
     print j+' -> '+output
 
