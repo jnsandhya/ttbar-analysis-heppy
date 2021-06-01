@@ -18,19 +18,20 @@ git cms-init --upstream-only
 # first make a fork from git@github.com:Arc-Pintade/cmg-cmssw.git to get cmg-cmssw.
 
 # get HEPPY structure
-git remote add lucas git@github.com:lucastorterotot/cmg-cmssw.git -f -t htt_10_4_0_v1
+git remote add lucas https://github.com/lucastorterotot/cmg-cmssw.git -f -t htt_10_4_0_v1
 
 # configure the sparse checkout, and get the base heppy packages (cp need to be on lyouicms machine cause of the presence of afs directory)
 cp /afs/cern.ch/user/g/gpetrucc/public/sparse-checkout_104X_heppy .git/info/sparse-checkout 
 git checkout -t lucas/htt_10_4_0_v1
 
 # get my CMGTools subsystem from the cmgtools-lite repository
-git clone -o aure git@github.com:Arc-Pintade/cmgtools-lite.git -b ttbar_9_4_11_cand1_v1 CMGTools
+git clone https://github.com/Arc-Pintade/ttbar-analysis-heppy.git CMGTools
 
 # get the recoil correction interface
 git clone https://github.com/CMS-HTT/RecoilCorrections.git  HTT-utilities/RecoilCorrections 
 
 # compile : Warning you need to compile on CentOS6 (lyouicms machine)
+scram b clean
 scram b -j 20
 
 # Last installation
