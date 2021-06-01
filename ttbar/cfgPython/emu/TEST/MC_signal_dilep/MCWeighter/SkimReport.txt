@@ -1,4 +1,0 @@
-Counter SkimReport :
-	 All Events                                    1000 	 1.00 	 1.0000
-	 Sum Weights                              72092.723161 	 72.09 	 72.0927
-
