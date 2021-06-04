@@ -13,7 +13,9 @@ event = Block(
     n_pv = v(lambda x: len(x.vertices), int),
     rho = v(lambda x: x.rho),
     is_data = v(lambda x: x.input.eventAuxiliary().isRealData(), int),
-    unix_time = v(lambda x: x.unixTime)
+    unix_time = v(lambda x: x.unixTime),
+    #inst_lumi_delivred = v(lambda x: x.instLumiDelivred),
+    #inst_lumi_recorded = v(lambda x: x.instLumiRecorded)
     )
    
 jets30 = Block(
