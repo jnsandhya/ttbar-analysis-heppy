@@ -1,6 +1,7 @@
 import math
 import os
 import ROOT
+from ROOT import TFile
 
 from PhysicsTools.Heppy.analyzers.core.AutoHandle import AutoHandle
 from PhysicsTools.Heppy.analyzers.core.Analyzer import Analyzer
@@ -12,17 +13,18 @@ from PhysicsTools.Heppy.physicsutils.TauDecayModes import tauDecayModes
 
 from CMGTools.ttbar.analyzers.TauGenTreeProducer import TauGenTreeProducer
 
-
-# if "/sDYReweighting_cc.so" not in ROOT.gSystem.GetLibraries(): 
-#     ROOT.gROOT.ProcessLine(".L %s/src/CMGTools/H2TauTau/python/proto/plotter/DYReweighting.cc+" % os.environ['CMSSW_BASE']);
-#ROOT.gSystem.Load("libCMGToolsH2TauTau")
-#from ROOT import getDYWeight
     
 
 class GenAnalyzer(Analyzer):
 
     '''Add generator information to hard leptons.
     '''
+
+    def __init__(self, cfg_ana, cfg_comp, looperName):
+        super(GenAnalyzer, self).__init__(cfg_ana, cfg_comp, looperName)
+        self.wsfile = TFile(self.cfg_ana.workspace_path)
+        self.ws = self.wsfile.Get('w')
+
     def declareHandles(self):
         super(GenAnalyzer, self).declareHandles()
 
@@ -82,10 +84,32 @@ class GenAnalyzer(Analyzer):
         if self.cfg_comp.name.find('TT') != -1 or self.cfg_comp.name.find('TTH') == -1:
             self.getTopPtWeight(event)
 
+
         if self.cfg_comp.name.find('DY') != -1:
-            self.getDYMassPtWeight(event)
+            self.applyDYMassPtWeight(event)
+
 
         return True
+
+    def applyDYMassPtWeight(self, event):
+        '''
+        DY pT re-weighting
+        Uncertainty of 10% of the correction on the
+        re-weighting applied to Z to ll events in all channels.
+        '''
+        if not hasattr(event, 'parentBoson'):
+            event.parentBoson = GenAnalyzer.getParentBoson(event)
+        self.ws.var('z_gen_mass').setVal(event.parentBoson.mass())
+        self.ws.var('z_gen_pt').setVal(event.parentBoson.pt())
+        dy_weight = self.ws.function('zptmass_weight_nom').getVal()
+        
+        shift = dy_weight - 1
+        dy_weight = 1 + shift
+
+        event.dy_weight = dy_weight
+        event.eventWeight *= dy_weight
+
+
 
     @staticmethod
     def getGenTauJets(event):
@@ -149,11 +173,6 @@ class GenAnalyzer(Analyzer):
         all = leptons_prompt + taus_prompt
         return GenAnalyzer.p4sum(all)
 
- #   @staticmethod 
- #   def getDYMassPtWeight(event):
- #       if not hasattr(event, 'parentBoson'):
- #           event.parentBoson = GenAnalyzer.getParentBoson(event)
- #       event.dy_weight = getDYWeight(event.parentBoson.mass(), event.parentBoson.pt())
 
     @staticmethod
     def getSusySystem(event):

@@ -103,9 +103,12 @@ mc_ttbar = [
     background_MC_DY3
 ]
 
+mc_resubmit = [
+    background_MC_DY
+]
+
 mc_test=[
-    signal_MC_dilep,
-    background_MC_TTW
+    background_MC_ST_s
 ]
 
 ############################################################################

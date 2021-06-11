@@ -55,10 +55,13 @@ class JetAnalyzer(Analyzer):
         if self.cfg_ana.do_jec:
             event.metShift = [0., 0.]
             event.type1METCorr = [0.,0.,0.]
-            self.jet_calibrator.correctAll(output_jets, event.rho, delta=0.,
+            try:
+                self.jet_calibrator.correctAll(output_jets, event.rho, delta=0.,
                                            addCorr=True, addShifts=True, 
                                            metShift=event.metShift,
                                            type1METCorr=event.type1METCorr)
+            except:
+                pass
         setattr(event, self.cfg_ana.output, output_jets)
         
         

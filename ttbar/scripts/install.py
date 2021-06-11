@@ -14,8 +14,12 @@ new_manager = './scripts/files_install/batchmanager.py'
 old_manager = '../../PhysicsTools/HeppyCore/python/utils/batchmanager.py'
 new_batch = './scripts/files_install/heppy_batch.py'
 old_batch = '../../../bin/'+architecture+'/heppy_batch.py'
+old_hadd  = '../../../bin/'+architecture+'/heppy_hadd.py'
+new_hadd  = './scripts/files_install/heppy_hadd.py'
+
 
 os.system('cp '+new_manager+' '+old_manager)
 os.system('cp '+new_batch+' '+old_batch)
+os.system('cp '+new_hadd+' '+old_hadd)
 
 print ''
