@@ -126,12 +126,15 @@ class METAnalyzer(Analyzer):
         pfmet_py_old = event.pfmet.py()
 
         if hasattr(self.cfg_ana, 'runFixEE2017') and self.cfg_ana.runFixEE2017:
-            rawMET = self.runFixEE2017(event)
-            pfmet_px_old = rawMET.px()
-            pfmet_py_old = rawMET.py()
-            if event.type1METCorr :
-                pfmet_px_old += event.type1METCorr[0]
-                pfmet_py_old += event.type1METCorr[1]
+            try:
+                rawMET = self.runFixEE2017(event)
+                pfmet_px_old = rawMET.px()
+                pfmet_py_old = rawMET.py()
+                if event.type1METCorr :
+                    pfmet_px_old += event.type1METCorr[0]
+                    pfmet_py_old += event.type1METCorr[1]
+            except:
+                pass
         # JEC
         elif event.metShift :
             pfmet_px_old += event.metShift[0]

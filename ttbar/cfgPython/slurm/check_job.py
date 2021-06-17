@@ -2,7 +2,7 @@
 
 import os
 import subprocess
-
+import math
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -51,7 +51,7 @@ for j in jobs:
         #failed_submission.append(directory+'/'+j)
 
     if output == '':
-        #print j+' ### Empty log'
+        print j+' ### Empty log'
         n_fai += 1
         failed_submission.append(directory+'/'+j)
     else:
@@ -60,8 +60,8 @@ for j in jobs:
 
 
 print ''
-print 'failed job :'+str(n_fai)+'/'+str(n_tot)
-print 'succed job :'+str(n_suc)+'/'+str(n_tot)
+print 'failed job :'+str(math.floor(float(n_fai)/n_tot*100))+'% --> '+str(n_fai)+'/'+str(n_tot) 
+print 'succed job :'+str(math.floor(float(n_suc)/n_tot*100))+'% --> '+str(n_suc)+'/'+str(n_tot)
 print ''
 
 
@@ -73,7 +73,7 @@ if start_harvest == 'y':
     print 'Resubmit !.'
     for sub in failed_submission:
         #print ' -> '+sub
-        cmd = 'cd '+sub+' && sbatch ./batchScript.sh'
+        cmd = 'cd '+sub+' && rm -rf */ && sbatch ./batchScript.sh'
         os.system(cmd)
 else:
     quit()

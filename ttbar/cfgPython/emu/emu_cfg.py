@@ -16,8 +16,8 @@ Event.print_patterns = ['*taus*',
 #import pdb; pdb.set_trace()
 
 from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
-#ComponentCreator.useAAA = True
-ComponentCreator.useLyonAAA = True
+ComponentCreator.useAAA = True
+#ComponentCreator.useLyonAAA = True
 
 import logging
 logging.shutdown()
@@ -31,9 +31,10 @@ logging.basicConfig(level=logging.WARNING)
 # Get all heppy options; set via "-o production" or "-o production=True"
 
 # production = True run on batch, production = False run locally
-test       = getHeppyOption('test', True)
+test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
+alternate  = getHeppyOption('alternate', False)
 year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
@@ -118,7 +119,7 @@ elif data:
 if year == '2016':    
     import CMGTools.ttbar.samples.summer16.ttbar2016 as backgrounds_forindex
 if year == '2017':
-    from CMGTools.ttbar.samples.fall17.ttbar2017 import mc_test
+    from CMGTools.ttbar.samples.fall17.ttbar2017 import mc_resubmit
     import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
 from CMGTools.ttbar.samples.component_index import ComponentIndex
 bindex = ComponentIndex(backgrounds_forindex)
@@ -134,12 +135,13 @@ if test:
 			   #MC_zjets_DY_502
     else:
         #comp = selectedComponents[0]
-        comp = bindex.glob('SingleElectron_Run2017E_31Mar2018')[0]
+        comp = bindex.glob('MuonEG_Run2017B_31Mar2018')[0]
+                # SingleElectron_Run2017E_31Mar2018
     selectedComponents   = [comp]
-    comp.files           = [comp.files[0]]
+    comp.files           = [comp.files[5]]
     comp.splitFactor     = 1
     comp.fineSplitFactor = 1
-    selectedComponents = mc_test
+    #selectedComponents   = mc_resubmit
 
 ############################################################################
 # Analyzers 
@@ -182,7 +184,9 @@ debugger = cfg.Analyzer(Debugger,
 from CMGTools.ttbar.analyzers.TimeAnalyzer import TimeAnalyzer
 
 time = cfg.Analyzer(TimeAnalyzer,
-                     name = 'TimeAnalyzer')
+                    name = 'TimeAnalyzer',
+                    year = year,
+                    data = data)
 
 
 ############################################################################
@@ -412,10 +416,17 @@ else:
                         selection = select_good_jets_FixEE2017)
 
 # From https://twiki.cern.ch/twiki/bin/view/CMS/JetID13TeVRun2017
-def select_jets_IDpt(jet): #function use in the next Analyzer
-    return  jet.pt()>20 and\
-            abs(jet.eta())<2.4 and\
-            jet.jetID("PAG_ttbarID_Loose")
+
+if year == '2016':
+    def select_jets_IDpt(jet): #function use in the next Analyzer
+        return  jet.pt()>20 and\
+                abs(jet.eta())<2.4 and\
+                jet.jetID("POG_PFID_TightLepVeto2016")
+else : 
+    def select_jets_IDpt(jet): #function use in the next Analyzer
+        return  jet.pt()>20 and\
+                abs(jet.eta())<2.4 and\
+                jet.jetID("POG_PFID_TightLepVeto")
 
 jets_20_unclean = cfg.Analyzer(Selector,
                                'jets_20_unclean',
@@ -496,7 +507,8 @@ gen_particles = cfg.Analyzer(GenAnalyzer,
                              name='GenAnalyzer',
                              jetCol='slimmedJets',
                              genmatching=True,
-                             genPtCut=8.
+                             genPtCut=8.,
+                             workspace_path='$CMSSW_BASE/src/CMGTools/ttbar/data/gen_scalefactors_v2.root'
                              )
 
 pfmetana = cfg.Analyzer(METAnalyzer,
