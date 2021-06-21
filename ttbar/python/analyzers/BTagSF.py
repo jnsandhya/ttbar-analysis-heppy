@@ -38,7 +38,6 @@ class BTagSF(object):
                 rootfname = '/'.join([os.environ["CMSSW_BASE"],
                                       'src/CMGTools/ttbar/data/2017/btag/btag_efficiency_DeepCSV.root'])
                 calib = ROOT.BTagCalibration("CSVv2", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/CSVv2_94XSF_V2_B_F.csv"))
-            #tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_medium.root
         self.mc_eff_file = TFile(rootfname)
 
         # MC b-tag efficiencies as measured in HTT by Adinda
@@ -58,8 +57,8 @@ class BTagSF(object):
         v_sys.push_back('down')
 
         self.reader_bc = ROOT.BTagCalibrationReader(op_dict[wp], measurement, v_sys)
-        self.reader_bc.load(calib, 0, 'mujets')#comb
-        self.reader_bc.load(calib, 1, 'mujets')#
+        self.reader_bc.load(calib, 0, 'mujets')
+        self.reader_bc.load(calib, 1, 'mujets')
         print 'Booking light reader'
         self.reader_light = ROOT.BTagCalibrationReader(op_dict[wp], measurement, v_sys)
         self.reader_light.load(calib, 2, 'incl')
@@ -85,15 +84,14 @@ class BTagSF(object):
         return eff
 
     def getPOGSFB(self, pt, eta, flavor, measurement='central'):
-        if flavor in [4, 5]:
+        if flavor in [4,5]:
             return self.reader_bc.eval_auto_bounds(measurement, self.getBTVJetFlav(flavor), eta, pt)
-
-        return self.reader_light.eval_auto_bounds('central', self.getBTVJetFlav(flavor), eta, pt)
+        
+        return self.reader_light.eval_auto_bounds(measurement, self.getBTVJetFlav(flavor), eta, pt)
 
     def isBTagged(self, jet, pt, eta, csv, jetflavor, is_data, csv_cut=0.5803 ): #CSVv2 loose default
         jetflavor = abs(jetflavor)
         setattr(jet, 'btagWeight', 1.)
-        
         SFb = self.getPOGSFB(pt, abs(eta), jetflavor)
         SFb_up = self.getPOGSFB(pt, abs(eta), jetflavor,'up')
         SFb_down = self.getPOGSFB(pt, abs(eta), jetflavor,'down')
@@ -120,7 +118,6 @@ class BTagSF(object):
                 jet.btagWeightUp = 1
                 jet.btagWeightDown = 1
             return False
-    
 
 
 if __name__ == '__main__':
