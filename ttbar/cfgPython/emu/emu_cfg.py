@@ -33,7 +33,7 @@ logging.basicConfig(level=logging.WARNING)
 # production = True run on batch, production = False run locally
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
-data       = getHeppyOption('data', False)
+data       = getHeppyOption('data', True)
 alternate  = getHeppyOption('alternate', False)
 year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
@@ -51,6 +51,9 @@ if year == '2016':
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_electron
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_muon
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron
     from CMGTools.ttbar.samples.fall17.trigger     import data_triggers
     from CMGTools.ttbar.samples.fall17.trigger     import mc_triggers
 
@@ -110,7 +113,7 @@ for sample in data_elecmuon:
 if not data:
     selectedComponents = mc_ttbar
 elif data:
-    selectedComponents = data_elecmuon
+    selectedComponents = data_muon_electron
     
     
 ############################################################################
