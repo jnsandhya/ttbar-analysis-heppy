@@ -58,8 +58,8 @@ class BTagSF(object):
         v_sys.push_back('down')
 
         self.reader_bc = ROOT.BTagCalibrationReader(op_dict[wp], measurement, v_sys)
-        self.reader_bc.load(calib, 0, 'comb')
-        self.reader_bc.load(calib, 1, 'comb')
+        self.reader_bc.load(calib, 0, 'mujets')#comb
+        self.reader_bc.load(calib, 1, 'mujets')#
         print 'Booking light reader'
         self.reader_light = ROOT.BTagCalibrationReader(op_dict[wp], measurement, v_sys)
         self.reader_light.load(calib, 2, 'incl')
