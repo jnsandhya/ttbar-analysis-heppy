@@ -18,6 +18,13 @@ class BJetAnalyzer(Analyzer):
         sfb_weight = 1.
         sfb_weightup = 1.
         sfb_weightdown = 1.
+        sfc_weight = 1.
+        sfc_weightup = 1.
+        sfc_weightdown = 1.
+        sfl_weight = 1.
+        sfl_weightup = 1.
+        sfl_weightdown = 1.
+        
         jets = getattr(event, self.cfg_ana.jets)
         for jet in jets:
             if self.cfg_ana.year == '2016': 
@@ -48,14 +55,32 @@ class BJetAnalyzer(Analyzer):
                                                    is_data=not self.cfg_comp.isMC,
                                                    csv_cut=csv_cut)
  
-            if(jet.btagWeight > 0):
+            if(jet.btagWeight > 0 and abs(jet.hadronFlavour()) == 5):
                 sfb_weight *= jet.btagWeight
                 sfb_weightup *= jet.btagWeightUp
                 sfb_weightdown *= jet.btagWeightDown
+
+            if(jet.btagWeight > 0 and abs(jet.hadronFlavour()) == 4):
+                sfc_weight *= jet.btagWeight
+                sfc_weightup *= jet.btagWeightUp
+                sfc_weightdown *= jet.btagWeightDown
+            
+            else:    
+                sfl_weight *= jet.btagWeight
+                sfl_weightup *= jet.btagWeightUp
+                sfl_weightdown *= jet.btagWeightDown
+
             
         setattr(event, 'sfbWeight', sfb_weight)
         setattr(event, 'sfbWeightUp', sfb_weightup)
         setattr(event, 'sfbWeightDown', sfb_weightdown)
+        setattr(event, 'sfcWeight', sfc_weight)
+        setattr(event, 'sfcWeightUp', sfc_weightup)
+        setattr(event, 'sfcWeightDown', sfc_weightdown)
+        setattr(event, 'sflWeight', sfl_weight)
+        setattr(event, 'sflWeightUp', sfl_weightup)
+        setattr(event, 'sflWeightDown', sfl_weightdown)
+
         event.eventWeight *= event.sfbWeight
             
                                                    
