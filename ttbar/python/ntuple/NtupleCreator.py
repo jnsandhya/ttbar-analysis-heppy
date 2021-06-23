@@ -1,4 +1,5 @@
 from tools import *
+from CMGTools.ttbar.utils.JesEnergyScaleSources import jesunc_sources
 import math
 
 default = Variable.default
@@ -18,11 +19,21 @@ event = Block(
     #inst_lumi_recorded = v(lambda x: x.instLumiRecorded)
     )
    
+items1 = {}
+for iJet, key in enumerate(jesunc_sources.keys()) :
+  branch_name = "j1_corr_%s_JEC_up" %(key)
+  branch_name2 = "j1_corr_%s_JEC_down" %(key)
+  branch_name3 = "j2_corr_%s_JEC_up" %(key)
+  branch_name4 = "j2_corr_%s_JEC_down" %(key)
+  items1[branch_name] = v(lambda x: getattr(x[0],  "corr_"+key+"_JEC_up", 0.) if len(x)>0 else 0)
+  items1[branch_name2] = v(lambda x: getattr(x[0], "corr_"+key+"_JEC_down", 0.) if len(x)>0 else 0)
+  items1[branch_name3] = v(lambda x: getattr(x[1], "corr_"+key+"_JEC_up", 0.) if len(x)>1 else 0)
+  items1[branch_name4] = v(lambda x: getattr(x[1], "corr_"+key+"_JEC_down", 0.) if len(x)>1 else 0)
+  print(branch_name)
+
 jets30 = Block(
-    'jets30', lambda x: x.jets_30,
+    'jets_30', lambda x: x.jets_30,
     n_jets = v(lambda x: len(x), int),
-    j1_corr_CMS_scale_j_eta0to5_13TeV_JEC_up = v(lambda x: getattr(x[0], 'corr_CMS_scale_j_eta0to5_13TeV_JEC_up',0.) if len(x)>0 else 0),
-    j1_corr_CMS_scale_j_eta0to5_13TeV_JEC_down = v(lambda x: getattr(x[0], 'corr_CMS_scale_j_eta0to5_13TeV_JEC_down', 0.) if len(x)>0 else 0),
     j1_pt = v(lambda x: x[0].pt() if len(x)>0 else default),
     j1_eta = v(lambda x: x[0].eta() if len(x)>0 else default),
     j1_phi = v(lambda x: x[0].phi() if len(x)>0 else default),
@@ -33,8 +44,6 @@ jets30 = Block(
     j1_flavour_hadron = v(lambda x: x[0].hadronFlavour() if len(x)>0 else default),
     j1_rawf = v(lambda x: x[0].rawFactor() if len(x)>0 else default),
     j2_pt = v(lambda x: x[1].pt() if len(x)>1 else default),
-    j2_corr_CMS_scale_j_eta0to5_13TeV_JEC_up = v(lambda x: getattr(x[1], 'corr_CMS_scale_j_eta0to5_13TeV_JEC_up', 0.) if len(x)>1 else 0),
-    j2_corr_CMS_scale_j_eta0to5_13TeV_JEC_down = v(lambda x: getattr(x[1], 'corr_CMS_scale_j_eta0to5_13TeV_JEC_down', 0.) if len(x)>1 else 0),
     j2_eta = v(lambda x: x[1].eta() if len(x)>1 else default),
     j2_phi = v(lambda x: x[1].phi() if len(x)>1 else default),
     j2_pumva = v(lambda x: x[1].puMva('pileupJetId:fullDiscriminant') if len(x)>1 else default ),
@@ -43,7 +52,35 @@ jets30 = Block(
     j2_flavour_hadron = v(lambda x: x[1].hadronFlavour() if len(x)>1 else default),
     j2_rawf = v(lambda x: x[1].rawFactor() if len(x)>1 else default),
     dijet_m = v(lambda x: (x[0].p4()+x[1].p4()).M() if len(x)>1 else default),
+    j1_corr_nominal = v(lambda x: getattr(x[0], "corr_nominal",1.) if len(x)>0 else 1), 
+    j2_corr_nominal = v(lambda x: getattr(x[1], "corr_nominal",1.) if len(x)>1 else 1), 
+    #j1_corr_CMS_scale_j_eta0to5_13Tev_JEC_up =  v(lambda x: getattr(x[0], "corr_CMS_scale_j_eta0to5_13Tev_JEC_up", 0.) if len(x)>0 else 0),
+    #j1_corr_CMS_scale_j_eta0to5_13Tev_JEC_down =  v(lambda x: getattr(x[0], "corr_CMS_scale_j_eta0to5_13Tev_JEC_down", 0.) if len(x)>0 else 0),
+    #j2_corr_CMS_scale_j_eta0to5_13Tev_JEC_up =  v(lambda x: getattr(x[1], "corr_CMS_scale_j_eta0to5_13Tev_JEC_up", 0.) if len(x)>1 else 0),
+    #j2_corr_CMS_scale_j_eta0to5_13Tev_JEC_down =  v(lambda x: getattr(x[1], "corr_CMS_scale_j_eta0to5_13Tev_JEC_down", 0.) if len(x)>1 else 0)
+    **items1
 )
+
+#jets2_30 = Block(
+#    'jets_30', lambda x: x.jets_30,
+ 
+#    **items2
+#)
+
+#jets1unc_30 = Block(
+#  'jets_30', lambda x: x.jets_30,
+#    **items1)
+#
+#jets2unc_30 = Block(
+#    'jets_30', lambda x: x.jets_30,
+#    **items2
+#)
+
+
+#unc_jet =  Block(
+#    'jets_30', lambda x: x.jets_30,
+#    **items1)
+#    #**items2)
 
 metvars = Block(
     'metvars', lambda x: x.pfmet,
@@ -149,12 +186,18 @@ bjets = Block(
     'bjets', lambda x: x.bjets_30,
     n_bjets = v(lambda x: len(x), int),
 )
+
 for vname, variable in jets30.iteritems():
+    if vname.startswith('j1_corr'):
+      continue
+    if vname.startswith('j2_corr'):
+      continue
     if not vname.startswith('j'):
-        continue
+      continue
     newname = vname.replace('j1','b1',1)
     newname = newname.replace('j2','b2',1)
     bjets[newname] = variable
+
 
 electron = Block(
     'electron', lambda x: x.select_electron[0],
@@ -187,11 +230,11 @@ dilepton = Block(
 
 
 common2016 = EventContent(
-    [event, weights, syst, jets30, bjets, electron, muon, dilepton, metvars, triggers2016]
+    [event, weights, syst, jets30,  bjets, electron, muon, dilepton, metvars, triggers2016]
 )
 
 common2017 = EventContent(
-    [event, weights, syst, jets30, bjets, electron, muon, dilepton, metvars, triggers2017]
+    [event, weights, syst, jets30,  bjets, electron, muon, dilepton, metvars, triggers2017]
 )
 
 ################################################################################

@@ -21,8 +21,8 @@ class JetAnalyzer(Analyzer):
                 jecPath=os.path.expandvars(
                     "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
                     ),
-                upToLevel=3,
-                calculateSeparateCorrections=True,
+                #upToLevel=3,
+                #calculateSeparateCorrections=True,
                 calculateType1METCorrection=True,
                 groupForUncertaintySources = jesunc_sources
                 )
@@ -59,16 +59,15 @@ class JetAnalyzer(Analyzer):
         if self.cfg_ana.do_jec:
             event.metShift = [0., 0.]
             event.type1METCorr = [0.,0.,0.]
-            print("Event")
             try:
-                print("Event__")
                 self.jet_calibrator.correctAll(output_jets, event.rho, delta=0.,
                                            addCorr=True, addShifts=True, 
                                            metShift=event.metShift,
                                            type1METCorr=event.type1METCorr)
             except:
                 pass
-        print("event", self.cfg_ana.output, output_jets)    
+            
+
         setattr(event, self.cfg_ana.output, output_jets)
         
         
