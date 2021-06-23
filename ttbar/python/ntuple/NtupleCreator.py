@@ -21,6 +21,8 @@ event = Block(
 jets30 = Block(
     'jets30', lambda x: x.jets_30,
     n_jets = v(lambda x: len(x), int),
+    j1_corr_CMS_scale_j_eta0to5_13TeV_JEC_up = v(lambda x: getattr(x[0], 'corr_CMS_scale_j_eta0to5_13TeV_JEC_up',0.) if len(x)>0 else 0),
+    j1_corr_CMS_scale_j_eta0to5_13TeV_JEC_down = v(lambda x: getattr(x[0], 'corr_CMS_scale_j_eta0to5_13TeV_JEC_down', 0.) if len(x)>0 else 0),
     j1_pt = v(lambda x: x[0].pt() if len(x)>0 else default),
     j1_eta = v(lambda x: x[0].eta() if len(x)>0 else default),
     j1_phi = v(lambda x: x[0].phi() if len(x)>0 else default),
@@ -31,6 +33,8 @@ jets30 = Block(
     j1_flavour_hadron = v(lambda x: x[0].hadronFlavour() if len(x)>0 else default),
     j1_rawf = v(lambda x: x[0].rawFactor() if len(x)>0 else default),
     j2_pt = v(lambda x: x[1].pt() if len(x)>1 else default),
+    j2_corr_CMS_scale_j_eta0to5_13TeV_JEC_up = v(lambda x: getattr(x[1], 'corr_CMS_scale_j_eta0to5_13TeV_JEC_up', 0.) if len(x)>1 else 0),
+    j2_corr_CMS_scale_j_eta0to5_13TeV_JEC_down = v(lambda x: getattr(x[1], 'corr_CMS_scale_j_eta0to5_13TeV_JEC_down', 0.) if len(x)>1 else 0),
     j2_eta = v(lambda x: x[1].eta() if len(x)>1 else default),
     j2_phi = v(lambda x: x[1].phi() if len(x)>1 else default),
     j2_pumva = v(lambda x: x[1].puMva('pileupJetId:fullDiscriminant') if len(x)>1 else default ),

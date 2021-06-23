@@ -1,6 +1,7 @@
 from PhysicsTools.Heppy.analyzers.core.Analyzer import Analyzer
 from PhysicsTools.Heppy.analyzers.core.AutoHandle import AutoHandle
 from PhysicsTools.Heppy.physicsobjects.Jet import Jet
+from CMGTools.ttbar.utils.JesEnergyScaleSources import jesunc_sources
 
 import os 
 
@@ -20,7 +21,10 @@ class JetAnalyzer(Analyzer):
                 jecPath=os.path.expandvars(
                     "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
                     ),
-                calculateType1METCorrection=True
+                upToLevel=3,
+                calculateSeparateCorrections=True,
+                calculateType1METCorrection=True,
+                groupForUncertaintySources = jesunc_sources
                 )
         self.counters.addCounter('JetAnalyzer')
         count = self.counters.counter('JetAnalyzer')
@@ -55,13 +59,16 @@ class JetAnalyzer(Analyzer):
         if self.cfg_ana.do_jec:
             event.metShift = [0., 0.]
             event.type1METCorr = [0.,0.,0.]
+            print("Event")
             try:
+                print("Event__")
                 self.jet_calibrator.correctAll(output_jets, event.rho, delta=0.,
                                            addCorr=True, addShifts=True, 
                                            metShift=event.metShift,
                                            type1METCorr=event.type1METCorr)
             except:
                 pass
+        print("event", self.cfg_ana.output, output_jets)    
         setattr(event, self.cfg_ana.output, output_jets)
         
         
