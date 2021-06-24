@@ -33,7 +33,7 @@ logging.basicConfig(level=logging.WARNING)
 # production = True run on batch, production = False run locally
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
-data       = getHeppyOption('data', True)
+data       = getHeppyOption('data', False)
 alternate  = getHeppyOption('alternate', False)
 year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
@@ -394,7 +394,6 @@ dilepton_sorted = cfg.Analyzer(
 from CMGTools.ttbar.analyzers.JetAnalyzer import JetAnalyzer
 from CMGTools.ttbar.analyzers.JetCleaner  import JetCleaner
 
-
 def select_good_jets_FixEE2017(jet): #function use in the next Analyzer
     return jet.correctedJet("Uncorrected").pt() > 50. or\
            abs(jet.eta()) < 2.65 or\
@@ -418,7 +417,40 @@ else:
                         year = year,
                         selection = select_good_jets_FixEE2017)
 
+
+from CMGTools.ttbar.analyzers.Calibrator import Calibrator
+
+#up_down = ['up','down']
+#
+#if not data:
+#    JES = [
+#        #'CMS_scale_j_eta0to5_13Tev',
+#        #'CMS_scale_j_eta0to3_13TeV',
+#        #'CMS_scale_j_eta3to5_13TeV',
+#        'CMS_scale_j_RelativeBal_13TeV'
+#        #'CMS_scale_j_RelativeSample_13TeV'
+#        ]
+#    for source in JES:
+#        jet_calibrator = cfg.Analyzer(
+#            Calibrator,
+#            src = 'jets',
+#            calibrator_factor_func = lambda x: getattr(x,"corr_{}_JEC_{}".format(source,'up'), 1./x.rawFactor()) * x.rawFactor()
+#            #calibrator_factor_func = lambda x: getattr(x,"corr_{}_JEC_{}".format(source,'down'), 1./x.rawFactor()) * x.rawFactor()
+#            )
+       
 # From https://twiki.cern.ch/twiki/bin/view/CMS/JetID13TeVRun2017
+
+
+jet_sorter = cfg.Analyzer(
+    Sorter,
+    output = 'jets_sorted',
+    src = 'jets',
+    metric = lambda jet: (jet.pt()),
+    reverse = True
+    )
+
+
+
 
 if year == '2016':
     def select_jets_IDpt(jet): #function use in the next Analyzer
@@ -434,7 +466,7 @@ else :
 jets_20_unclean = cfg.Analyzer(Selector,
                                'jets_20_unclean',
                                output = 'jets_20_unclean',
-                               src = 'jets',
+                               src = 'jets_sorted',
                                filter_func = select_jets_IDpt)
 
 jet_20_electron_clean = cfg.Analyzer(JetCleaner,
@@ -459,6 +491,8 @@ two_jets = cfg.Analyzer(EventFilter,
                         name = 'TwoJets',
                         src = 'jets_30',
                         filter_func = lambda x : len(x)>1)
+
+
 
 
 ############################################################################
@@ -589,6 +623,8 @@ sequence = cfg.Sequence([
     dilepton_sorted,
 # Jets
     jets,
+    jet_sorter,
+    #jet_calibrator, 
     jets_20_unclean,
     jet_20_electron_clean,
     jet_20_clean,
@@ -631,5 +667,9 @@ config = cfg.Config(components=selectedComponents,
                     events_class=Events)
 
 printComps(config.components, True)
+
+
+
+
 
 
