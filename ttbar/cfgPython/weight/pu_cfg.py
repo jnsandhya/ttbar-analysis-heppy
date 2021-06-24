@@ -4,7 +4,7 @@ from   PhysicsTools.HeppyCore.framework.config     import printComps
 from   CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 
 test       = getHeppyOption('test', False)
-alternate  = getHeppyOption('alternate', False)
+alternate  = getHeppyOption('alternate', True)
 year       = getHeppyOption('year', '2017' )
 
 
@@ -46,7 +46,7 @@ bindex = ComponentIndex(backgrounds_forindex)
 
 if test:
     cache = True
-    comp = bindex.glob('signal_MC_dilep')[0]
+    comp = bindex.glob('alt_MC_hdampUp')[0]
     #'signal_MC_dilep'
     #'alt_MC_hdampUp'
     selectedComponents = [comp]

@@ -6,7 +6,12 @@ print ''
 print ' > Copy of Jet.py object with loose ID'
 new_jet = './scripts/files_install/Jet.py'
 old_jet = '../../PhysicsTools/Heppy/python/physicsobjects/Jet.py'
+new_calib = './scripts/files_install/JetReCalibrator.py' 
+old_calib = '../../PhysicsTools/Heppy/python/physicsutils/JetReCalibrator.py'
+os.system('cp '+new_calib+' '+old_calib)
 os.system('cp '+new_jet+' '+old_jet)
+
+
 
 print ''
 print ' > Copy of batch scripts'
