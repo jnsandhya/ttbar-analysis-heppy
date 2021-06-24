@@ -6,6 +6,7 @@ from   PhysicsTools.HeppyCore.framework.config     import printComps
 from   PhysicsTools.HeppyCore.framework.heppy_loop import getHeppyOption
 from   PhysicsTools.HeppyCore.framework.looper     import Looper
 from   PhysicsTools.HeppyCore.framework.event      import Event
+from   CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 Event.print_patterns = ['*taus*', 
                         '*muons*', 
                         '*electrons*', 
@@ -15,7 +16,7 @@ Event.print_patterns = ['*taus*',
 
 #import pdb; pdb.set_trace()
 
-from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
+
 ComponentCreator.useAAA = True
 #ComponentCreator.useLyonAAA = True
 
@@ -113,7 +114,7 @@ for sample in data_elecmuon:
 if not data:
     selectedComponents = mc_ttbar
 elif data:
-    selectedComponents = data_muon_electron
+    selectedComponents = data_single_muon
     
     
 ############################################################################
