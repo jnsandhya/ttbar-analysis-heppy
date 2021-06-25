@@ -18,6 +18,10 @@ args = parser.parse_args()
 directory = args.directory
 #sample = args.sample
 
+if directory[-1] != '/':
+    directory += '/'
+
+
 jobs = os.listdir(directory)
 
 n_fai = 0

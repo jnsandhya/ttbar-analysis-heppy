@@ -84,6 +84,7 @@ if year == '2017':
     puFileDataUp   = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017_up.root'
     puFileDataDown = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017_down.root'
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_2017.root'
+    puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_alt_2017.root'
 
 #else:
 for sample in mc_ttbar:
