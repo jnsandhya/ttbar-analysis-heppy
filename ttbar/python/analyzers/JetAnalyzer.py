@@ -2,6 +2,8 @@ from PhysicsTools.Heppy.analyzers.core.Analyzer import Analyzer
 from PhysicsTools.Heppy.analyzers.core.AutoHandle import AutoHandle
 from PhysicsTools.Heppy.physicsobjects.Jet import Jet
 from CMGTools.ttbar.utils.JesEnergyScaleSources import jesunc_sources
+from CMGTools.ttbar.utils.JesEnergyScaleSources import redjesunc_sources_2016
+from CMGTools.ttbar.utils.JesEnergyScaleSources import redjesunc_sources_2017
 
 import os 
 
@@ -16,16 +18,29 @@ class JetAnalyzer(Analyzer):
 
             do_residual = not self.cfg_comp.isMC
             from PhysicsTools.Heppy.physicsutils.JetReCalibrator import JetReCalibrator
-            self.jet_calibrator = JetReCalibrator(
-                global_tag, 'AK4PFchs', do_residual, 
-                jecPath=os.path.expandvars(
-                    "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
-                    ),
-                #upToLevel=3,
-                #calculateSeparateCorrections=True,
-                calculateType1METCorrection=True,
-                groupForUncertaintySources = jesunc_sources
-                )
+            if self.cfg_ana.year == '2016' :
+                self.jet_calibrator = JetReCalibrator(
+                    global_tag, 'AK4PFchs', do_residual, 
+                    jecPath=os.path.expandvars(
+                        "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
+                        ),
+                    #upToLevel=3,
+                    #calculateSeparateCorrections=True,
+                    calculateType1METCorrection=True,
+                    groupForUncertaintySources = redjesunc_sources_2016
+                    )
+            else:
+                self.jet_calibrator = JetReCalibrator(
+                    global_tag, 'AK4PFchs', do_residual, 
+                    jecPath=os.path.expandvars(
+                        "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
+                        ),
+                    #upToLevel=3,
+                    #calculateSeparateCorrections=True,
+                    calculateType1METCorrection=True,
+                    groupForUncertaintySources = redjesunc_sources_2017
+                    )
+
         self.counters.addCounter('JetAnalyzer')
         count = self.counters.counter('JetAnalyzer')
         count.register('all events')
