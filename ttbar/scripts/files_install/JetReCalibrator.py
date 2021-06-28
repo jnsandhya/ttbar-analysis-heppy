@@ -21,8 +21,6 @@ class JetReCalibrator:
         self.calculateType1METCorr = calculateType1METCorrection
         self.type1METParams  = type1METParams
         self.groupForUncertaintySources = groupForUncertaintySources
-        
-        print("uptolevel:", upToLevel, "calculateSeparateCorrections", calculateSeparateCorrections)
         # Make base corrections
         path = os.path.expandvars(jecPath) #"%s/src/CMGTools/RootTools/data/jec" % os.environ['CMSSW_BASE'];
         self.L1JetPar  = ROOT.JetCorrectorParameters("%s/%s_L1FastJet_%s.txt" % (path,globalTag,jetFlavour),"");
@@ -35,7 +33,6 @@ class JetReCalibrator:
         # Add residuals if needed
         if doResidualJECs : 
             self.ResJetPar = ROOT.JetCorrectorParameters("%s/%s_L2L3Residual_%s.txt" % (path,globalTag,jetFlavour))
-            print(self.ResJetPar)
             self.vPar.push_back(self.ResJetPar);
         #Step3 (Construct a FactorizedJetCorrector object) 
         self.JetCorrector = ROOT.FactorizedJetCorrector(self.vPar)
@@ -45,12 +42,14 @@ class JetReCalibrator:
                 self.JetUncertaintyBySources = {}
                 for group, sources in groupForUncertaintySources.iteritems():
                     for source in sources:
-                        params = ROOT.JetCorrectorParameters("%s/%s_UncertaintySources_%s.txt" % (path,globalTag,jetFlavour),source)
+                        #params = ROOT.JetCorrectorParameters("%s/%s_UncertaintySources_%s.txt" % (path,globalTag,jetFlavour),source)
+                        params = ROOT.JetCorrectorParameters("%s/RegroupedV2_%s_UncertaintySources_%s.txt" % (path,globalTag,jetFlavour),source)
                         self.JetUncertaintyBySources[source] = ROOT.JetCorrectionUncertainty(params)
         elif os.path.exists("%s/Uncertainty_FAKE.txt" % path):
             self.JetUncertainty = ROOT.JetCorrectionUncertainty("%s/Uncertainty_FAKE.txt" % path);
         else:
-            print('Missing JEC uncertainty file "%s/%s_Uncertainty_%s.txt", so jet energy uncertainties will not be available' % (path,globalTag,jetFlavour))
+            #print('Missing JEC uncertainty file "%s/%s_Uncertainty_%s.txt", so jet energy uncertainties will not be available' % (path,globalTag,jetFlavour))
+            print('Missing JEC uncertainty file "%s/RegroupedV2_%s_Uncertainty_%s.txt", so jet energy uncertainties will not be available' % (path,globalTag,jetFlavour))
             self.JetUncertainty = None
         self.separateJetCorrectors = {}
         if calculateSeparateCorrections or calculateType1METCorrection:
@@ -143,30 +142,25 @@ class JetReCalibrator:
             type1METCorr = [0,0,0]
         raw = jet.rawFactor()
         corr = self.getCorrection(jet,rho,delta)
-        setattr(jet, "corr_nominal", corr)
-        #print("nominal corr", corr)
         if addCorr: 
             jet.corr = corr
             for sepcorr in self.separateJetCorrectors.keys():
-                #print("separateJetCorrectors:", sepcorr, self.getCorrection(jet,rho,delta=0,corrector=self.separateJetCorrectors[sepcorr]))
                 setattr(jet,"CorrFactor_"+sepcorr,self.getCorrection(jet,rho,delta=0,corrector=self.separateJetCorrectors[sepcorr]))
         if addShifts:
             for cdelta,shift in [(1.0, "JECUp"), (-1.0, "JECDown")]:
                 cshift = self.getCorrection(jet,rho,delta+cdelta)
-                #print("corr"+shift, cshift)
                 setattr(jet, "corr"+shift, cshift)
             if self.groupForUncertaintySources:
                 for group, sources in self.groupForUncertaintySources.iteritems():
                     shift_up = self.getCorrection(jet,rho,delta+1.0,sources=sources)
                     shift_down = self.getCorrection(jet,rho,delta-1.0,sources=sources)
-                    #print("corr_"+group+"_JEC_up", shift_up)
-                    #print("corr_"+group+"_JEC_down", shift_down)
+                    #print("corr_"+group+"_JEC_up", shift_up/jet.corr)
+                    #print("corr_"+group+"_JEC_down", shift_down/jet.corr)
                     setattr(jet, "corr_"+group+"_JEC_up", shift_up/jet.corr)
                     setattr(jet, "corr_"+group+"_JEC_down", shift_down/jet.corr)
         if corr <= 0:
             return False
         newpt = jet.pt()*raw*corr
-        #print("new pt:", newpt)
         if newpt > self.type1METParams['jetPtThreshold']:
             rawP4forT1 = self.rawP4forType1MET_(jet)
             if rawP4forT1 and rawP4forT1.Pt()*corr > self.type1METParams['jetPtThreshold']:
@@ -194,10 +188,8 @@ class JetReCalibrator:
         if metShift     != [0.,0.   ]: raise RuntimeError("input metShift tuple is not initialized to zeros")
         if type1METCorr != [0.,0.,0.]: raise RuntimeError("input type1METCorr tuple is not initialized to zeros")
         for j in jets:
-            #print("jet")
             ok = self.correct(j,rho,delta,addCorr=addCorr,addShifts=addShifts,metShift=metShift,type1METCorr=type1METCorr)
             if not ok: badJets.append(j)
-            
         if len(badJets) > 0:
             print("Warning: %d out of %d jets flagged bad by JEC." % (len(badJets), len(jets)))
         for bj in badJets:
