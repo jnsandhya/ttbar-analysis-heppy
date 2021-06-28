@@ -4,6 +4,9 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('directory', help='display your directory')
 
+######################################################
+## init
+######################################################
 
 args = parser.parse_args()
 directory = args.directory

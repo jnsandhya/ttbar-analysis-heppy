@@ -35,7 +35,7 @@ logging.basicConfig(level=logging.WARNING)
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
-alternate  = getHeppyOption('alternate', False)
+alternate  = getHeppyOption('alternate', True)
 year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
@@ -51,10 +51,11 @@ if year == '2016':
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
+    from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_electron
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_muon
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_electron
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_muon
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron
     from CMGTools.ttbar.samples.fall17.trigger     import data_triggers
     from CMGTools.ttbar.samples.fall17.trigger     import mc_triggers
 
@@ -88,9 +89,13 @@ if year == '2017':
 
 #else:
 for sample in mc_ttbar:
+        sample.puFileData = puFileData
         sample.triggers = mc_triggers
         sample.puFileMC = puFileMC
-        sample.puFileData = puFileData
+        if not alternate:
+            sample.puFileMC = puFileMC
+        else:
+            sample.puFileMC = puFileMCalt
         #print sample
 
 #print data_triggers 
@@ -113,7 +118,10 @@ for sample in data_elecmuon:
     sample.dataGT = gt_data.format(era)
 
 if not data:
-    selectedComponents = mc_ttbar
+    if not alternate:
+        selectedComponents = mc_ttbar
+    else:
+        selectedComponents = alt_ttbar
 elif data:
     selectedComponents = data_single_muon
     
@@ -125,7 +133,8 @@ if year == '2016':
     import CMGTools.ttbar.samples.summer16.ttbar2016 as backgrounds_forindex
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017 import mc_resubmit
-    import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
+    #import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
+    import CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 as backgrounds_forindex    
 from CMGTools.ttbar.samples.component_index import ComponentIndex
 bindex = ComponentIndex(backgrounds_forindex)
 
@@ -133,7 +142,8 @@ bindex = ComponentIndex(backgrounds_forindex)
 if test:
     cache = True
     if not data:
-        comp = bindex.glob('MC_signal_dilep')[0]
+        comp = bindex.glob('alt_MC_hdampUp')[0]
+               #alt_MC_hdampUp
                #MC_signal_dilep
 			   #MC_signal_hadronic
 			   #MC_zjets_DY_1050
