@@ -19,17 +19,18 @@ event = Block(
     #inst_lumi_recorded = v(lambda x: x.instLumiRecorded)
     )
    
-items1 = {}
-for iJet, key in enumerate(jesunc_sources.keys()) :
-  branch_name = "j1_corr_%s_JEC_up" %(key)
-  branch_name2 = "j1_corr_%s_JEC_down" %(key)
-  branch_name3 = "j2_corr_%s_JEC_up" %(key)
-  branch_name4 = "j2_corr_%s_JEC_down" %(key)
-  items1[branch_name] = v(lambda x: getattr(x[0],  "corr_"+key+"_JEC_up", 0.) if len(x)>0 else 0)
-  items1[branch_name2] = v(lambda x: getattr(x[0], "corr_"+key+"_JEC_down", 0.) if len(x)>0 else 0)
-  items1[branch_name3] = v(lambda x: getattr(x[1], "corr_"+key+"_JEC_up", 0.) if len(x)>1 else 0)
-  items1[branch_name4] = v(lambda x: getattr(x[1], "corr_"+key+"_JEC_down", 0.) if len(x)>1 else 0)
-  print(branch_name)
+#items1 = {}
+#items2 = {}
+#for iJet, key in enumerate(jesunc_sources.keys()) :
+ # branch_name = "corr_%s_JEC_up" %(key)
+  #branch_name2 = "corr_%s_JEC_down" %(key)
+  #test_nominal = v(lambda x: 1 if (len(x)>1 and (x[0].pt()>30. and x[1].pt()>30.) ) else 0, int),
+  #items1[branch_name] = v(lambda x: 1 if (len(x)>1 and (x[0].pt()*getattr(x[0],  branch_name, 0.) > 30. and x[1].pt()*getattr(x[1],  branch_name, 0.) > 30. )) else 0, int)
+  #items1[branch_name2] = v(lambda x: 1 if (len(x)>1 and (x[0].pt()*getattr(x[0],  branch_name2, 0.) > 30. and x[1].pt()*getattr(x[1],  branch_name2, 0.) > 30. )) else 0, int)
+  #items1[branch_name2] = v(lambda x: getattr(x[0], "corr_"+key+"_JEC_down", 0.) if len(x)>0 else 0)
+  #items1[branch_name3] = v(lambda x: getattr(x[1], "corr_"+key+"_JEC_up", 0.) if len(x)>1 else 0)
+  #items1[branch_name4] = v(lambda x: getattr(x[1], "corr_"+key+"_JEC_down", 0.) if len(x)>1 else 0)
+  #print(branch_name)
 
 jets30 = Block(
     'jets_30', lambda x: x.jets_30,
@@ -52,13 +53,11 @@ jets30 = Block(
     j2_flavour_hadron = v(lambda x: x[1].hadronFlavour() if len(x)>1 else default),
     j2_rawf = v(lambda x: x[1].rawFactor() if len(x)>1 else default),
     dijet_m = v(lambda x: (x[0].p4()+x[1].p4()).M() if len(x)>1 else default),
-    j1_corr_nominal = v(lambda x: getattr(x[0], "corr_nominal",1.) if len(x)>0 else 1), 
-    j2_corr_nominal = v(lambda x: getattr(x[1], "corr_nominal",1.) if len(x)>1 else 1), 
+    #corr_nominal = v(lambda x: 1 if (len(x)>1 and (x[0].pt()>30. and x[1].pt()>30.) ) else 0, int),
+    #corr_nominal = v(lambda x: True if (len(x)>1 and (x[0].pt>30. and x[1].pt>30.) ) else False), 
+    #j2_corr_nominal = v(lambda x: getattr(x[1], "corr_nominal",1.) if len(x)>1 else 1), 
     #j1_corr_CMS_scale_j_eta0to5_13Tev_JEC_up =  v(lambda x: getattr(x[0], "corr_CMS_scale_j_eta0to5_13Tev_JEC_up", 0.) if len(x)>0 else 0),
-    #j1_corr_CMS_scale_j_eta0to5_13Tev_JEC_down =  v(lambda x: getattr(x[0], "corr_CMS_scale_j_eta0to5_13Tev_JEC_down", 0.) if len(x)>0 else 0),
-    #j2_corr_CMS_scale_j_eta0to5_13Tev_JEC_up =  v(lambda x: getattr(x[1], "corr_CMS_scale_j_eta0to5_13Tev_JEC_up", 0.) if len(x)>1 else 0),
-    #j2_corr_CMS_scale_j_eta0to5_13Tev_JEC_down =  v(lambda x: getattr(x[1], "corr_CMS_scale_j_eta0to5_13Tev_JEC_down", 0.) if len(x)>1 else 0)
-    **items1
+   # **items1
 )
 
 #jets2_30 = Block(
@@ -183,8 +182,11 @@ triggers2016 = Block(
 )
 
 bjets = Block(
-    'bjets', lambda x: x.bjets_30,
+    'bjets_30', lambda x: x.bjets_30,
     n_bjets = v(lambda x: len(x), int),
+    #n_bjets_len = v(lambda x: bool(len(x))),
+    #b_corr_2 = v(lambda x: True for jet in x if jet.is_btagged)
+    #has_b = v(lambda x: bool(sum([jet.is_btagged for jet in x])))
 )
 
 for vname, variable in jets30.iteritems():
