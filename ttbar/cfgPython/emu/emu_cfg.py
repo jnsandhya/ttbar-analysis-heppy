@@ -137,8 +137,9 @@ if year == '2016':
     import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017 import mc_resubmit
-    #import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
     import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
+    #import CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 as backgrounds_forindex    
+
 from CMGTools.ttbar.samples.component_index import ComponentIndex
 bindex = ComponentIndex(backgrounds_forindex)
 
@@ -149,11 +150,12 @@ if test:
         comp = bindex.glob('alt_MC_hdampUp')[0]
                #alt_MC_hdampUp
                #MC_signal_dilep
-			   #MC_signal_hadronic
-			   #MC_zjets_DY_1050
-			   #MC_zjets_DY_502
+               #MC_signal_hadronic
+	       #MC_zjets_DY_1050
+	       #MC_zjets_DY_502
     else:
         #comp = selectedComponents[0]
+        #comp = bindex.glob('MuonEG_Run2017B_31Mar2018')[0]
         comp = bindex.glob('MuonEG_Run2017B_31Mar2018')[0]
                 # SingleElectron_Run2017E_31Mar2018
     selectedComponents   = [comp]
