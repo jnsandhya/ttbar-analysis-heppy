@@ -22,33 +22,39 @@ for l in removed_dir:
 if directory[-1] != '/':
     directory += '/'
 
+to_remove = []
 
 for l in listdir:
 
     if l[-1] != '/':
         l += '/'    
     direct = directory+l
-    
-    listing = os.listdir(direct+'/MCWeighter/')        
-    
-    if len(listing) == 0:
-        print listing
-        shutil.rmtree(direct)
 
-    #print direct
-    #cmd = '\n\
-    #directories=$(ls '+direct+' | grep _Chunk | sort)\n\
-    #for directory in ${directories}\n\
-    #do\n\
-    #    #echo "${directory}"\n\
-    #    if find '+direct+'${directory}/MCWeighter/ -mindepth 1 -maxdepth 1 | read; then\n\
-    #        echo "Not Empty"\n\
-    #    else\n\
-    #        rm -rf '+direct+'${directory} \n\
-    #        echo "Empty" \n\
-    #    fi\n\
-    #done'
+    try:
+    
+        listing1 = os.listdir(direct+'/MCWeighter/')        
+        listing2 = os.listdir(direct+'/NtupleProducer/')        
+        if len(listing1) == 0 or  len(listing2) == 0:
+            to_remove.append(direct)    
 
-    #print cmd
-    #os.system(cmd)
+    except:
+
+        to_remove.append(direct)    
+
+
+
+print to_remove
+
+
+
+print ' ------------ \n'
+start_harvest = None
+while start_harvest not in ['y','n']:
+    start_harvest = raw_input('Remove failed jobs ? [y/n]')
+if start_harvest == 'y':
+
+    for l in to_remove:
+        shutil.rmtree(l)
+else:
+    quit()
 

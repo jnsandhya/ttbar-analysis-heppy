@@ -1,5 +1,6 @@
 import os
 import argparse
+import time
 
 parser = argparse.ArgumentParser()
 parser.add_argument('directory', help='display your directory')
@@ -40,7 +41,7 @@ if start_harvest == 'y':
     new_dir = raw_input('  name of new directory :')
     print 'Move !.'
     os.system('mkdir '+new_dir)
-    
+    time.sleep(2)
     for l in listdir:
         if l.find('Chunk') == -1:
             cmd = 'cp -r '+directory+l+'/ '+new_dir

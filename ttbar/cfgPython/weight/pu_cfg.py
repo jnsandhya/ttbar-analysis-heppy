@@ -5,7 +5,7 @@ from   CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 
 test       = getHeppyOption('test', False)
 alternate  = getHeppyOption('alternate', True)
-year       = getHeppyOption('year', '2017' )
+year       = getHeppyOption('year', '2016' )
 
 
 ComponentCreator.useAAA = True
@@ -17,7 +17,8 @@ ComponentCreator.useAAA = True
 ################################################################################
 
 if (year == '2016'):
-    from CMGTools.ttbar.samples.summer16.ttbar2016            import mc_ttbar
+    from CMGTools.ttbar.samples.summer16.ttbar2016              import mc_ttbar
+    from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 import alt_ttbar
 elif(year == '2017'):
     from CMGTools.ttbar.samples.fall17.ttbar2017              import mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 import alt_ttbar
@@ -34,7 +35,10 @@ else:
 # Test
 ################################################################################
 if(year == '2016'):    
-    import CMGTools.TTbarTime.proto.samples.summer16.ttbar2016 as backgrounds_forindex
+    if not alternate:
+        import CMGTools.TTbarTime.proto.samples.summer16.ttbar2016 as backgrounds_forindex
+    else:
+        import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex
 elif(year == '2017'):
     if not alternate:
         import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
