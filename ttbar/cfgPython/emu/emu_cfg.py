@@ -34,8 +34,8 @@ logging.basicConfig(level=logging.WARNING)
 # production = True run on batch, production = False run locally
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
-data       = getHeppyOption('data', False)
-alternate  = getHeppyOption('alternate', True)
+data       = getHeppyOption('data', True)
+alternate  = getHeppyOption('alternate', False)
 year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
@@ -46,6 +46,8 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 ############################################################################
 if year == '2016':
     from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
+    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test
+    from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon
     from CMGTools.ttbar.samples.summer16.trigger   import data_triggers
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
@@ -79,6 +81,7 @@ if year == '2016':
     puFileDataUp   = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/MyDataPileupHistogram_up.root'
     puFileDataDown = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/MyDataPileupHistogram_down.root'
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup.root'
+    puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup_alternative.root'
     
 if year == '2017':
     puFileData     = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017.root'
@@ -119,7 +122,7 @@ for sample in data_elecmuon:
 
 if not data:
     if not alternate:
-        selectedComponents = mc_ttbar
+        selectedComponents = mc_ttbar_test
     else:
         selectedComponents = alt_ttbar
 elif data:
@@ -131,10 +134,12 @@ elif data:
 ############################################################################
 if year == '2016':    
     import CMGTools.ttbar.samples.summer16.ttbar2016 as backgrounds_forindex
+    import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017 import mc_resubmit
     import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
     #import CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 as backgrounds_forindex    
+
 from CMGTools.ttbar.samples.component_index import ComponentIndex
 bindex = ComponentIndex(backgrounds_forindex)
 
