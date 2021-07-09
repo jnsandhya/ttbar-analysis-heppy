@@ -19,27 +19,49 @@ class JetAnalyzer(Analyzer):
             do_residual = not self.cfg_comp.isMC
             from PhysicsTools.Heppy.physicsutils.JetReCalibrator import JetReCalibrator
             if self.cfg_ana.year == '2016' :
-                self.jet_calibrator = JetReCalibrator(
-                    global_tag, 'AK4PFchs', do_residual, 
-                    jecPath=os.path.expandvars(
-                        "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
-                        ),
-                    #upToLevel=3,
-                    #calculateSeparateCorrections=True,
-                    calculateType1METCorrection=True,
-                    groupForUncertaintySources = redjesunc_sources_2016
-                    )
+                if self.cfg_comp.isMC:
+                    self.jet_calibrator = JetReCalibrator(
+                        global_tag, 'AK4PFchs', do_residual, 
+                        jecPath=os.path.expandvars(
+                            "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
+                            ),
+                        #upToLevel=3,
+                        #calculateSeparateCorrections=True,
+                        calculateType1METCorrection=True,
+                        groupForUncertaintySources = redjesunc_sources_2016
+                        )
+                else:
+                    self.jet_calibrator = JetReCalibrator(
+                        global_tag, 'AK4PFchs', do_residual, 
+                        jecPath=os.path.expandvars(
+                            "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
+                            ),
+                        #upToLevel=3,
+                        #calculateSeparateCorrections=True,
+                        calculateType1METCorrection=True,
+                        )
             else:
-                self.jet_calibrator = JetReCalibrator(
-                    global_tag, 'AK4PFchs', do_residual, 
-                    jecPath=os.path.expandvars(
-                        "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
+                if self.cfg_comp.isMC:
+                    self.jet_calibrator = JetReCalibrator(
+                        global_tag, 'AK4PFchs', do_residual, 
+                        jecPath=os.path.expandvars(
+                            "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
                         ),
-                    #upToLevel=3,
-                    #calculateSeparateCorrections=True,
-                    calculateType1METCorrection=True,
-                    groupForUncertaintySources = redjesunc_sources_2017
-                    )
+                        #upToLevel=3,
+                        #calculateSeparateCorrections=True,
+                        calculateType1METCorrection=True,
+                        groupForUncertaintySources = redjesunc_sources_2017
+                        )
+                else:
+                    self.jet_calibrator = JetReCalibrator(
+                        global_tag, 'AK4PFchs', do_residual, 
+                        jecPath=os.path.expandvars(
+                            "${CMSSW_BASE}/src/CMGTools/RootTools/data/jec"
+                        ),
+                        #upToLevel=3,
+                        #calculateSeparateCorrections=True,
+                        calculateType1METCorrection=True
+                        )
 
         self.counters.addCounter('JetAnalyzer')
         count = self.counters.counter('JetAnalyzer')
