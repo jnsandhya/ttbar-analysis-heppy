@@ -127,7 +127,10 @@ if not data:
         selectedComponents = alt_ttbar
 elif data:
     selectedComponents = data_elecmuon
-    
+
+# change split factor 
+for l in selectedComponents:
+    l.splitFactor = 10
     
 ############################################################################
 # Test

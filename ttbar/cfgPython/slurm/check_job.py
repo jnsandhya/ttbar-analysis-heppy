@@ -27,6 +27,7 @@ jobs = os.listdir(directory)
 n_fai = 0
 n_suc = 0 
 n_run = 0
+n_not = 0
 n_tot = 0
 failed_submission = []
 
@@ -66,26 +67,30 @@ for j in jobs:
 
         output1 = subprocess.check_output(cmd1, shell=True)
         output2 = subprocess.check_output(cmd2, shell=True)
+
+        if output2.find('sending the job directory back') != -1 :
+            if output1 == '':
+                print j+' ### Failed job'
+                n_fai += 1
+                failed_submission.append(target_dir)
+            else:
+                print j+' -> '+output1
+                n_suc += 1
+        else:
+            n_run += 1
     except:
+        n_not += 1
         failed_submission.append(target_dir)
         print ' ### Failed submission '+j+' ###'
         continue
 
-    if output2.find('sending the job directory back') != -1 :
-        if output1 == '':
-            print j+' ### Failed job'
-            n_fai += 1
-            failed_submission.append(target_dir)
-        else:
-            print j+' -> '+output1
-            n_suc += 1
-    else:
-        n_run += 1
+ 
 
 print '\n ******************************************* '
 print_job(' failed', n_fai, n_tot)
 print_job(' succed', n_suc, n_tot)
 print_job('running', n_run, n_tot)
+print_job('not sub', n_not, n_tot)
 print '******************************************* \n'
 
 
