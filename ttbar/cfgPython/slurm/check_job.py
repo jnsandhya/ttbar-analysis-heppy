@@ -84,11 +84,15 @@ for j in jobs:
             else:
                 print j+' -> '+output1
                 n_suc += 1
-        else:
+        elif output2.find('running')!= -1 :
             n_run += 1
+        else:
+            print j+' ### Failed job back'
+            n_fai += 1
+            failed_submission.append(target_dir)
 
     except :
-        n_run += 1
+        n_not += 1
         continue
 
 
@@ -108,7 +112,7 @@ print '******************************************* \n'
 print ' ------------ \n'
 start_harvest = None
 while start_harvest not in ['y','n']:
-    start_harvest = raw_input('Resubmit jobs ? [y/n]')
+    start_harvest = raw_input('Resubmit '+str(n_fai)+' jobs ? [y/n]')
 if start_harvest == 'y':
     print 'Resubmit !.'
     for sub in failed_submission:
