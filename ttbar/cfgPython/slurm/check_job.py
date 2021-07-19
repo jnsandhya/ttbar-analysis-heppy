@@ -60,13 +60,21 @@ for j in jobs:
     target_dir = directory+'/'+j
     
     try:
-
         slurm_file = get_slurm_file(target_dir)
-        cmd1 = 'tail -n 10 '+target_dir+'/log.txt'
-        cmd2 = 'tail -n 1  '+target_dir+'/'+slurm_file
 
+    except :
+        failed_submission.append(target_dir)
+        print ' ### Failed submission '+j+' ###'
+        continue
+
+
+    cmd1 = 'tail -n 10 '+target_dir+'/log.txt'
+    cmd2 = 'tail -n 1  '+target_dir+'/'+slurm_file
+
+    try:
         output1 = subprocess.check_output(cmd1, shell=True)
         output2 = subprocess.check_output(cmd2, shell=True)
+
 
         if output2.find('sending the job directory back') != -1 :
             if output1 == '':
@@ -78,13 +86,11 @@ for j in jobs:
                 n_suc += 1
         else:
             n_run += 1
-    except:
-        n_not += 1
-        failed_submission.append(target_dir)
-        print ' ### Failed submission '+j+' ###'
+
+    except :
+        n_run += 1
         continue
 
- 
 
 print '\n ******************************************* '
 print_job(' failed', n_fai, n_tot)

@@ -174,6 +174,7 @@ data_dimuon = [DoubleMuon_Run2017B_31Mar2018, DoubleMuon_Run2017C_31Mar2018, Dou
 data_dielectron = [DoubleEG_Run2017B_31Mar2018, DoubleEG_Run2017C_31Mar2018, DoubleEG_Run2017D_31Mar2018, DoubleEG_Run2017E_31Mar2018, DoubleEG_Run2017F_31Mar2018]
 
 data_elecmuon = data_single_electron + data_single_muon + data_muon_electron
+data_singles = data_single_electron + data_single_muon 
 data_ttbar = data_elecmuon + data_dimuon + data_dielectron
 
 

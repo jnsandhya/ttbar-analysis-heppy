@@ -54,13 +54,13 @@ if year == '2016':
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
-    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_electron
-    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_muon
-    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron ##
     from CMGTools.ttbar.samples.fall17.trigger     import data_triggers
     from CMGTools.ttbar.samples.fall17.trigger     import mc_triggers
 
+data_files = data_singles
 
 events_to_pick = []
 
@@ -102,7 +102,7 @@ for sample in mc_ttbar:
         #print sample
 
 #print data_triggers 
-for sample in data_elecmuon:
+for sample in data_files:
     #print sample
     #sample.name[sample.name.find('2017')+4] are era A,B,C,D,E and F
     #print sample.name, sample.name.find(year), sample.name.find(year)+4, sample.name[sample.name.find(year)+4], data_triggers[sample.name[sample.name.find(year)+4]]
@@ -126,7 +126,7 @@ if not data:
     else:
         selectedComponents = alt_ttbar
 elif data:
-    selectedComponents = data_elecmuon
+    selectedComponents = data_files
 
 # change split factor 
 for l in selectedComponents:
