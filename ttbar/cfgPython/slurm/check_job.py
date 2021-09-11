@@ -69,7 +69,7 @@ for j in jobs:
 
 
     cmd1 = 'tail -n 10 '+target_dir+'/log.txt'
-    cmd2 = 'tail -n 1  '+target_dir+'/'+slurm_file
+    cmd2 = 'tail -n 10  '+target_dir+'/'+slurm_file
 
     try:
         output1 = subprocess.check_output(cmd1, shell=True)
@@ -84,7 +84,7 @@ for j in jobs:
             else:
                 print j+' -> '+output1
                 n_suc += 1
-        elif output2.find('running')!= -1 :
+        elif output2.find('running')!= -1 or output2 == '':
             n_run += 1
         else:
             print j+' ### Failed job back'

@@ -125,7 +125,11 @@ if not data:
 elif data:
     selectedComponents = data_single_muon
     
-    
+
+# change split factor 
+for l in selectedComponents:
+    l.splitFactor = 40    
+
 ############################################################################
 # Test
 ############################################################################

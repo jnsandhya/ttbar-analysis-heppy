@@ -17,8 +17,8 @@ Event.print_patterns = ['*taus*',
 #import pdb; pdb.set_trace()
 
 
-ComponentCreator.useAAA = True
-#ComponentCreator.useLyonAAA = True
+#ComponentCreator.useAAA = True
+ComponentCreator.useLyonAAA = True
 
 import logging
 logging.shutdown()
@@ -34,7 +34,7 @@ logging.basicConfig(level=logging.WARNING)
 # production = True run on batch, production = False run locally
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
-data       = getHeppyOption('data', True)
+data       = getHeppyOption('data', False)
 alternate  = getHeppyOption('alternate', False)
 year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
@@ -48,19 +48,19 @@ if year == '2016':
     from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test
     from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
-    from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon
+    #from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon 
+    from CMGTools.ttbar.samples.summer16.ttbar2016 import data_single_electron as data_files
     from CMGTools.ttbar.samples.summer16.trigger   import data_triggers
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_muon as data_files
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron ##
     from CMGTools.ttbar.samples.fall17.trigger     import data_triggers
     from CMGTools.ttbar.samples.fall17.trigger     import mc_triggers
-
-data_files = data_singles
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_resubmit as mc_ttbar
 
 events_to_pick = []
 
@@ -122,7 +122,7 @@ for sample in data_files:
 
 if not data:
     if not alternate:
-        selectedComponents = mc_ttbar_test
+        selectedComponents = mc_ttbar
     else:
         selectedComponents = alt_ttbar
 elif data:
@@ -130,7 +130,7 @@ elif data:
 
 # change split factor 
 for l in selectedComponents:
-    l.splitFactor = 10
+    l.splitFactor = 40
     
 ############################################################################
 # Test

@@ -104,7 +104,8 @@ mc_ttbar = [
 ]
 
 mc_resubmit = [
-    background_MC_DY
+    background_MC_WJets,
+    background_MC_WJets2
 ]
 
 mc_test=[
