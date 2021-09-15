@@ -111,6 +111,9 @@ weights = Block(
 #    weight_sf_ee_trig = v(lambda x : getattr(x, 'sfEETrigWeight', 1.)),
     weight_sf_em_trig = v(lambda x : getattr(x, 'sfEMTrigWeight', 1.)),
 #    weight_sf_mm_trig = v(lambda x : getattr(x, 'sfMTrigWeight', 1.)),
+    weight_prefiring = v(lambda x : getattr(x, 'prefiringWeight', 1.)),
+    weight_prefiring_up = v(lambda x : getattr(x, 'prefiringWeightUp', 1.)),
+    weight_prefiring_down = v(lambda x : getattr(x, 'prefiringWeightDown', 1.)),
 ) 
 
 syst = Block(
