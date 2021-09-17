@@ -17,8 +17,8 @@ Event.print_patterns = ['*taus*',
 #import pdb; pdb.set_trace()
 
 
-#ComponentCreator.useAAA = True
-ComponentCreator.useLyonAAA = True
+ComponentCreator.useAAA = True
+#ComponentCreator.useLyonAAA = True
 
 import logging
 logging.shutdown()
@@ -46,21 +46,22 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 ############################################################################
 if year == '2016':
     from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
-    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test
+    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test
     from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
-    #from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon 
-    from CMGTools.ttbar.samples.summer16.ttbar2016 import data_single_electron as data_files
+    from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon
     from CMGTools.ttbar.samples.summer16.trigger   import data_triggers
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
-    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_muon as data_files
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron ##
     from CMGTools.ttbar.samples.fall17.trigger     import data_triggers
     from CMGTools.ttbar.samples.fall17.trigger     import mc_triggers
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_resubmit as mc_ttbar
+
+#data_files = data_singles
+data_files = data_elecmuon
 
 events_to_pick = []
 
@@ -130,14 +131,14 @@ elif data:
 
 # change split factor 
 for l in selectedComponents:
-    l.splitFactor = 40
+    l.splitFactor = 10
     
 ############################################################################
 # Test
 ############################################################################
 if year == '2016':    
     import CMGTools.ttbar.samples.summer16.ttbar2016 as backgrounds_forindex
-    import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
+    #import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017 import mc_resubmit
     import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
@@ -150,7 +151,7 @@ bindex = ComponentIndex(backgrounds_forindex)
 if test:
     cache = True
     if not data:
-        comp = bindex.glob('alt_MC_hdampUp')[0]
+        comp = bindex.glob('MC_signal_dilep')[0]
                #alt_MC_hdampUp
                #MC_signal_dilep
                #MC_signal_hadronic
@@ -596,6 +597,7 @@ njets_ana = cfg.Analyzer(NJetsAnalyzer,
                          verbose=False)
 
 
+
 ############################################################################
 # Ntuples 
 ############################################################################
@@ -611,6 +613,33 @@ ntuple = cfg.Analyzer(NtupleProducer,
                       treename = 'events',
                       event_content = event_content_test)
                       
+from CMGTools.ttbar.analyzers.PrefiringAnalyzer import PrefiringAnalyzer
+if year == '2016':
+    prefiringana = cfg.Analyzer(PrefiringAnalyzer, 
+                                name='PrefiringAnalyzer',
+                                L1Maps = '$CMSSW_BASE/src/CMGTools/RootTools/data/L1PrefiringMaps_new.root',
+                                photons = 'slimmedPhotons',
+                                jets = 'slimmedJets',
+                                DataEra = '2016BtoH',
+                                UseJetEMPt = False ,
+                                PrefiringRateSystematicUncty =  0.2 , 
+                                jetMaxMuonFraction=0.5,
+                                SkipWarnings= True,
+
+                            )
+if year == '2017':
+    prefiringana = cfg.Analyzer(PrefiringAnalyzer, 
+                                name='PrefiringAnalyzer',
+                                L1Maps = '$CMSSW_BASE/src/CMGTools/RootTools/data/L1PrefiringMaps_new.root',
+                                photons = 'slimmedPhotons',
+                                jets = 'slimmedJets',
+                                DataEra = '2017BtoF',
+                                UseJetEMPt = False ,
+                                PrefiringRateSystematicUncty =  0.2 , 
+                                jetMaxMuonFraction=0.5,
+                                SkipWarnings= True,
+                            )
+
 
 sequence = cfg.Sequence([
     mcweighter,
@@ -665,6 +694,7 @@ sequence = cfg.Sequence([
     njets_ana,
 #Met
     pfmetana,
+    prefiringana,
 # Ntple
     #debugger,
     ntuple

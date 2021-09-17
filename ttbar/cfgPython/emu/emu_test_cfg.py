@@ -36,7 +36,7 @@ test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
 alternate  = getHeppyOption('alternate', False)
-year       = getHeppyOption('year', '2017' )
+year       = getHeppyOption('year', '2016' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
 btagger    = getHeppyOption('btagger', 'DeepCSV')
@@ -45,20 +45,22 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 # Components
 ############################################################################
 if year == '2016':
-    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
+    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test as mc_ttbar
+    from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon
     from CMGTools.ttbar.samples.summer16.trigger   import data_triggers
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar_test as mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
-    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_electron
-    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_single_muon
-    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron ##
     from CMGTools.ttbar.samples.fall17.trigger     import data_triggers
     from CMGTools.ttbar.samples.fall17.trigger     import mc_triggers
 
+#data_files = data_singles
+data_files = data_elecmuon
 
 events_to_pick = []
 
@@ -79,7 +81,8 @@ if year == '2016':
     puFileDataUp   = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/MyDataPileupHistogram_up.root'
     puFileDataDown = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/MyDataPileupHistogram_down.root'
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup.root'
-    
+    puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup_alternative.root'
+   
 if year == '2017':
     puFileData     = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017.root'
     puFileDataUp   = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017_up.root'
@@ -99,7 +102,7 @@ for sample in mc_ttbar:
         #print sample
 
 #print data_triggers 
-for sample in data_elecmuon:
+for sample in data_files:
     #print sample
     #sample.name[sample.name.find('2017')+4] are era A,B,C,D,E and F
     #print sample.name, sample.name.find(year), sample.name.find(year)+4, sample.name[sample.name.find(year)+4], data_triggers[sample.name[sample.name.find(year)+4]]
@@ -123,18 +126,19 @@ if not data:
     else:
         selectedComponents = alt_ttbar
 elif data:
-    selectedComponents = data_single_muon
-    
+    selectedComponents = data_files
 
 # change split factor 
 for l in selectedComponents:
-    l.splitFactor = 40    
-
+    l.splitFactor = 50
+    
+    
 ############################################################################
 # Test
 ############################################################################
 if year == '2016':    
     import CMGTools.ttbar.samples.summer16.ttbar2016 as backgrounds_forindex
+    #import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017 import mc_resubmit
     import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
@@ -147,13 +151,14 @@ if test:
     cache = True
     if not data:
         comp = bindex.glob('MC_signal_dilep')[0]
-        #comp = bindex.glob('alt_MC_hdampUp')[0]
+               #alt_MC_hdampUp
                #MC_signal_dilep
-			   #MC_signal_hadronic
-			   #MC_zjets_DY_1050
-			   #MC_zjets_DY_502
+               #MC_signal_hadronic
+	       #MC_zjets_DY_1050
+	       #MC_zjets_DY_502
     else:
         #comp = selectedComponents[0]
+        #comp = bindex.glob('MuonEG_Run2017B_31Mar2018')[0]
         comp = bindex.glob('MuonEG_Run2017B_31Mar2018')[0]
                 # SingleElectron_Run2017E_31Mar2018
     selectedComponents   = [comp]
@@ -606,6 +611,33 @@ ntuple = cfg.Analyzer(NtupleProducer,
                       outputfile = 'events.root',
                       treename = 'events',
                       event_content = event_content_test)
+
+from CMGTools.ttbar.analyzers.PrefiringAnalyzer import PrefiringAnalyzer
+if year == '2016':
+    prefiringana = cfg.Analyzer(PrefiringAnalyzer, 
+                                name='PrefiringAnalyzer',
+                                L1Maps = '$CMSSW_BASE/src/CMGTools/RootTools/data/L1PrefiringMaps_new.root',
+                                photons = 'slimmedPhotons',
+                                jets = 'slimmedJets',
+                                DataEra = '2016BtoH',
+                                UseJetEMPt = False ,
+                                PrefiringRateSystematicUncty =  0.2 , 
+                                jetMaxMuonFraction=0.5,
+                                SkipWarnings= True,
+
+                            )
+if year == '2017':
+    prefiringana = cfg.Analyzer(PrefiringAnalyzer, 
+                                name='PrefiringAnalyzer',
+                                L1Maps = '$CMSSW_BASE/src/CMGTools/RootTools/data/L1PrefiringMaps_new.root',
+                                photons = 'slimmedPhotons',
+                                jets = 'slimmedJets',
+                                DataEra = '2017BtoF',
+                                UseJetEMPt = False ,
+                                PrefiringRateSystematicUncty =  0.2 , 
+                                jetMaxMuonFraction=0.5,
+                                SkipWarnings= True,
+                            )
                       
 
 sequence = cfg.Sequence([
@@ -661,6 +693,7 @@ sequence = cfg.Sequence([
     njets_ana,
 #Met
     pfmetana,
+    prefiringana,
 # Ntple
     #debugger,
     ntuple

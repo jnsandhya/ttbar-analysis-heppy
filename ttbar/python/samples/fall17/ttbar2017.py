@@ -73,6 +73,9 @@ background_MC_DY2 = creator.makeMCComponent("MC_zjets_DY_502", "/DYJetsToLL_M-50
 background_MC_DY3 = creator.makeMCComponent("MC_zjets_DY_1050", "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM", "CMS", ".*root", 22635.1)
 
 
+mc_ttbar_test = [
+    signal_MC_dilep]
+
 mc_ttbar = [
     signal_MC_dilep,
     signal_MC_semilep,
@@ -104,8 +107,7 @@ mc_ttbar = [
 ]
 
 mc_resubmit = [
-    background_MC_WJets,
-    background_MC_WJets2
+    background_MC_DY
 ]
 
 mc_test=[
