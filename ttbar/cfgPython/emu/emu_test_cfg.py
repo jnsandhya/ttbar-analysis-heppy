@@ -36,7 +36,7 @@ test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
 alternate  = getHeppyOption('alternate', False)
-year       = getHeppyOption('year', '2017' )
+year       = getHeppyOption('year', '2016' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
 btagger    = getHeppyOption('btagger', 'DeepCSV')
@@ -45,13 +45,15 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 # Components
 ############################################################################
 if year == '2016':
-    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test as mc_ttbar
+    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test as mc_ttbar
+    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon
     from CMGTools.ttbar.samples.summer16.trigger   import data_triggers
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar_test as mc_ttbar
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import  mc_ttbar
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar_test as mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
@@ -130,7 +132,7 @@ elif data:
 
 # change split factor 
 for l in selectedComponents:
-    l.splitFactor = 10
+    l.splitFactor = 50
     
     
 ############################################################################
@@ -645,6 +647,11 @@ sequence = cfg.Sequence([
 # Analyzers
     json,
     vertex,
+    gen_particles,
+    trigger,
+    #trigger_match,
+    lheweight,
+    pileup,
 # Time
     time,
 # Muon
@@ -684,12 +691,7 @@ sequence = cfg.Sequence([
     bjets_30,
     one_bjets,
 # Rescaling
-    gen_particles,
-    trigger,
-    #trigger_match,
     #met_filters,
-    lheweight,
-    pileup,
     njets_ana,
 #Met
     pfmetana,

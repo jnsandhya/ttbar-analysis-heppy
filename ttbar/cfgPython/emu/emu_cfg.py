@@ -35,7 +35,7 @@ logging.basicConfig(level=logging.WARNING)
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
-alternate  = getHeppyOption('alternate', False)
+alternate  = getHeppyOption('alternate', True)
 year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
@@ -53,9 +53,9 @@ if year == '2016':
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
-    from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
-    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
+    from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar_new as alt_ttbar
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron ##
     from CMGTools.ttbar.samples.fall17.trigger     import data_triggers
     from CMGTools.ttbar.samples.fall17.trigger     import mc_triggers
@@ -646,6 +646,11 @@ sequence = cfg.Sequence([
 # Analyzers
     json,
     vertex,
+    gen_particles,
+    trigger,
+    #trigger_match,
+    lheweight,
+    pileup,
 # Time
     time,
 # Muon
@@ -680,21 +685,19 @@ sequence = cfg.Sequence([
     jet_20_clean,
     jets_30,
     two_jets,
+
+
 # b-jets
     btaganalyzer,
     bjets_30,
     one_bjets,
 # Rescaling
-    gen_particles,
-    trigger,
-    #trigger_match,
     #met_filters,
-    lheweight,
-    pileup,
     njets_ana,
 #Met
     pfmetana,
     prefiringana,
+
 # Ntple
     #debugger,
     ntuple
