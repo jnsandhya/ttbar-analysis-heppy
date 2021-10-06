@@ -20,9 +20,9 @@ def sleep_minutes(minutes):
 
 script = 'check_job.py'
 
-for i in range(10):
+for i in range(20):
     p = subprocess.Popen(['python', script, directory], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     sleep_minutes(1)
     out, err = p.communicate('y')
     print 'From other process: ' + out
-    sleep_minutes(1)
+    sleep_minutes(10)

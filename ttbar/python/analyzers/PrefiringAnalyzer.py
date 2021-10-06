@@ -65,12 +65,12 @@ class PrefiringAnalyzer(Analyzer):
         super(PrefiringAnalyzer, self).declareHandles()
         
         self.handles['photons'] = AutoHandle(
-            'slimmedPhotons',
+            self.cfg_ana.photons,
             'std::vector<pat::Photon>'
         )
 
         self.handles['jets'] = AutoHandle(
-            'slimmedJets', 
+            self.cfg_ana.jets, 
             'std::vector<pat::Jet>'
         )
 

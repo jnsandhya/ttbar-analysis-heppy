@@ -697,7 +697,6 @@ sequence = cfg.Sequence([
 #Met
     pfmetana,
     prefiringana,
-
 # Ntple
     #debugger,
     ntuple
