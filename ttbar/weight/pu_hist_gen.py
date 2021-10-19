@@ -6,7 +6,8 @@ from   PhysicsTools.HeppyCore.framework.heppy_loop import getHeppyOption
 
 usage = "usage: python pu_hist_gen.py [options] \n example: python pu_hist_gen.py -l CRABtest -y year"
 parser = OptionParser(usage=usage)
-parser.add_option("-y","--year", dest='year', default="2016", help="year on which u want to run the PU")
+parser.add_option("-y","--year", dest='year', default="2017", help="year on which u want to run the PU")
+parser.add_option("-l","--dirc", dest='dirc', default="test", help=" dir that has output PU")
 options,args = parser.parse_args()
 
 print options
@@ -23,7 +24,7 @@ else:
 
 
 samples=[]
-dir_input  = "./input_files/pu/"+options.year+"/"
+dir_input  = "./input_files/pu/"+options.year+"/"+options.dirc+"/"
 #if options.get_files:
 #    if not os.path.exists(dir_input):
 #        '''
@@ -52,7 +53,7 @@ for i in mc_ttbar:
     
 file_names = os.listdir(dir_input)
 file_names.sort()
-#print file_names
+print file_names
 
 rootfile = TFile(dir_output+"pileup.root", "RECREATE")
 pu_file = []

@@ -56,6 +56,33 @@ alt_MC_mtop169p5 = creator.makeMCComponent("alt_MC_mtop169p5","/TTTo2L2Nu_TuneCP
 alt_MC_mtop175p5 = creator.makeMCComponent("alt_MC_mtop175p5","/TTTo2L2Nu_TuneCP5_PSweights_mtop1755_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
 
 
+alt_MCsemilep_hdampDown = creator.makeMCComponent("alt_MCsemilep_hdampDown","/TTToSemiLeptonic_hdampDOWN_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+alt_MCsemilep_hdampUp = creator.makeMCComponent("alt_MCsemilep_hdampUp","/TTToSemiLeptonic_hdampUP_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+
+alt_MCsemilep_CP5Down = creator.makeMCComponent("alt_MCsemilep_CP5Down","/TTToSemiLeptonic_TuneCP5down_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+alt_MCsemilep_CP5Up = creator.makeMCComponent("alt_MCsemilep_CP5Up","/TTToSemiLeptonic_TuneCP5up_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+
+alt_MCsemilep_erdOn = creator.makeMCComponent("alt_MCsemilep_erdOn","/TTToSemiLeptonic_TuneCP5_PSweights_erdON_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+alt_MCsemilep_QCDbased = creator.makeMCComponent("alt_MCsemilep_QCDbased","/TTToSemiLeptonic_TuneCP5CR1_QCDbased_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+alt_MCsemilep_GluonMove = creator.makeMCComponent("alt_MCsemilep_GluonMove","/TTToSemiLeptonic_TuneCP5CR2_GluonMove_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+
+
+alt_MCsemilep_mtop169p5 = creator.makeMCComponent("alt_MCsemilep_mtop169p5","/TTToSemiLeptonic_TuneCP5_PSweights_mtop1695_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+alt_MCsemilep_mtop175p5 = creator.makeMCComponent("alt_MCsemilep_mtop175p5","/TTToSemiLeptonic_TuneCP5_PSweights_mtop1755_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+
+
+alt_MChad_hdampDown = creator.makeMCComponent("alt_MChad_hdampDown","/TTToHadronic_hdampDOWN_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM","CMS",".*root", 89.05);
+alt_MChad_hdampUp = creator.makeMCComponent("alt_MChad_hdampUp","/TTToHadronic_hdampUP_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+
+alt_MChad_CP5Down = creator.makeMCComponent("alt_MChad_CP5Down","/TTToHadronic_TuneCP5down_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+alt_MChad_CP5Up = creator.makeMCComponent("alt_MChad_CP5Up","/TTToHadronic_TuneCP5up_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+
+alt_MChad_erdOn = creator.makeMCComponent("alt_MChad_erdOn","/TTToHadronic_TuneCP5_PSweights_erdON_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+alt_MChad_QCDbased = creator.makeMCComponent("alt_MChad_QCDbased","/TTToHadronic_TuneCP5CR1_QCDbased_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+alt_MChad_GluonMove = creator.makeMCComponent("alt_MChad_GluonMove","/TTToHadronic_TuneCP5CR2_GluonMove_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+
+alt_MChad_mtop169p5 = creator.makeMCComponent("alt_MChad_mtop169p5","/TTToHadronic_TuneCP5_PSweights_mtop1695_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
+alt_MChad_mtop175p5 = creator.makeMCComponent("alt_MChad_mtop175p5","/TTToHadronic_TuneCP5_PSweights_mtop1755_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 89.05);
 
 
 alt_ttbar = [
@@ -72,7 +99,25 @@ alt_ttbar = [
     alt_MC_QCDbased,
     alt_MC_GluonMove,
     alt_MC_mtop169p5,
-    alt_MC_mtop175p5
+    alt_MC_mtop175p5,
+    alt_MCsemilep_hdampDown, 
+    alt_MCsemilep_hdampUp,
+    alt_MCsemilep_CP5Down,
+    alt_MCsemilep_CP5Up,
+    alt_MCsemilep_erdOn,
+    alt_MCsemilep_QCDbased,
+    alt_MCsemilep_GluonMove,
+    alt_MCsemilep_mtop169p5,
+    alt_MCsemilep_mtop175p5, 
+    alt_MChad_hdampDown, 
+    alt_MChad_hdampUp, 
+    alt_MChad_CP5Down, 
+    alt_MChad_CP5Up, 
+    alt_MChad_erdOn, 
+    alt_MChad_QCDbased, 
+    alt_MChad_GluonMove, 
+    alt_MChad_mtop169p5, 
+    alt_MChad_mtop175p5
 ]
 
 

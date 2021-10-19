@@ -7,7 +7,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('directory', help='display your directory')
-#parser.add_argument('sample', help='display your sample')
+parser.add_argument('target', help='mv successful jobs back to the main directory')
 
 
 ######################################################
@@ -16,7 +16,7 @@ parser.add_argument('directory', help='display your directory')
 
 args = parser.parse_args()
 directory = args.directory
-#sample = args.sample
+target = args.target
 
 if directory[-1] != '/':
     directory += '/'
@@ -35,6 +35,7 @@ failed_jobs = []
 failed_log = []
 failed_ids ={}
 failed_subids ={}
+succ_ids ={}
 
 ######################################################
 ## Functions
@@ -91,8 +92,9 @@ for j in jobs:
 
             else:
                 #print j+' -> '+output1
+                succ_ids[target_dir] = slurm_file
                 n_suc += 1
-        elif output2.find('running')!= -1 or output2 == '':
+        elif output2.find('running')!= -1 :
             #print j, slurm_file+' ### Running job'
             n_run += 1
         else:
@@ -105,7 +107,6 @@ for j in jobs:
     except :
         failed_log.append(target_dir)
         output2 = subprocess.check_output(cmd2, shell=True)
-
         if output2.find('running')!= -1 :
             #print j, slurm_file+' ###Running, no log file'
             n_run+=1
@@ -117,22 +118,14 @@ for j in jobs:
         n_notlog += 1
         continue
 
-
-
-print 'Printing '+str(len(failed_jobs))+' failed jobs !.'
-for keys,values in failed_ids.items():
+os.system('mkdir -p '+target)
+print 'Printing '+str(len(succ_ids))+' succesful jobs !.'
+for keys,values in succ_ids.items():
     print ' -> '+keys+'/'+values
-    #cmd = 'mv '+keys+' FailedJobs2017_Total_down'
-    #os.system(cmd)
+    cmd = 'mv '+keys+' '+target
+    os.system(cmd)
 
-print 'Printing '+str(len(failed_submission))+' failed submission jobs !.'
-for sub,ids in failed_subids.items():
-    print ' -> '+sub+'/'+ids
-    
-#print 'Printing '+str(len(failed_log))+' failed jobs with no log file!.'
-#for sub in failed_log:
-#    print ' -> '+sub
-  
+
 
 print '\n ******************************************* '
 print_job(' failed', n_fai, n_tot)
@@ -141,29 +134,4 @@ print_job('running', n_run, n_tot)
 print_job('not sub', n_not, n_tot)
 #print_job('not log', n_notlog, n_tot)
 print '******************************************* \n'
-
-
-######################################################
-## Resubmit
-######################################################
-
-
-print ' ------------ \n'
-start_harvest = None
-while start_harvest not in ['y','n']:
-    start_harvest = raw_input('Resubmit failed/not submitted jobs ? [y/n]')
-if start_harvest == 'y':
-    print 'Resubmitting '+str(len(failed_jobs))+' failed jobs !.'
-    for sub in failed_jobs:
-        cmd = 'cd '+sub+' && rm -rf */ && rm slurm-* && sbatch ./batchScript.sh'
-        os.system(cmd)
-    print 'Resubmitting '+str(len(failed_submission))+' failed submission jobs !.'
-    for sub in failed_submission:
-        #print ' -> '+sub
-        cmd = 'cd '+sub+' && rm -rf */ && rm -f slurm-* && sbatch ./batchScript.sh'
-        #os.system(cmd)
-else:
-    quit()
-#
-#tail slurm-91578.out -n 1
 

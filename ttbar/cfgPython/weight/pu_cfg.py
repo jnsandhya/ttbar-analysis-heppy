@@ -5,7 +5,7 @@ from   CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 
 test       = getHeppyOption('test', False)
 alternate  = getHeppyOption('alternate', True)
-year       = getHeppyOption('year', '2016' )
+year       = getHeppyOption('year', '2017' )
 
 
 ComponentCreator.useAAA = True

@@ -36,7 +36,7 @@ test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
 alternate  = getHeppyOption('alternate', True)
-year       = getHeppyOption('year', '2017' )
+year       = getHeppyOption('year', '2016' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
 btagger    = getHeppyOption('btagger', 'DeepCSV')
@@ -53,7 +53,7 @@ if year == '2016':
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
-    from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar_new as alt_ttbar
+    from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron ##
@@ -91,17 +91,6 @@ if year == '2017':
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_2017.root'
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_alt_2017.root'
 
-#else:
-for sample in mc_ttbar:
-        sample.puFileData = puFileData
-        sample.triggers = mc_triggers
-        sample.puFileMC = puFileMC
-        if not alternate:
-            sample.puFileMC = puFileMC
-        else:
-            sample.puFileMC = puFileMCalt
-        #print sample
-
 #print data_triggers 
 for sample in data_files:
     #print sample
@@ -129,20 +118,35 @@ if not data:
 elif data:
     selectedComponents = data_files
 
-# change split factor 
-for l in selectedComponents:
-    l.splitFactor = 10
-    
+for sample in selectedComponents:
+    sample.splitFactor = 50
+    if not data:
+        if year=='2016' and 'signal' in sample.name:
+            sample.splitFactor = 80
+            #print sample.name, sample.splitFactor
+
+        if 'jets' in sample.name:
+            sample.splitFactor = 100
+            #print sample.name, sample.splitFactor
+       
+        sample.puFileData  = puFileData
+        sample.triggers    = mc_triggers
+        sample.puFileMC    = puFileMC
+
+        if alternate:
+            sample.splitFactor = 15
+            sample.puFileMC = puFileMCalt
+ 
 ############################################################################
 # Test
 ############################################################################
 if year == '2016':    
     import CMGTools.ttbar.samples.summer16.ttbar2016 as backgrounds_forindex
-    #import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
+    import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017 import mc_resubmit
     import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
-    #import CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 as backgrounds_forindex    
+    import CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 as backgrounds_forindex    
 
 from CMGTools.ttbar.samples.component_index import ComponentIndex
 bindex = ComponentIndex(backgrounds_forindex)
@@ -151,7 +155,8 @@ bindex = ComponentIndex(backgrounds_forindex)
 if test:
     cache = True
     if not data:
-        comp = bindex.glob('MC_signal_dilep')[0]
+        comp = bindex.glob('alt_MC_hdampUp')[0]
+               #MC_signal_dilep
                #alt_MC_hdampUp
                #MC_signal_dilep
                #MC_signal_hadronic
