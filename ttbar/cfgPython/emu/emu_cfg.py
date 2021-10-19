@@ -36,7 +36,7 @@ test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
 alternate  = getHeppyOption('alternate', True)
-year       = getHeppyOption('year', '2016' )
+year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
 btagger    = getHeppyOption('btagger', 'DeepCSV')
@@ -119,24 +119,25 @@ elif data:
     selectedComponents = data_files
 
 for sample in selectedComponents:
-    sample.splitFactor = 50
+    #sample.splitFactor = 50
     if not data:
-        if year=='2016' and 'signal' in sample.name:
-            sample.splitFactor = 80
-            #print sample.name, sample.splitFactor
-
-        if 'jets' in sample.name:
-            sample.splitFactor = 100
-            #print sample.name, sample.splitFactor
-       
         sample.puFileData  = puFileData
         sample.triggers    = mc_triggers
         sample.puFileMC    = puFileMC
 
         if alternate:
-            sample.splitFactor = 15
+            sample.splitFactor = 20
             sample.puFileMC = puFileMCalt
- 
+
+        if year=='2016' and 'signal' in sample.name:
+            #sample.splitFactor = 80
+            print sample.name, sample.splitFactor
+
+        if 'jets' in sample.name:
+            #sample.splitFactor = 100
+            print sample.name, sample.splitFactor
+       
+      
 ############################################################################
 # Test
 ############################################################################
