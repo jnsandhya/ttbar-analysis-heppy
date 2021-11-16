@@ -15,29 +15,39 @@ class BTagSF(object):
             if tagger == 'DeepCSV':
                 rootfname = '/'.join([os.environ["CMSSW_BASE"],
                                       'src/CMGTools/ttbar/data/2016/btag/btag_efficiency_DeepCSV.root'])
-                calib = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_2016LegacySF_V1.csv"))
+                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_2016LegacySF_V1_YearCorrelation-V1.csv"))
+                calib_incl = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_2016LegacySF_V1.csv"))
             if tagger == 'DeepJet':
                 rootfname = '/'.join([os.environ["CMSSW_BASE"],
                               'src/CMGTools/ttbar/data/2016/btag/btag_efficiency_CSVv2.root'])
-                calib = ROOT.BTagCalibration("CSVv2", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepJet_2016LegacySF_V1.csv"))
+                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_2016LegacySF_V1_YearCorrelation-V1.csv"))
+                calib_incl = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_2016LegacySF_V1.csv"))
+                #calib = ROOT.BTagCalibration("CSVv2", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepJet_2016LegacySF_V1.csv"))
             if tagger == 'CSVv2':
                 rootfname = '/'.join([os.environ["CMSSW_BASE"],
                               'src/CMGTools/ttbar/data/2016/btag/btag_efficiency_CSVv2.root'])
-                calib = ROOT.BTagCalibration("CSVv2", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/CSVv2_94XSF_V2_B_F.csv"))
+                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_2016LegacySF_V1_YearCorrelation-V1.csv"))
+                calib_incl = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_2016LegacySF_V1.csv"))
+                #calib = ROOT.BTagCalibration("CSVv2", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/CSVv2_94XSF_V2_B_F.csv"))
 
         else:
             if tagger == 'DeepCSV':
                 rootfname = '/'.join([os.environ["CMSSW_BASE"],
                                       'src/CMGTools/ttbar/data/2017/btag/btag_efficiency_DeepCSV_2017.root'])
-                calib = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepCSV_94XSF_V5_B_F.csv"))
+                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_94XSF_V4_B_F_YearCorrelation-V1.csv"))
+                calib_incl = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepCSV_94XSF_V5_B_F.csv"))
             if tagger == 'DeepJet':
                 rootfname = '/'.join([os.environ["CMSSW_BASE"],
                                       'src/CMGTools/ttbar/data/2017/btag/btag_efficiency_DeepCSV.root'])
-                calib = ROOT.BTagCalibration("DeepFlavour", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepFlavour_94XSF_V4_B_F.csv"))
+                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_94XSF_V4_B_F_YearCorrelation-V1.csv"))
+                calib_incl = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepCSV_94XSF_V5_B_F.csv"))
             if tagger == 'CSVv2':
                 rootfname = '/'.join([os.environ["CMSSW_BASE"],
                                       'src/CMGTools/ttbar/data/2017/btag/btag_efficiency_DeepCSV.root'])
-                calib = ROOT.BTagCalibration("CSVv2", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/CSVv2_94XSF_V2_B_F.csv"))
+                #calib = ROOT.BTagCalibration("CSVv2", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/CSVv2_94XSF_V2_B_F.csv"))
+                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_94XSF_V4_B_F_YearCorrelation-V1.csv"))
+                calib_incl = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepCSV_94XSF_V5_B_F.csv"))
+
         self.mc_eff_file = TFile(rootfname)
 
         # MC b-tag efficiencies as measured in HTT by Adinda
@@ -55,13 +65,17 @@ class BTagSF(object):
         v_sys = getattr(ROOT, 'vector<string>')()
         v_sys.push_back('up')
         v_sys.push_back('down')
+        v_sys.push_back('up_correlated')
+        v_sys.push_back('down_correlated')
+        v_sys.push_back('up_uncorrelated')
+        v_sys.push_back('down_uncorrelated')
 
         self.reader_bc = ROOT.BTagCalibrationReader(op_dict[wp], measurement, v_sys)
-        self.reader_bc.load(calib, 0, 'mujets')
-        self.reader_bc.load(calib, 1, 'mujets')
+        self.reader_bc.load(calib_bc, 0, 'mujets')
+        self.reader_bc.load(calib_bc, 1, 'mujets')
         print 'Booking light reader'
         self.reader_light = ROOT.BTagCalibrationReader(op_dict[wp], measurement, v_sys)
-        self.reader_light.load(calib, 2, 'incl')
+        self.reader_light.load(calib_incl, 2, 'incl')
 
     @staticmethod
     def getBTVJetFlav(flav):
@@ -95,6 +109,12 @@ class BTagSF(object):
         SFb = self.getPOGSFB(pt, abs(eta), jetflavor)
         SFb_up = self.getPOGSFB(pt, abs(eta), jetflavor,'up')
         SFb_down = self.getPOGSFB(pt, abs(eta), jetflavor,'down')
+
+        SFb_up_corr = self.getPOGSFB(pt, abs(eta), jetflavor,'up_correlated')
+        SFb_down_corr = self.getPOGSFB(pt, abs(eta), jetflavor,'down_correlated')
+
+        SFb_up_uncorr = self.getPOGSFB(pt, abs(eta), jetflavor,'up_uncorrelated')
+        SFb_down_uncorr = self.getPOGSFB(pt, abs(eta), jetflavor,'down_uncorrelated')
         #print SFb, SFb_up, SFb_down
         eff_b = self.getMCBTagEff(pt, abs(eta), jetflavor)
         
@@ -103,20 +123,38 @@ class BTagSF(object):
                 jet.btagWeight = (SFb*eff_b)/eff_b
                 jet.btagWeightUp = (SFb_up*eff_b)/eff_b
                 jet.btagWeightDown = (SFb_down*eff_b)/eff_b
+
+                jet.btagWeightUp_correlated = (SFb_up_corr*eff_b)/eff_b
+                jet.btagWeightDown_correlated = (SFb_down_corr*eff_b)/eff_b
+                jet.btagWeightUp_uncorrelated = (SFb_up_uncorr*eff_b)/eff_b
+                jet.btagWeightDown_uncorrelated = (SFb_down_uncorr*eff_b)/eff_b
             else:
                 jet.btagWeight = 1
                 jet.btagWeightUp = 1
                 jet.btagWeightDown = 1
+                jet.btagWeightUp_correlated = 1
+                jet.btagWeightDown_correlated = 1
+                jet.btagWeightUp_uncorrelated = 1
+                jet.btagWeightDown_uncorrelated = 1
             return True
         else:
             if(eff_b != 1):
                 jet.btagWeight = (1 - SFb*eff_b)/(1 - eff_b)
                 jet.btagWeightUp = (1 - SFb_up*eff_b)/(1 - eff_b)
                 jet.btagWeightDown = (1 - SFb_down*eff_b)/(1 - eff_b)
+                jet.btagWeightUp_correlated = (1 - SFb_up_corr*eff_b)/(1 - eff_b)
+                jet.btagWeightDown_correlated = (1 - SFb_down_corr*eff_b)/(1 - eff_b)
+                jet.btagWeightUp_uncorrelated = (1 - SFb_up_uncorr*eff_b)/(1 - eff_b)
+                jet.btagWeightDown_uncorrelated = (1 - SFb_down_uncorr*eff_b)/(1 - eff_b)
+
             else:
                 jet.btagWeight = 1
                 jet.btagWeightUp = 1
                 jet.btagWeightDown = 1
+                jet.btagWeightUp_correlated = 1
+                jet.btagWeightDown_correlated = 1
+                jet.btagWeightUp_uncorrelated = 1
+                jet.btagWeightDown_uncorrelated = 1
             return False
 
 

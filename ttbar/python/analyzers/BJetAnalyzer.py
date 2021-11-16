@@ -15,15 +15,20 @@ class BJetAnalyzer(Analyzer):
         #https://twiki.cern.ch/twiki/bin/viewauth/CMS/BtagRecommendation2016Legacy
 
 
-        sfb_weight = 1.
+        sf_weight = 1.
         sfb_weightup = 1.
         sfb_weightdown = 1.
-        sfc_weight = 1.
-        sfc_weightup = 1.
-        sfc_weightdown = 1.
+        sfb_weightup_correlated = 1.
+        sfb_weightdown_correlated = 1.
+        sfb_weightup_uncorrelated = 1.
+        sfb_weightdown_uncorrelated = 1.
         sfl_weight = 1.
         sfl_weightup = 1.
         sfl_weightdown = 1.
+        sfl_weightup_correlated = 1.
+        sfl_weightdown_correlated = 1.
+        sfl_weightup_uncorrelated = 1.
+        sfl_weightdown_uncorrelated = 1.
         
         jets = getattr(event, self.cfg_ana.jets)
         for jet in jets:
@@ -59,20 +64,45 @@ class BJetAnalyzer(Analyzer):
             if(jet.btagWeight > 0 and abs(jet.hadronFlavour()) in [4, 5]):
                 sfb_weightup *= jet.btagWeightUp
                 sfb_weightdown *= jet.btagWeightDown
+                sfb_weightup_correlated *= jet.btagWeightUp_correlated
+                sfb_weightdown_correlated *= jet.btagWeightDown_correlated
+                sfb_weightup_uncorrelated *= jet.btagWeightUp_uncorrelated
+                sfb_weightdown_uncorrelated *= jet.btagWeightDown_uncorrelated
                 sfl_weightup *= jet.btagWeight
                 sfl_weightdown *= jet.btagWeight
+                sfl_weightup_correlated *= jet.btagWeight
+                sfl_weightdown_correlated *= jet.btagWeight
+                sfl_weightup_uncorrelated *= jet.btagWeight
+                sfl_weightdown_uncorrelated *= jet.btagWeight
+
             else:    
                 sfb_weightup *= jet.btagWeight
                 sfb_weightdown *= jet.btagWeight
+                sfb_weightup_correlated *= jet.btagWeight
+                sfb_weightdown_correlated *= jet.btagWeight
+                sfb_weightup_uncorrelated *= jet.btagWeight
+                sfb_weightdown_uncorrelated *= jet.btagWeight
                 sfl_weightup *= jet.btagWeightUp
                 sfl_weightdown *= jet.btagWeightDown
+                sfl_weightup_correlated *= jet.btagWeightUp_correlated
+                sfl_weightdown_correlated *= jet.btagWeightDown_correlated
+                sfl_weightup_uncorrelated *= jet.btagWeightUp_uncorrelated
+                sfl_weightdown_uncorrelated *= jet.btagWeightDown_uncorrelated
 
             
         setattr(event, 'sfWeight', sf_weight)
         setattr(event, 'sfbWeightUp', sfb_weightup)
         setattr(event, 'sfbWeightDown', sfb_weightdown)
+        setattr(event, 'sfbWeightUp_correlated', sfb_weightup_correlated)
+        setattr(event, 'sfbWeightDown_correlated', sfb_weightdown_correlated)
+        setattr(event, 'sfbWeightUp_uncorrelated', sfb_weightup_uncorrelated)
+        setattr(event, 'sfbWeightDown_uncorrelated', sfb_weightdown_uncorrelated)
         setattr(event, 'sflWeightUp', sfl_weightup)
         setattr(event, 'sflWeightDown', sfl_weightdown)
+        setattr(event, 'sflWeightUp_correlated', sfl_weightup_correlated)
+        setattr(event, 'sflWeightDown_correlated', sfl_weightdown_correlated)
+        setattr(event, 'sflWeightUp_uncorrelated', sfl_weightup_uncorrelated)
+        setattr(event, 'sflWeightDown_uncorrelated', sfl_weightdown_uncorrelated)
 
         event.eventWeight *= event.sfWeight
             
