@@ -63,6 +63,7 @@ for j in jobs:
 
     n_tot += 1
     target_dir = directory+'/'+j
+    slurm_file = ''
     
     try:
         slurm_file = get_slurm_file(target_dir)

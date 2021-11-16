@@ -79,7 +79,7 @@ class PrefiringAnalyzer(Analyzer):
         super(PrefiringAnalyzer,self).beginLoop(setup)
 
     def process(self, event):
-        
+        self.readCollections(event.input)     
         if not self.cfg_comp.isMC: return True
         
         fluctuations = ['central','up','down']

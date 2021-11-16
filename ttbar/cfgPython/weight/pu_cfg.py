@@ -21,8 +21,8 @@ if (year == '2016'):
     from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 import alt_ttbar
 elif(year == '2017'):
     from CMGTools.ttbar.samples.fall17.ttbar2017              import mc_ttbar
-    from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 import alt_ttbar
-
+    #from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 import alt_ttbar
+    from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar_test as alt_ttbar
 
 events_to_pick = []
 

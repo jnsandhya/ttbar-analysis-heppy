@@ -14,7 +14,7 @@ def IntersecOfSets(arr1, arr2, arr3):
       
     # Calculates intersection of 
     # sets on s1 and s2
-    set1 = s1.intersection(s2)         #[80, 20, 100]
+    set1 = s1.intersection(s2)  
       
     # Calculates intersection of sets
     # on set1 and s3

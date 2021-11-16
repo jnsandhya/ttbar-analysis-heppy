@@ -81,11 +81,11 @@ jets30 = Block(
 #    **items1)
 #    #**items2)
 
-metvars = Block(
-    'metvars', lambda x: x.pfmet,
-    met = v(lambda x: x.pt()),
-    metphi = v(lambda x: x.phi()),
-)
+#metvars = Block(
+#    'metvars', lambda x: x.pfmet,
+#    met = v(lambda x: x.pt()),
+#    metphi = v(lambda x: x.phi()),
+#)
 
 weights = Block(
     'weights', lambda x: x, 
@@ -95,13 +95,13 @@ weights = Block(
     weight_generator = v(lambda x : getattr(x, 'generatorWeight', 1.)),
     weight_pu_up = v(lambda x : getattr(x, 'puWeightUp',1.)),
     weight_pu_down = v(lambda x : getattr(x, 'puWeightDown',1.)),
-    weight_sfb = v(lambda x : getattr(x, 'sfbWeight', 1.)),
+    weight_sfb = v(lambda x : getattr(x, 'sfWeight', 1.)),
     weight_sfb_up = v(lambda x : getattr(x, 'sfbWeightUp', 1.)),
     weight_sfb_down = v(lambda x : getattr(x, 'sfbWeightDown', 1.)),
-    weight_sfc = v(lambda x : getattr(x, 'sfcWeight', 1.)),
-    weight_sfc_up = v(lambda x : getattr(x, 'sfcWeightUp', 1.)),
-    weight_sfc_down = v(lambda x : getattr(x, 'sfcWeightDown', 1.)),
-    weight_sfl = v(lambda x : getattr(x, 'sflWeight', 1.)),
+    #weight_sfc = v(lambda x : getattr(x, 'sfcWeight', 1.)),
+    #weight_sfc_up = v(lambda x : getattr(x, 'sfcWeightUp', 1.)),
+    #weight_sfc_down = v(lambda x : getattr(x, 'sfcWeightDown', 1.)),
+    #weight_sfl = v(lambda x : getattr(x, 'sflWeight', 1.)),
     weight_sfl_up = v(lambda x : getattr(x, 'sflWeightUp', 1.)),
     weight_sfl_down = v(lambda x : getattr(x, 'sflWeightDown', 1.)),
     weight_sfe_id = v(lambda x : getattr(x, 'sfeIdWeight', 1.)),
@@ -235,11 +235,13 @@ dilepton = Block(
 
 
 common2016 = EventContent(
-    [event, weights, syst, jets30,  bjets, electron, muon, dilepton, metvars, triggers2016]
+    #[event, weights, syst, jets30,  bjets, electron, muon, dilepton, metvars, triggers2016]
+    [event, weights, syst, jets30,  bjets, electron, muon, dilepton, triggers2016]
 )
 
 common2017 = EventContent(
-    [event, weights, syst, jets30,  bjets, electron, muon, dilepton, metvars, triggers2017]
+    #[event, weights, syst, jets30,  bjets, electron, muon, dilepton, metvars, triggers2017]
+    [event, weights, syst, jets30,  bjets, electron, muon, dilepton, triggers2017]
 )
 
 ################################################################################

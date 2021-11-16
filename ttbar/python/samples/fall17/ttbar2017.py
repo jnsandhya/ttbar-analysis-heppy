@@ -106,8 +106,10 @@ mc_ttbar = [
     background_MC_DY3
 ]
 
-mc_resubmit = [
-    background_MC_DY
+mc_jets = [
+    #background_MC_DY
+    background_MC_DY2,
+    background_MC_DY3
 ]
 
 mc_test=[

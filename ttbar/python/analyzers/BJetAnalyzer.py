@@ -55,33 +55,26 @@ class BJetAnalyzer(Analyzer):
                                                    is_data=not self.cfg_comp.isMC,
                                                    csv_cut=csv_cut)
  
-            if(jet.btagWeight > 0 and abs(jet.hadronFlavour()) == 5):
-                sfb_weight *= jet.btagWeight
+            sf_weight *= jet.btagWeight
+            if(jet.btagWeight > 0 and abs(jet.hadronFlavour()) in [4, 5]):
                 sfb_weightup *= jet.btagWeightUp
                 sfb_weightdown *= jet.btagWeightDown
-
-            if(jet.btagWeight > 0 and abs(jet.hadronFlavour()) == 4):
-                sfc_weight *= jet.btagWeight
-                sfc_weightup *= jet.btagWeightUp
-                sfc_weightdown *= jet.btagWeightDown
-            
+                sfl_weightup *= jet.btagWeight
+                sfl_weightdown *= jet.btagWeight
             else:    
-                sfl_weight *= jet.btagWeight
+                sfb_weightup *= jet.btagWeight
+                sfb_weightdown *= jet.btagWeight
                 sfl_weightup *= jet.btagWeightUp
                 sfl_weightdown *= jet.btagWeightDown
 
             
-        setattr(event, 'sfbWeight', sfb_weight)
+        setattr(event, 'sfWeight', sf_weight)
         setattr(event, 'sfbWeightUp', sfb_weightup)
         setattr(event, 'sfbWeightDown', sfb_weightdown)
-        setattr(event, 'sfcWeight', sfc_weight)
-        setattr(event, 'sfcWeightUp', sfc_weightup)
-        setattr(event, 'sfcWeightDown', sfc_weightdown)
-        setattr(event, 'sflWeight', sfl_weight)
         setattr(event, 'sflWeightUp', sfl_weightup)
         setattr(event, 'sflWeightDown', sfl_weightdown)
 
-        event.eventWeight *= event.sfbWeight
+        event.eventWeight *= event.sfWeight
             
                                                    
 

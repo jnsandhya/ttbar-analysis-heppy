@@ -92,8 +92,9 @@ alt_MChad_GluonMove = creator.makeMCComponent("alt_MChad_GluonMove","/TTToHadron
 alt_MChad_mtop169p5 = creator.makeMCComponent("alt_MChad_mtop169p5","/TTToHadronic_mtop169p5_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3/MINIAODSIM","CMS",".*root", 89.05);
 alt_MChad_mtop175p5_pmx = creator.makeMCComponent("alt_MChad_mtop175p5_pmx","/TTToHadronic_mtop175p5_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM","CMS",".*root", 89.05);
 
-
-
+alt_ttbar_test = [
+    alt_MChad_mtop175p5_pmx
+]
 
 alt_ttbar = [
     alt_MC_hdampUp,

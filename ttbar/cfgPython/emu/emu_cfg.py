@@ -16,7 +16,6 @@ Event.print_patterns = ['*taus*',
 
 #import pdb; pdb.set_trace()
 
-
 ComponentCreator.useAAA = True
 #ComponentCreator.useLyonAAA = True
 
@@ -36,7 +35,7 @@ test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
 alternate  = getHeppyOption('alternate', True)
-year       = getHeppyOption('year', '2017' )
+year       = getHeppyOption('year', '2016' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
 btagger    = getHeppyOption('btagger', 'DeepCSV')
@@ -126,14 +125,14 @@ for sample in selectedComponents:
         sample.puFileMC    = puFileMC
 
         if alternate:
-            sample.splitFactor = 20
+            sample.splitFactor = 40
             sample.puFileMC = puFileMCalt
 
         if year=='2016' and 'signal' in sample.name:
             #sample.splitFactor = 80
             print sample.name, sample.splitFactor
 
-        if 'jets' in sample.name:
+        if 'wjets' in sample.name:
             #sample.splitFactor = 100
             print sample.name, sample.splitFactor
        
@@ -143,11 +142,10 @@ for sample in selectedComponents:
 ############################################################################
 if year == '2016':    
     import CMGTools.ttbar.samples.summer16.ttbar2016 as backgrounds_forindex
-    import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
+    #import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
 if year == '2017':
-    from CMGTools.ttbar.samples.fall17.ttbar2017 import mc_resubmit
     import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
-    import CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 as backgrounds_forindex    
+    #import CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 as backgrounds_forindex    
 
 from CMGTools.ttbar.samples.component_index import ComponentIndex
 bindex = ComponentIndex(backgrounds_forindex)
@@ -156,7 +154,7 @@ bindex = ComponentIndex(backgrounds_forindex)
 if test:
     cache = True
     if not data:
-        comp = bindex.glob('alt_MC_hdampUp')[0]
+        comp = bindex.glob('MC_signal_dilep')[0]
                #MC_signal_dilep
                #alt_MC_hdampUp
                #MC_signal_dilep
@@ -657,6 +655,7 @@ sequence = cfg.Sequence([
     #trigger_match,
     lheweight,
     pileup,
+    
 # Time
     time,
 # Muon
@@ -691,8 +690,6 @@ sequence = cfg.Sequence([
     jet_20_clean,
     jets_30,
     two_jets,
-
-
 # b-jets
     btaganalyzer,
     bjets_30,
@@ -701,9 +698,8 @@ sequence = cfg.Sequence([
     #met_filters,
     njets_ana,
 #Met
-    pfmetana,
+    # Ntple
     prefiringana,
-# Ntple
     #debugger,
     ntuple
 ])

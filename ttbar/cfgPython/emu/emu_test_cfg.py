@@ -16,7 +16,6 @@ Event.print_patterns = ['*taus*',
 
 #import pdb; pdb.set_trace()
 
-
 ComponentCreator.useAAA = True
 #ComponentCreator.useLyonAAA = True
 
@@ -36,7 +35,7 @@ test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
 alternate  = getHeppyOption('alternate', False)
-year       = getHeppyOption('year', '2016' )
+year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
 btagger    = getHeppyOption('btagger', 'DeepCSV')
@@ -45,15 +44,14 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 # Components
 ############################################################################
 if year == '2016':
-    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test as mc_ttbar
-    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
+    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_jets as mc_ttbar
+    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_jets as mc_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon
     from CMGTools.ttbar.samples.summer16.trigger   import data_triggers
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import  mc_ttbar
-    #from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar_test as mc_ttbar
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_jets as  mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
@@ -84,24 +82,13 @@ if year == '2016':
     puFileDataDown = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/MyDataPileupHistogram_down.root'
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup.root'
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup_alternative.root'
-   
+    
 if year == '2017':
     puFileData     = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017.root'
     puFileDataUp   = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017_up.root'
     puFileDataDown = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017_down.root'
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_2017.root'
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_alt_2017.root'
-
-#else:
-for sample in mc_ttbar:
-        sample.puFileData = puFileData
-        sample.triggers = mc_triggers
-        sample.puFileMC = puFileMC
-        if not alternate:
-            sample.puFileMC = puFileMC
-        else:
-            sample.puFileMC = puFileMCalt
-        #print sample
 
 #print data_triggers 
 for sample in data_files:
@@ -130,11 +117,26 @@ if not data:
 elif data:
     selectedComponents = data_files
 
-# change split factor 
-for l in selectedComponents:
-    l.splitFactor = 50
-    
-    
+for sample in selectedComponents:
+    sample.splitFactor = 50
+    if not data:
+        sample.puFileData  = puFileData
+        sample.triggers    = mc_triggers
+        sample.puFileMC    = puFileMC
+
+        if alternate:
+            sample.splitFactor = 40
+            sample.puFileMC = puFileMCalt
+
+        if year=='2016' and 'signal' in sample.name:
+            sample.splitFactor = 80
+            #print sample.name, sample.splitFactor
+
+        if 'jets' in sample.name:
+            sample.splitFactor = 50
+            #print sample.name, sample.splitFactor
+       
+      
 ############################################################################
 # Test
 ############################################################################
@@ -142,9 +144,9 @@ if year == '2016':
     import CMGTools.ttbar.samples.summer16.ttbar2016 as backgrounds_forindex
     #import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
 if year == '2017':
-    from CMGTools.ttbar.samples.fall17.ttbar2017 import mc_resubmit
     import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
     #import CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 as backgrounds_forindex    
+
 from CMGTools.ttbar.samples.component_index import ComponentIndex
 bindex = ComponentIndex(backgrounds_forindex)
 
@@ -153,6 +155,7 @@ if test:
     cache = True
     if not data:
         comp = bindex.glob('MC_signal_dilep')[0]
+               #MC_signal_dilep
                #alt_MC_hdampUp
                #MC_signal_dilep
                #MC_signal_hadronic
@@ -508,8 +511,7 @@ jets_30 = cfg.Analyzer(Selector,
                        'jets_30',
                        output = 'jets_30',
                        src = 'jets_20_clean',
-                       filter_func = lambda x : x.pt()*TESTCORR >30)
-
+                       filter_func = lambda x : x.pt()*TESTCORR>30)
                        
 two_jets = cfg.Analyzer(EventFilter, 
                         name = 'TwoJets',
@@ -572,13 +574,6 @@ gen_particles = cfg.Analyzer(GenAnalyzer,
                              workspace_path='$CMSSW_BASE/src/CMGTools/ttbar/data/gen_scalefactors_v2.root'
                              )
 
-pfmetana = cfg.Analyzer(METAnalyzer,
-                        name='PFMetana',
-                        recoil_correction_file='HTT-utilities/RecoilCorrections/data/Type1_PFMET_2017.root',
-                        met = 'pfmet',
-                        apply_recoil_correction= True,#Recommendation states loose pfjetID for jet multiplicity but this WP is not supported anymore?
-                        runFixEE2017= True)
-
 lheweight = cfg.Analyzer(LHEWeightAnalyzer,
                          name="LHEWeightAnalyzer",
                          useLumiInfo=False)
@@ -599,6 +594,7 @@ njets_ana = cfg.Analyzer(NJetsAnalyzer,
                          verbose=False)
 
 
+
 ############################################################################
 # Ntuples 
 ############################################################################
@@ -613,7 +609,7 @@ ntuple = cfg.Analyzer(NtupleProducer,
                       outputfile = 'events.root',
                       treename = 'events',
                       event_content = event_content_test)
-
+                      
 from CMGTools.ttbar.analyzers.PrefiringAnalyzer import PrefiringAnalyzer
 if year == '2016':
     prefiringana = cfg.Analyzer(PrefiringAnalyzer, 
@@ -640,7 +636,7 @@ if year == '2017':
                                 jetMaxMuonFraction=0.5,
                                 SkipWarnings= True,
                             )
-                      
+
 
 sequence = cfg.Sequence([
     mcweighter,
@@ -652,6 +648,7 @@ sequence = cfg.Sequence([
     #trigger_match,
     lheweight,
     pileup,
+    
 # Time
     time,
 # Muon
@@ -694,9 +691,8 @@ sequence = cfg.Sequence([
     #met_filters,
     njets_ana,
 #Met
-    pfmetana,
+    # Ntple
     prefiringana,
-# Ntple
     #debugger,
     ntuple
 ])
