@@ -549,13 +549,14 @@ bjets_30 = cfg.Analyzer(Selector,
 ############################################################################
 # Generator stuff 
 ############################################################################
-from PhysicsTools.Heppy.analyzers.gen.LHEWeightAnalyzer import LHEWeightAnalyzer
+#from PhysicsTools.Heppy.analyzers.gen.LHEWeightAnalyzer import LHEWeightAnalyzer
 from CMGTools.ttbar.analyzers.PileUpAnalyzer            import PileUpAnalyzer
 from CMGTools.ttbar.analyzers.GenAnalyzer               import GenAnalyzer
 from CMGTools.ttbar.analyzers.GenMatcherAnalyzer        import GenMatcherAnalyzer
 from CMGTools.ttbar.analyzers.MCWeighter                import MCWeighter
 from CMGTools.ttbar.analyzers.NJetsAnalyzer             import NJetsAnalyzer
 from CMGTools.ttbar.analyzers.METAnalyzer               import METAnalyzer
+from CMGTools.ttbar.analyzers.LHEWeightAnalyzer 	import LHEWeightAnalyzer
 
 #"genmatcher = cfg.Analyzer(
 #    GenMatcherAnalyzer, 
@@ -581,9 +582,9 @@ pfmetana = cfg.Analyzer(METAnalyzer,
                         apply_recoil_correction= True,#Recommendation states loose pfjetID for jet multiplicity but this WP is not supported anymore?
                         runFixEE2017= True)
 
-lheweight = cfg.Analyzer(LHEWeightAnalyzer,
-                         name="LHEWeightAnalyzer",
-                         useLumiInfo=False)
+#lheweight = cfg.Analyzer(LHEWeightAnalyzer,
+#                         name="LHEWeightAnalyzer",
+#                         useLumiInfo=False)
 
 pileup = cfg.Analyzer(PileUpAnalyzer,
                       name='PileUpAnalyzer',
@@ -591,6 +592,10 @@ pileup = cfg.Analyzer(PileUpAnalyzer,
                       autoPU=False,
                       puFileDataUp   = puFileDataUp,
                       puFileDataDown = puFileDataDown)
+
+lheanalyzer = cfg.Analyzer(LHEWeightAnalyzer,
+			   name='LHEWeightAnalyzer',
+			   useLumiInfo=False)
 
 mcweighter = cfg.Analyzer(MCWeighter,
                           name='MCWeighter')
@@ -647,13 +652,14 @@ if year == '2017':
 
 sequence = cfg.Sequence([
     mcweighter,
+    lheanalyzer,
 # Analyzers
     json,
     vertex,
     gen_particles,
     trigger,
     #trigger_match,
-    lheweight,
+    #lheweight,
     pileup,
     
 # Time

@@ -1,6 +1,7 @@
 import os
 
-architecture = 'slc6_amd64_gcc700'
+#architecture = 'slc6_amd64_gcc700'
+architecture = 'slc7_amd64_gcc820'
 
 print ''
 print ' > Copy of Jet.py object with loose ID'
