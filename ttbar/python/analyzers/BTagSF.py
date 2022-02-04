@@ -34,18 +34,18 @@ class BTagSF(object):
             if tagger == 'DeepCSV':
                 rootfname = '/'.join([os.environ["CMSSW_BASE"],
                                       'src/CMGTools/ttbar/data/2017/btag/btag_efficiency_DeepCSV_2017.root'])
-                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_94XSF_V4_B_F_YearCorrelation-V1.csv"))
+                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepCSV_94XSF_V4_B_F_YearCorrelation-V1.csv"))
                 calib_incl = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepCSV_94XSF_V5_B_F.csv"))
             if tagger == 'DeepJet':
                 rootfname = '/'.join([os.environ["CMSSW_BASE"],
                                       'src/CMGTools/ttbar/data/2017/btag/btag_efficiency_DeepCSV.root'])
-                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_94XSF_V4_B_F_YearCorrelation-V1.csv"))
+                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepCSV_94XSF_V4_B_F_YearCorrelation-V1.csv"))
                 calib_incl = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepCSV_94XSF_V5_B_F.csv"))
             if tagger == 'CSVv2':
                 rootfname = '/'.join([os.environ["CMSSW_BASE"],
                                       'src/CMGTools/ttbar/data/2017/btag/btag_efficiency_DeepCSV.root'])
                 #calib = ROOT.BTagCalibration("CSVv2", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/CSVv2_94XSF_V2_B_F.csv"))
-                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2016/btag/DeepCSV_94XSF_V4_B_F_YearCorrelation-V1.csv"))
+                calib_bc   = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepCSV_94XSF_V4_B_F_YearCorrelation-V1.csv"))
                 calib_incl = ROOT.BTagCalibration("DeepCSV", os.path.expandvars("$CMSSW_BASE/src/CMGTools/ttbar/data/2017/btag/DeepCSV_94XSF_V5_B_F.csv"))
 
         self.mc_eff_file = TFile(rootfname)
