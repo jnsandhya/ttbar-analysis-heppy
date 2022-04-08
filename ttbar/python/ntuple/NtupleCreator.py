@@ -4,6 +4,8 @@ import math
 
 default = Variable.default
 
+weight_pdfas_variation = []
+
 event = Block(
     'event', lambda x: x,
     run = v(lambda x: x.run, int),
@@ -125,6 +127,36 @@ weights = Block(
     weight_prefiring = v(lambda x : getattr(x, 'prefiringWeight', 1.)),
     weight_prefiring_up = v(lambda x : getattr(x, 'prefiringWeightUp', 1.)),
     weight_prefiring_down = v(lambda x : getattr(x, 'prefiringWeightDown', 1.)),
+
+    weight_qcdscale_variation0 = v(lambda x : getattr(x, 'qcdScaleWeight')[1] if hasattr(x, 'qcdScaleWeight') else default),
+    weight_qcdscale_variation1 = v(lambda x : getattr(x, 'qcdScaleWeight')[2] if hasattr(x, 'qcdScaleWeight') else default),
+    weight_qcdscale_variation2 = v(lambda x : getattr(x, 'qcdScaleWeight')[3] if hasattr(x, 'qcdScaleWeight') else default),
+    weight_qcdscale_variation3 = v(lambda x : getattr(x, 'qcdScaleWeight')[4] if hasattr(x, 'qcdScaleWeight') else default),
+    weight_qcdscale_variation4 = v(lambda x : getattr(x, 'qcdScaleWeight')[5] if hasattr(x, 'qcdScaleWeight') else default),
+    weight_qcdscale_variation5 = v(lambda x : getattr(x, 'qcdScaleWeight')[6] if hasattr(x, 'qcdScaleWeight') else default),
+
+    #v(lambda x : x.qcdScaleWeight[2]
+    #and len(x.qcdScaleWeight)>=7) else default
+    #weight_pdfas_variation =  v(lambda x : x.pdfasWeight if len(x.pdfasWeight)>0 else default), 
+    weight_pdfas_variation =  v(lambda x : getattr(x, 'pdfasWeight') if hasattr(x, 'pdfasWeight') else default),
+
+    #weight_pdfas_variation0 = v(lambda x : x.pdfasWeight[1] if len(x.pdfasWeight)>=100 else default),
+
+    weight_ps_variation0 = v(lambda x : getattr(x, 'psWeight')[2] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=2) else default),
+    weight_ps_variation1 = v(lambda x : getattr(x, 'psWeight')[3] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=3) else default),
+    weight_ps_variation2 = v(lambda x : getattr(x, 'psWeight')[4] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=4) else default),
+    weight_ps_variation3 = v(lambda x : getattr(x, 'psWeight')[5] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=5) else default),
+    weight_ps_variation4 = v(lambda x : getattr(x, 'psWeight')[6] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=6) else default),
+    weight_ps_variation5 = v(lambda x : getattr(x, 'psWeight')[7] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=7) else default),
+    weight_ps_variation6 = v(lambda x : getattr(x, 'psWeight')[8] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=8) else default),
+    weight_ps_variation7 = v(lambda x : getattr(x, 'psWeight')[9] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=9) else default),
+    weight_ps_variation8 = v(lambda x : getattr(x, 'psWeight')[10] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=10) else default),
+    weight_ps_variation9 = v(lambda x : getattr(x, 'psWeight')[11] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=11) else default),
+    weight_ps_variation10 = v(lambda x : getattr(x, 'psWeight')[12] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=12) else default),
+    weight_ps_variation11 = v(lambda x : getattr(x, 'psWeight')[13] if (hasattr(x, 'psWeight') and len(getattr(x, 'psWeight'))>=13) else default),
+
+
+
 ) 
 
 syst = Block(
