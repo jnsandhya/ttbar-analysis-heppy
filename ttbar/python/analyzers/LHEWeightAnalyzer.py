@@ -175,14 +175,21 @@ class LHEWeightAnalyzer( Analyzer ):
 
 	event.ps_variation = []
 
+	#print 'A'
+
         if self.mchandles['GenInfos'].isValid():
             for cnt,w in enumerate(self.mchandles['GenInfos'].product().weights()):
+		#print cnt, w
 		if cnt==0:
 		   ps_weight_nominal = w
                 event.ps_variation.append(w/ps_weight_nominal)
-                self.ps.Fill(cnt, event.ps_variation[-1])
+		#print('ps_weight_nominal='+str(ps_weight_nominal))
+		#print('event.ps_variation[-1]='+str(event.ps_variation[-1]))
+                #self.ps.Fill(cnt, event.ps_variation[-1])
 
             setattr(event, 'psWeight', event.ps_variation)
+
+	#print 'B'
 
         #print 'ps variation: ', event.ps_variation, 'len', len(event.ps_variation)
 
@@ -210,7 +217,7 @@ class LHEWeightAnalyzer( Analyzer ):
             event.scale_variation.append(LHE_weight/event.LHE_originalWeight)
 	    setattr(event, 'qcdScaleWeight', event.scale_variation)
 
-            self.scale.Fill(ii, LHE_weight/event.LHE_originalWeight)
+            #self.scale.Fill(ii, LHE_weight/event.LHE_originalWeight)
 
         for ii, windex in enumerate(self.pdfindex):
 
@@ -219,7 +226,7 @@ class LHEWeightAnalyzer( Analyzer ):
             event.pdf_variation.append(LHE_weight/event.LHE_originalWeight)
             setattr(event, 'pdfasWeight', event.pdf_variation)
 
-            self.pdf.Fill(ii, LHE_weight/event.LHE_originalWeight)
+            #self.pdf.Fill(ii, LHE_weight/event.LHE_originalWeight)
 
         #for ii, windex in enumerate(self.alphaindex):
 
@@ -235,20 +242,22 @@ class LHEWeightAnalyzer( Analyzer ):
 #        import pdb; pdb.set_trace()
         super(LHEWeightAnalyzer, self).write(setup)
 
+	#print 'Writing output of LHEWeightAnalyzer'
+
         if not self.cfg_comp.isMC:
             return True
         if (self.cfg_comp.name.find('WW')!=-1 or self.cfg_comp.name.find('WZ')!=-1 or self.cfg_comp.name.find('ZZ')!=-1):
             return True
 
-        self.rootfile = TFile('/'.join([self.dirName,
-                                        'weight.root']), 'recreate')
+        #self.rootfile = TFile('/'.join([self.dirName,
+        #                                'weight.root']), 'recreate')
 
         #self.alpha_s.Write()
-        self.pdf.Write()
-        self.scale.Write()
-	self.ps.Write()
-        self.rootfile.Write()
-        self.rootfile.Close()
+        #self.pdf.Write()
+        #self.scale.Write()
+	#self.ps.Write()
+        #self.rootfile.Write()
+        #self.rootfile.Close()
 
 
 setattr(LHEWeightAnalyzer,"defaultConfig",
