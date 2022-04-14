@@ -2,7 +2,8 @@
 
 mkdir /gridgroup/cms/nchanon/CMSSW_10_4_0/src/CMGTools/ttbar/cfgPython/emu/$1
 #rm -rf $1_Nominal
-sed -e 's/*TESTCORR//g' < ../emu/emu_test_cfg.py > ../emu/$1/emu_nominal_cfg.py 
+#sed -e 's/*TESTCORR//g' < ../emu/emu_test_cfg.py > ../emu/$1/emu_nominal_cfg.py 
+cp ../emu/emu_prod_2016allMC_cfg.py ../emu/$1/emu_nominal_cfg.py 
 bash launch.sh ../emu/$1/emu_nominal_cfg.py $1_Nominal
 
 # Absolute Absolute_2016 BBEC1 BBEC1_2016 FlavorQCD RelativeBal RelativeSample_2016 Total

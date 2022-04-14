@@ -16,8 +16,8 @@ Event.print_patterns = ['*taus*',
 
 #import pdb; pdb.set_trace()
 
-#ComponentCreator.useAAA = True
-ComponentCreator.useLyonAAA = True
+ComponentCreator.useAAA = True
+#ComponentCreator.useLyonAAA = True
 
 import logging
 logging.shutdown()
@@ -44,6 +44,7 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 # Components
 ############################################################################
 if year == '2016':
+    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_signal_dilep as mc_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
     #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test
     from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
@@ -125,17 +126,17 @@ for sample in selectedComponents:
         sample.puFileMC    = puFileMC
 
         if alternate:
-            sample.splitFactor = 40
+            #sample.splitFactor = 40
             sample.puFileMC = puFileMCalt
 
-        if year=='2016' and 'signal' in sample.name:
+        #if year=='2016' and 'signal' in sample.name:
             #sample.splitFactor = 80
-            print sample.name, sample.splitFactor
+            #print sample.name, sample.splitFactor
 
-        if 'wjets' in sample.name:
+        #if 'wjets' in sample.name:
             #sample.splitFactor = 100
-            print sample.name, sample.splitFactor
-       
+            #print sample.name, sample.splitFactor
+        print sample.name, sample.splitFactor 
       
 ############################################################################
 # Test
@@ -154,7 +155,7 @@ bindex = ComponentIndex(backgrounds_forindex)
 if test:
     cache = True
     if not data:
-	#comp = bindex.glob('background_MC_WW')[0]
+	comp = bindex.glob('background_MC_WW')[0]
 	#comp = bindex.glob('background_MC_WJets')[0]
 	#comp = bindex.glob('background_MC_DY')[0]
         #comp = bindex.glob('background_MC_DY_50')[0]
@@ -163,9 +164,7 @@ if test:
 	#comp = bindex.glob('background_MC_ST_s')[0]
 	#comp = bindex.glob('background_MC_ST_t_top')[0]
 	#comp = bindex.glob('background_MC_tW_top')[0]
-        comp = bindex.glob('MC_signal_dilep')[0]
-        #comp = bindex.glob('MC_signal_dilep')[1]
-	#comp = MC_signal_dilep
+        #comp = bindex.glob('MC_signal_dilep')[0]
                #MC_signal_dilep
                #alt_MC_hdampUp
                #MC_signal_dilep
@@ -173,13 +172,12 @@ if test:
 	       #MC_zjets_DY_1050
 	       #MC_zjets_DY_502
     else:
-	comp =  bindex.glob('MuonEG_Run2016B_17Jul2018')[0]
         #comp = selectedComponents[0]
         #comp = bindex.glob('MuonEG_Run2017B_31Mar2018')[0]
-        #comp = bindex.glob('MuonEG_Run2017B_31Mar2018')[0]
+        comp = bindex.glob('MuonEG_Run2017B_31Mar2018')[0]
                 # SingleElectron_Run2017E_31Mar2018
     selectedComponents   = [comp]
-    comp.files           = [comp.files[0]] #was 5
+    comp.files           = [comp.files[5]]
     comp.splitFactor     = 1
     comp.fineSplitFactor = 1
     #selectedComponents   = mc_resubmit
@@ -587,12 +585,12 @@ gen_particles = cfg.Analyzer(GenAnalyzer,
                              workspace_path='$CMSSW_BASE/src/CMGTools/ttbar/data/gen_scalefactors_v2.root'
                              )
 
-pfmetana = cfg.Analyzer(METAnalyzer,
-                        name='PFMetana',
-                        recoil_correction_file='HTT-utilities/RecoilCorrections/data/Type1_PFMET_2017.root',
-                        met = 'pfmet',
-                        apply_recoil_correction= True,#Recommendation states loose pfjetID for jet multiplicity but this WP is not supported anymore?
-                        runFixEE2017= True)
+#pfmetana = cfg.Analyzer(METAnalyzer,
+#                        name='PFMetana',
+#                        recoil_correction_file='HTT-utilities/RecoilCorrections/data/Type1_PFMET_2017.root',
+#                        met = 'pfmet',
+#                        apply_recoil_correction= True,#Recommendation states loose pfjetID for jet multiplicity but this WP is not supported anymore?
+#                        runFixEE2017= True)
 
 #lheweight = cfg.Analyzer(LHEWeightAnalyzer,
 #                         name="LHEWeightAnalyzer",
