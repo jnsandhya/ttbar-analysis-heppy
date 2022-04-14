@@ -82,6 +82,8 @@ if year == '2016':
     puFileDataDown = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/MyDataPileupHistogram_down.root'
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup.root'
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup_alternative.root'
+    JERFileMC      = '/gridgroup/cms/sjain/CMSSW_10_4_0/src/CMGTools/ttbar/data/2016/jer/Summer16_25nsV1b_MC_PtResolution_AK4PFchs.txt'
+    JERFileDATA    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/jer/Summer16_25nsV1b_DATA_PtResolution_AK4PFchs.txt'
     
 if year == '2017':
     puFileData     = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017.root'
@@ -89,6 +91,8 @@ if year == '2017':
     puFileDataDown = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017_down.root'
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_2017.root'
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_alt_2017.root'
+    JERFileMC       = "/gridgroup/cms/sjain/CMSSW_10_4_0/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_MC_PtResolution_AK4PFchs.txt"
+    JERFileData    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_DATA_PtResolution_AK4PFchs.txt'
 
 #print data_triggers 
 for sample in data_files:
@@ -441,15 +445,28 @@ if year == '2016':
     jets = cfg.Analyzer(JetAnalyzer, 
                         output = 'jets',
                         jets = 'slimmedJets',
+                        genJetCol = 'slimmedGenJets',
+                        rho = ('fixedGridRhoFastjetAll','',''),
+                        jer = JERFileMC,
+                        smearJets = True,
+                        shiftJER = 0,
+                        addJERShifts = 1,
+                        do_mc_match=True,
                         do_jec = True,
                         gt_mc = gt_mc,
                         year = year)
                         
 else:
-    
     jets = cfg.Analyzer(JetAnalyzer, 
                         output = 'jets',
                         jets = 'slimmedJets',
+                        genJetCol = 'slimmedGenJets',
+                        rho = ('fixedGridRhoFastjetAll','',''),
+                        jer = JERFileMC,
+                        smearJets = True,
+                        shiftJER = 0,
+                        addJERShifts = 1,
+                        do_mc_match=True,
                         do_jec = True,
                         gt_mc = gt_mc,
                         year = year,
