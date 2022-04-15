@@ -5,7 +5,12 @@ class MCWeighter(Analyzer):
 
     def declareHandles(self):
         super(MCWeighter, self).declareHandles()
-        self.mchandles['GenInfo'] = AutoHandle( ('generator','',''), 'GenEventInfoProduct' )
+        #self.mchandles['GenInfo'] = AutoHandle( ('generator','',''), 'GenEventInfoProduct' )
+        self.mchandles['GenInfo'] = AutoHandle('generator',
+                                                'GenEventInfoProduct',
+                                                 mayFail=True,
+                                                 fallbackLabel='source',
+                                                 lazy=False )
 
     def beginLoop(self, setup):
         super(MCWeighter,self).beginLoop(setup)
