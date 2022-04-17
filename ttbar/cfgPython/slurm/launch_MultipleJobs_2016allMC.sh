@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir /gridgroup/cms/nchanon/CMSSW_10_4_0/src/CMGTools/ttbar/cfgPython/emu/$1
+mkdir $CMSSW_BASE/src/CMGTools/ttbar/cfgPython/emu/$1
 #rm -rf $1_Nominal
 #sed -e 's/*TESTCORR//g' < ../emu/emu_test_cfg.py > ../emu/$1/emu_nominal_cfg.py 
 cp ../emu/emu_prod_2016allMC_cfg.py ../emu/$1/emu_nominal_cfg.py 

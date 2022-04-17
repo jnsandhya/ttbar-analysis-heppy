@@ -16,8 +16,8 @@ Event.print_patterns = ['*taus*',
 
 #import pdb; pdb.set_trace()
 
-#ComponentCreator.useAAA = True
-ComponentCreator.useLyonAAA = True
+ComponentCreator.useAAA = True
+#ComponentCreator.useLyonAAA = True
 
 import logging
 logging.shutdown()

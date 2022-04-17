@@ -21,7 +21,7 @@ class NtupleProducer(TreeAnalyzerNumpy):
             data = block.data_source(event)
             for varname, var in block.iteritems():
                 if (varname.find('weight_pdfas_variation')!=-1):
-		    if (self.cfg_comp.isData or self.cfg_comp.name.find('WW')!=-1 or self.cfg_comp.name.find('WZ')!=-1 or self.cfg_comp.name.find('ZZ')!=-1):
+		    if (self.cfg_comp.isData or self.cfg_comp.name.find('WW')!=-1 or self.cfg_comp.name.find('WZ')!=-1 or self.cfg_comp.name.find('ZZ')!=-1 or self.cfg_comp.name.find('ST_t_')!=-1):
 		        continue
 		    for i in range(0, 102):
 			try:
