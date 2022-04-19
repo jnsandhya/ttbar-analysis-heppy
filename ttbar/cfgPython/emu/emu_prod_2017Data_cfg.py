@@ -16,8 +16,8 @@ Event.print_patterns = ['*taus*',
 
 #import pdb; pdb.set_trace()
 
-ComponentCreator.useAAA = True
-#ComponentCreator.useLyonAAA = True
+#ComponentCreator.useAAA = True
+ComponentCreator.useLyonAAA = True
 
 import logging
 logging.shutdown()
@@ -33,7 +33,7 @@ logging.basicConfig(level=logging.WARNING)
 # production = True run on batch, production = False run locally
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
-data       = getHeppyOption('data', False)
+data       = getHeppyOption('data', True)
 alternate  = getHeppyOption('alternate', False)
 year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
@@ -52,8 +52,7 @@ if year == '2016':
     from CMGTools.ttbar.samples.summer16.trigger   import data_triggers
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
-    #from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar_AAA as mc_ttbar
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##

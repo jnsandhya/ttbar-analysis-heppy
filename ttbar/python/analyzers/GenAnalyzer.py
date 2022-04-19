@@ -28,7 +28,13 @@ class GenAnalyzer(Analyzer):
     def declareHandles(self):
         super(GenAnalyzer, self).declareHandles()
 
-        self.mchandles['genInfo'] = AutoHandle(('generator','',''), 'GenEventInfoProduct' )
+        #self.mchandles['genInfo'] = AutoHandle(('generator','',''), 'GenEventInfoProduct' )
+        self.mchandles['genInfo'] = AutoHandle('generator',
+                                                'GenEventInfoProduct',
+                                                 mayFail=True,
+                                                 fallbackLabel='source',
+                                                 lazy=False )
+
         self.mchandles['genJets'] = AutoHandle('slimmedGenJets', 'std::vector<reco::GenJet>')
         self.mchandles['genParticles'] = AutoHandle('prunedGenParticles', 'std::vector<reco::GenParticle')
 
@@ -63,7 +69,10 @@ class GenAnalyzer(Analyzer):
 
         self.readCollections(event.input)
         event.genParticles = self.mchandles['genParticles'].product()
-        event.weight_gen = math.copysign(1., self.mchandles['genInfo'].product().weight())
+	if self.mchandles['genInfo'].isValid():
+            event.weight_gen = math.copysign(1., self.mchandles['genInfo'].product().weight())
+	else:
+	    event.weight_gen = 0
         event.eventWeight *= math.copysign(1., event.weight_gen)
 
         # gen MET as sum of the neutrino 4-momenta

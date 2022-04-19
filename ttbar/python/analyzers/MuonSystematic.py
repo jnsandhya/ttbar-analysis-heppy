@@ -64,7 +64,7 @@ class MuonSystematic(Analyzer):
         muons = getattr(event, self.cfg_ana.muons)    
 
         for muon in muons:
-            if(muon.pt() <= 120):
+            if(muon.pt() < 120):
                 if self.year == '2016':
                     common_factor    = self.mc_syst_id_hist1.GetBinContent(self.mc_syst_id_hist1.FindBin(muon.eta(), muon.pt()))*self.lumi_BCDEF + self.mc_syst_id_hist2.GetBinContent(self.mc_syst_id_hist2.FindBin(muon.eta(), muon.pt()))*self.lumi_GH
                     syst_id_weight1  = self.mc_syst_id_hist1.GetBinError(self.mc_syst_id_hist1.FindBin(muon.eta(), muon.pt()))*self.lumi_BCDEF/common_factor
