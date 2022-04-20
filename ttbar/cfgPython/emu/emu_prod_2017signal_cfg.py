@@ -34,7 +34,7 @@ logging.basicConfig(level=logging.WARNING)
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
-alternate  = getHeppyOption('alternate', True)
+alternate  = getHeppyOption('alternate', False)
 year       = getHeppyOption('year', '2017' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
@@ -44,16 +44,16 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 # Components
 ############################################################################
 if year == '2016':
-    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
-    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_nosignal as mc_ttbar
-    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_signal_dilep as mc_ttbar
+    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
+    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_signal_dilep as mc_ttbar
     #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test
     from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon
     from CMGTools.ttbar.samples.summer16.trigger   import data_triggers
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
-    from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
+    from CMGTools.ttbar.samples.fall17.ttbar2017   import  mc_signal_dilep as mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##

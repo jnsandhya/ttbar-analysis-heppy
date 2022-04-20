@@ -34,8 +34,8 @@ logging.basicConfig(level=logging.WARNING)
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
-alternate  = getHeppyOption('alternate', True)
-year       = getHeppyOption('year', '2017' )
+alternate  = getHeppyOption('alternate', False)
+year       = getHeppyOption('year', '2016' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
 btagger    = getHeppyOption('btagger', 'DeepCSV')
@@ -44,9 +44,8 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 # Components
 ############################################################################
 if year == '2016':
-    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
-    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_nosignal as mc_ttbar
-    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_signal_dilep as mc_ttbar
+    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
+    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_signal_dilep as mc_ttbar
     #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test
     from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon

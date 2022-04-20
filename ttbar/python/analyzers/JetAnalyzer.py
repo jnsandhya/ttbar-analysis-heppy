@@ -246,6 +246,7 @@ class JetAnalyzer(Analyzer):
                    setattr(jet, "corrJERDown", ptscaleJERDown)
                    #print "jet with pt %.2f, eta %.2f has ptscale %.2f, %.2f up corr, %.2f down corr" % (jet.pt(), jet.eta(), ptscale, ptscaleJERUp, ptscaleJERDown)
             else:
+		aeta = abs(jet.eta())
                 #print "jet with pt %.2f, eta %.2f is unmatched" % (jet.pt(), jet.eta())
                 factor = shiftJERfactor(self.shiftJER, aeta, year)
                 if factor > 1. : 
