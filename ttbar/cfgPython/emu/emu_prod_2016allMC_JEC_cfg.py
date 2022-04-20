@@ -34,8 +34,8 @@ logging.basicConfig(level=logging.WARNING)
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
-alternate  = getHeppyOption('alternate', True)
-year       = getHeppyOption('year', '2017' )
+alternate  = getHeppyOption('alternate', False)
+year       = getHeppyOption('year', '2016' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
 btagger    = getHeppyOption('btagger', 'DeepCSV')
@@ -542,7 +542,7 @@ jets_30 = cfg.Analyzer(Selector,
                        'jets_30',
                        output = 'jets_30',
                        src = 'jets_20_clean',
-                       filter_func = lambda x : x.pt()>30)
+                       filter_func = lambda x : x.pt()*CORR>30)
                        
 two_jets = cfg.Analyzer(EventFilter, 
                         name = 'TwoJets',

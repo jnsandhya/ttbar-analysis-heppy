@@ -218,6 +218,39 @@ mc_lyon_Vjets = [
     background_MC_WJets2,
 ]
 
+mc_ttbar_nosignal = [
+    #signal_MC_dilep,
+    signal_MC_semilep,
+    signal_MC_hadronic,
+    background_MC_ST_s,
+    background_MC_ST_t_top,
+    background_MC_ST_t_antitop,
+    background_MC_tW_top,
+    background_MC_tW_antitop,
+    background_MC_TTW,
+    background_MC_TTW2,
+    background_MC_TTW3,
+    background_MC_TTZ,
+    background_MC_TTZ2,
+    background_MC_TTZ3,
+    background_MC_TTZ4,
+    #background_MC_TTG,
+    #background_MC_TTG2,
+    background_MC_WW,
+    background_MC_WW2,
+    background_MC_WZ,
+    background_MC_WZ2,
+    background_MC_ZZ,
+    background_MC_ZZ2,
+    background_MC_WJets,
+    background_MC_WJets2,
+    background_MC_DY_50,
+    #background_MC_DY_502,
+    background_MC_DY_1050,
+    background_MC_DY_10502,
+    background_MC_DY_10503,
+]
+
 ############################################################################
 # DATA
 ############################################################################
