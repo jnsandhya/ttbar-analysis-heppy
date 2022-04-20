@@ -95,6 +95,7 @@ if year == '2017':
     JERFileMC       = "/gridgroup/cms/nchanon/CMSSW_10_4_0/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_MC_PtResolution_AK4PFchs.txt"
     JERFileData    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_DATA_PtResolution_AK4PFchs.txt'
 
+
 #print data_triggers 
 for sample in data_files:
     #print sample

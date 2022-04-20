@@ -44,6 +44,7 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 # Components
 ############################################################################
 if year == '2016':
+
     from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
     #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_nosignal as mc_ttbar
     #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_signal_dilep as mc_ttbar
@@ -96,6 +97,7 @@ if year == '2017':
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_alt_2017.root'
     JERFileMC       = "/gridgroup/cms/nchanon/CMSSW_10_4_0/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_MC_PtResolution_AK4PFchs.txt"
     JERFileData    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_DATA_PtResolution_AK4PFchs.txt'
+
 
 #print data_triggers 
 for sample in data_files:
@@ -613,7 +615,6 @@ pfmetana = cfg.Analyzer(METAnalyzer,
                         met = 'pfmet',
                         apply_recoil_correction= True,#Recommendation states loose pfjetID for jet multiplicity but this WP is not supported anymore?
                         runFixEE2017= True)
-
 #lheweight = cfg.Analyzer(LHEWeightAnalyzer,
 #                         name="LHEWeightAnalyzer",
 #                         useLumiInfo=False)

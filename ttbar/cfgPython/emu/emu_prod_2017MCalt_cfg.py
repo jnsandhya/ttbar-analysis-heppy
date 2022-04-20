@@ -86,7 +86,6 @@ if year == '2016':
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup_alternative.root'
     JERFileMC      = '/gridgroup/cms/nchanon/CMSSW_10_4_0/src/CMGTools/ttbar/data/2016/jer/Summer16_25nsV1b_MC_PtResolution_AK4PFchs.txt'
     JERFileDATA    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/jer/Summer16_25nsV1b_DATA_PtResolution_AK4PFchs.txt'
-    
 if year == '2017':
     puFileData     = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017.root'
     puFileDataUp   = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_data_2017_up.root'
