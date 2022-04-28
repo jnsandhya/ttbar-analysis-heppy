@@ -251,6 +251,13 @@ mc_ttbar_nosignal = [
     background_MC_DY_10503,
 ]
 
+mc_ttbar_remain = [
+    background_MC_WW,
+    background_MC_WZ,
+    background_MC_ZZ,
+    background_MC_ZZ2
+]
+
 ############################################################################
 # DATA
 ############################################################################

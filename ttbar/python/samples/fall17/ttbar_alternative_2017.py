@@ -128,6 +128,43 @@ alt_MChad_mtop169p5.splitFactor = 19
 alt_MChad_mtop175p5_pmx = creator.makeMCComponent("alt_MChad_mtop175p5_pmx","/TTToHadronic_mtop175p5_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM","CMS",".*root", 377.96);
 alt_MChad_mtop175p5_pmx.splitFactor = 20
 
+
+##############
+
+alt_MC_ST_s_mtop169p5 = creator.makeMCComponent("alt_MC_ST_s_top_mtop169p5","/ST_s-channel_4f_leptonDecays_mtop1695_TuneCP5_PSweights_13TeV-amcatnlo-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM","CMS",".*root", 10.32);
+alt_MC_ST_s_mtop169p5.splitFactor = 5
+
+alt_MC_ST_s_mtop175p5 = creator.makeMCComponent("alt_MC_ST_s_mtop175p5", "/ST_s-channel_4f_leptonDecays_mtop1755_TuneCP5_PSweights_13TeV-amcatnlo-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM","CMS",".*root", 10.32);
+alt_MC_ST_s_mtop175p5.splitFactor = 5
+
+alt_MC_ST_t_top_mtop169p5 = creator.makeMCComponent("alt_MC_ST_t_top_mtop169p5", "/ST_t-channel_top_4f_InclusiveDecays_mtop1695_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM","CMS", ".*root",136.02);
+alt_MC_ST_t_top_mtop169p5.splitFactor = 10
+
+alt_MC_ST_t_top_mtop175p5 = creator.makeMCComponent("alt_MC_ST_t_top_mtop175p5", "/ST_t-channel_top_4f_InclusiveDecays_mtop1755_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM","CMS", ".*root",136.02);
+alt_MC_ST_t_top_mtop175p5.splitFactor = 10
+
+alt_MC_ST_t_antitop_mtop169p5 = creator.makeMCComponent("alt_MC_ST_t_antitop_mtop169p5", "/ST_t-channel_antitop_4f_InclusiveDecays_mtop1695_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM","CMS", ".*root",80.95);
+alt_MC_ST_t_antitop_mtop169p5.splitFactor = 10
+
+alt_MC_ST_t_antitop_mtop173p5 = creator.makeMCComponent("alt_MC_ST_t_antitop_mtop173p5", "/ST_t-channel_antitop_4f_InclusiveDecays_mtop1735_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM","CMS", ".*root",80.95);
+alt_MC_ST_t_antitop_mtop173p5.splitFactor = 10
+#Careful, no 175.5 for this one
+
+alt_MC_tW_top_mtop169p5 = creator.makeMCComponent("alt_MC_tW_top_mtop169p5","/ST_tW_top_5f_inclusiveDecays_mtop1695_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM","CMS", ".*root",35.5);
+alt_MC_tW_top_mtop169p5.splitFactor = 4
+
+alt_MC_tW_top_mtop175p5 = creator.makeMCComponent("alt_MC_tW_top_mtop175p5","/ST_tW_top_5f_inclusiveDecays_mtop1755_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM","CMS", ".*root",35.5);
+alt_MC_tW_top_mtop175p5.splitFactor = 4
+
+alt_MC_tW_antitop_mtop169p5 = creator.makeMCComponent("alt_MC_tW_antitop_mtop169p5", "/ST_tW_antitop_5f_inclusiveDecays_mtop1695_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM","CMS", ".*root",35.5);
+alt_MC_tW_antitop_mtop169p5.splitFactor = 4
+
+alt_MC_tW_antitop_mtop175p5 = creator.makeMCComponent("alt_MC_tW_antitop_mtop175p5", "/ST_tW_antitop_5f_inclusiveDecays_mtop1755_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3/MINIAODSIM","CMS", ".*root",35.5);
+alt_MC_tW_antitop_mtop175p5.splitFactor = 4
+
+
+
+
 alt_ttbar_test = [
     alt_MChad_mtop175p5_pmx
 ]
@@ -172,4 +209,18 @@ alt_ttbar = [
     alt_MChad_mtop175p5_pmx
 ]
 
+alt_singletop = [
+    alt_MC_ST_s_mtop169p5,
+    alt_MC_ST_s_mtop175p5,
+    alt_MC_ST_t_top_mtop169p5,
+    alt_MC_ST_t_top_mtop175p5, 
+    alt_MC_ST_t_antitop_mtop169p5, 
+    alt_MC_ST_t_antitop_mtop173p5, 
+    alt_MC_tW_top_mtop169p5, 
+    alt_MC_tW_top_mtop175p5, 
+    alt_MC_tW_antitop_mtop169p5, 
+    alt_MC_tW_antitop_mtop175p5 
+]
+
+alt_ttbar = alt_ttbar + alt_singletop:
 

@@ -16,8 +16,8 @@ Event.print_patterns = ['*taus*',
 
 #import pdb; pdb.set_trace()
 
-ComponentCreator.useAAA = True
-#ComponentCreator.useLyonAAA = True
+#ComponentCreator.useAAA = True
+ComponentCreator.useLyonAAA = True
 
 import logging
 logging.shutdown()
@@ -34,7 +34,7 @@ logging.basicConfig(level=logging.WARNING)
 test       = getHeppyOption('test', False)
 syncntuple = getHeppyOption('syncntuple', True)
 data       = getHeppyOption('data', False)
-alternate  = getHeppyOption('alternate', True)
+alternate  = getHeppyOption('alternate', False)
 year       = getHeppyOption('year', '2016' )
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
 reapplyJEC = getHeppyOption('reapplyJEC', True)
@@ -44,7 +44,8 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 # Components
 ############################################################################
 if year == '2016':
-    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
+    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
+    from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_remain as mc_ttbar
     #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_nosignal as mc_ttbar
     #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_signal_dilep as mc_ttbar
     #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test
@@ -290,7 +291,7 @@ reweight_muon = cfg.Analyzer(MuonSF,
 one_muon = cfg.Analyzer(EventFilter, 
                         'one_muon',
                         src = 'select_muon',
-                        filter_func = lambda x : len(x)==1)
+                        filter_func = lambda x : len(x)>0)
                         
 exclude_loose_muon = cfg.Analyzer(EventFilter,
                                  'exlude_loose_muon',
@@ -365,7 +366,7 @@ reweight_electron = cfg.Analyzer(ElectronSF,
 one_electron = cfg.Analyzer(EventFilter, 
                             'one_electron',
                             src = 'select_electron',
-                            filter_func = lambda x : len(x)==1)
+                            filter_func = lambda x : len(x)>0)
 
 exclude_loose_electron = cfg.Analyzer(EventFilter,
                                      'exclude_loose_electron',
@@ -542,7 +543,7 @@ jets_30 = cfg.Analyzer(Selector,
                        'jets_30',
                        output = 'jets_30',
                        src = 'jets_20_clean',
-                       filter_func = lambda x : x.pt()>30)
+                       filter_func = lambda x : x.pt()*CORR>30)
                        
 two_jets = cfg.Analyzer(EventFilter, 
                         name = 'TwoJets',
@@ -698,18 +699,18 @@ sequence = cfg.Sequence([
 # Muon
     muons,
     select_muon,
-    #exclude_muon,
+    exclude_muon,
     reweight_muon,
     one_muon,
-    #exclude_loose_muon,
+    exclude_loose_muon,
     systematic_muon,
 # Electron
     electrons,
     select_electron,
-    #exclude_electron,
+    exclude_electron,
     reweight_electron,
     one_electron,
-    #exclude_loose_electron,
+    exclude_loose_electron,
     systematic_electron,
 # Dilepton
     dilepton,

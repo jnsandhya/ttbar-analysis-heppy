@@ -5,10 +5,10 @@ mkdir $CMSSW_BASE/src/CMGTools/ttbar/cfgPython/emu/$1
 #sed -e 's/*TESTCORR//g' < ../emu/emu_test_cfg.py > ../emu/$1/emu_nominal_cfg.py 
 
 cp ../emu/emu_prod_2017allMC_Lyon_cfg.py ../emu/$1/emu_nominal_Lyon_cfg.py 
-bash launch.sh ../emu/$1/emu_nominal_Lyon_cfg.py ${1}_Nominal
+bash launch.sh ../emu/$1/emu_nominal_Lyon_cfg.py ${1}_Nominal_Lyon
 
 cp ../emu/emu_prod_2017allMC_AAA_cfg.py ../emu/$1/emu_nominal_AAA_cfg.py 
-bash launch.sh ../emu/$1/emu_nominal_AAA_cfg.py ${1}_Nominal
+bash launch.sh ../emu/$1/emu_nominal_AAA_cfg.py ${1}_Nominal_AAA
 
 
 # Absolute Absolute_2016 BBEC1 BBEC1_2016 FlavorQCD RelativeBal RelativeSample_2016 Total

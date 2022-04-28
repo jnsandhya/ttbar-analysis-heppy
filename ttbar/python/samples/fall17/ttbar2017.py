@@ -51,6 +51,8 @@ background_MC_ST_s.splitFactor = 10
 background_MC_ST_s2 = creator.makeMCComponent("MC_singletop_ST_s2","/ST_s-channel_4f_leptonDecays_TuneCP5_PSweights_13TeV-amcatnlo-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM", "CMS", ".*root",10.32);
 background_MC_ST_s2.splitFactor = 10
 
+background_MC_ST_s3 = creator.makeMCComponent("MC_singletop_ST_s3", "/ST_s-channel_4f_leptonDecays_TuneCP5_PSweights_13TeV-amcatnlo-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM", "CMS", ".*root",10.32);
+
 background_MC_ST_t_top = creator.makeMCComponent("MC_singletop_ST_t_top","/ST_t-channel_top_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM","CMS",".*root",136.02);
 background_MC_ST_t_top.splitFactor = 6
 
@@ -63,11 +65,16 @@ background_MC_tW_top.splitFactor = 8
 background_MC_tW_top2 = creator.makeMCComponent("MC_singletop_ST_tW_top2","/ST_tW_top_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM", "CMS", ".*root",35.5);
 background_MC_tW_top2.splitFactor = 8
 
+background_MC_tW_top3 = creator.makeMCComponent("MC_singletop_ST_tW_top3", "/ST_tW_top_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM", "CMS", ".*root",35.5);
+background_MC_tW_top3.splitFactor = 8
+
 background_MC_tW_antitop = creator.makeMCComponent("MC_singletop_ST_tW_antitop","/ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM", "CMS", ".*root",35.5);
 background_MC_tW_antitop.splitFactor = 8
 
 background_MC_tW_antitop2 = creator.makeMCComponent("MC_singletop_ST_tW_antitop2","/ST_tW_antitop_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM", "CMS", ".*root",35.5);
 background_MC_tW_antitop2.splitFactor = 8
+
+
 
 ##############
 
