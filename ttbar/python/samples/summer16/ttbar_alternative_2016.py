@@ -62,6 +62,32 @@ alt_MChad_GluonMove = creator.makeMCComponent("alt_MChad_GluonMove","/TTToHadron
 alt_MChad_mtop169p5 = creator.makeMCComponent("alt_MChad_mtop169p5","/TTToHadronic_TuneCP5_PSweights_mtop1695_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 377.96);
 alt_MChad_mtop175p5 = creator.makeMCComponent("alt_MChad_mtop175p5","/TTToHadronic_TuneCP5_PSweights_mtop1755_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root", 377.96);
 
+#No s-channel samples with alternative mass
+
+alt_MC_ST_t_top_mtop169p5 = creator.makeMCComponent("alt_MC_ST_t_top_mtop169p5","/ST_t-channel_top_4f_InclusiveDecays_mtop1695_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS", ".*root",136.02);
+alt_MC_ST_t_top_mtop169p5.splitFactor = 6
+
+alt_MC_ST_t_antitop_mtop169p5 = creator.makeMCComponent("alt_MC_ST_t_antitop_mtop169p5", "/ST_t-channel_antitop_4f_InclusiveDecays_mtop1695_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS", ".*root",136.02);
+alt_MC_ST_t_antitop_mtop169p5.splitFactor = 4 
+
+alt_MC_ST_t_top_mtop175p5 = creator.makeMCComponent("alt_MC_ST_t_top_mtop175p5","/ST_t-channel_top_4f_InclusiveDecays_mtop1755_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS", ".*root",80.95);
+alt_MC_ST_t_top_mtop175p5.splitFactor = 6
+
+alt_MC_ST_t_antitop_mtop175p5 = creator.makeMCComponent("alt_MC_ST_t_antitop_mtop175p5","/ST_t-channel_antitop_4f_InclusiveDecays_mtop1755_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS", ".*root",80.95);
+alt_MC_ST_t_antitop_mtop175p5.splitFactor = 4
+
+#Careful: tW alternative mass are either NoFullyHadronic TuneCP5 or InclusiveDecays TuneCUETP8M1
+alt_MC_tW_top_mtop169p5 = creator.makeMCComponent("alt_MC_tW_mtop169p5", "/ST_tW_top_5f_mtop1695_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM", "CMS", ".*root",35.5);
+alt_MC_tW_top_mtop169p5.splitFactor = 1
+
+alt_MC_tW_antitop_mtop169p5 = creator.makeMCComponent("alt_MC_tW_antitop_mtop169p5", "/ST_tW_antitop_5f_mtop1695_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM", "CMS", ".*root",35.5);
+alt_MC_tW_antitop_mtop169p5.splitFactor = 1
+
+alt_MC_tW_top_mtop175p5 = creator.makeMCComponent("alt_MC_tW_mtop175p5", "/ST_tW_top_5f_mtop1755_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM", "CMS", ".*root",35.5);
+alt_MC_tW_top_mtop175p5.splitFactor = 1
+
+alt_MC_tW_antitop_mtop175p5 = creator.makeMCComponent("alt_MC_tW_antitop_mtop175p5", "/ST_tW_antitop_5f_mtop1755_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM", "CMS", ".*root",35.5);
+alt_MC_tW_antitop_mtop175p5.splitFactor = 1
 
 
 alt_MC_hdampUp.splitFactor = 10
@@ -135,6 +161,16 @@ alt_ttbar = [
     alt_MChad_mtop175p5
 ]
 
+alt_singletop = [
+    alt_MC_ST_t_top_mtop169p5,
+    alt_MC_ST_t_antitop_mtop169p5, 
+    alt_MC_ST_t_top_mtop175p5,
+    alt_MC_ST_t_antitop_mtop175p5, 
+    alt_MC_tW_top_mtop169p5,
+    alt_MC_tW_antitop_mtop169p5, 
+    alt_MC_tW_top_mtop175p5, 
+    alt_MC_tW_antitop_mtop175p5 
+]
 
-
+alt_ttbar = alt_ttbar + alt_singletop
 
