@@ -23,6 +23,7 @@ if directory[-1] != '/':
 
 
 jobs = os.listdir(directory)
+print jobs
 
 n_fai = 0
 n_suc = 0 
@@ -58,10 +59,13 @@ def print_job(name, n, n_tot):
 
 for j in jobs:
     if j.find('Chunk') == -1 :
-        continue
+	target_dir = directory+'/'+j
+    else:
+	target_dir = directory+'/'+j
+    #    continue
 
     n_tot += 1
-    target_dir = directory+'/'+j
+    #target_dir = directory+'/'+j
     slurm_file = ""
     try:
         slurm_file = get_slurm_file(target_dir)
