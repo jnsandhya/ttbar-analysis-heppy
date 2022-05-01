@@ -1,6 +1,12 @@
 from tools import *
-from CMGTools.ttbar.utils.JesEnergyScaleSources import jesunc_sources
+from CMGTools.ttbar.utils.JesEnergyScaleSources import *
 import math
+
+#if year == '2016':
+#        redjesunc_sources = redjesunc_sources_2016
+#else:
+#        redjesunc_sources = redjesunc_sources_2017
+
 
 default = Variable.default
 
@@ -235,15 +241,256 @@ bjets = Block(
     #has_b = v(lambda x: bool(sum([jet.is_btagged for jet in x])))
 )
 
+up_down = ['up','down']
+
+#bjets_30_corr = []
+#for source in redjesunc_sources_2016:
+#    for unc in up_down:
+#        bjets_corr_name = 'bjets_30_' + source + '_' + unc
+#        bjets_30_corr.append(bjets = Block(
+#					'bjets_30', lambda x: x.bjets_30,
+#    					n_bjets = v(lambda x: len(x), int),
+
+
+
+
+jets_30_corr = []
+#for source in redjesunc_sources_2016:
+#    for unc in up_down:
+#	jets_corr_name = 'jets_30_' + source + '_' + unc
+#	jets_30_corr.append(  Block(
+#			 jets_corr_name, lambda x:  getattr(x, jets_corr_name),
+#			 n_jets_corr = v(lambda x: len(x), int))
+#			)
+jets_30_corr.append(  Block(
+                        'jets_30_Total_up', lambda x:  getattr(x, 'jets_30_Total_up'),
+                        n_jets_Total_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_Total_down', lambda x:  getattr(x, 'jets_30_Total_down'),
+                        n_jets_Total_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_Absolute_up', lambda x:  getattr(x, 'jets_30_Absolute_up'),
+                        n_jets_Absolute_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_Absolute_down', lambda x:  getattr(x, 'jets_30_Absolute_down'),
+                        n_jets_Absolute_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_Absolute_2016_up', lambda x:  getattr(x, 'jets_30_Absolute_2016_up'),
+                        n_jets_Absolute_2016_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_Absolute_2016_down', lambda x:  getattr(x, 'jets_30_Absolute_2016_down'),
+                        n_jets_Absolute_2016_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_FlavorQCD_up', lambda x:  getattr(x, 'jets_30_FlavorQCD_up'),
+                        n_jets_FlavorQCD_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_FlavorQCD_down', lambda x:  getattr(x, 'jets_30_FlavorQCD_down'),
+                        n_jets_FlavorQCD_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_BBEC1_up', lambda x:  getattr(x, 'jets_30_BBEC1_up'),
+                        n_jets_BBEC1_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_BBEC1_down', lambda x:  getattr(x, 'jets_30_BBEC1_down'),
+                        n_jets_BBEC1_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_BBEC1_2016_up', lambda x:  getattr(x, 'jets_30_BBEC1_2016_up'),
+                        n_jets_BBEC1_2016_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_BBEC1_2016_down', lambda x:  getattr(x, 'jets_30_BBEC1_2016_down'),
+                        n_jets_BBEC1_2016_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_EC2_up', lambda x:  getattr(x, 'jets_30_EC2_up'),
+                        n_jets_EC2_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_EC2_down', lambda x:  getattr(x, 'jets_30_EC2_down'),
+                        n_jets_EC2_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_EC2_2016_up', lambda x:  getattr(x, 'jets_30_EC2_2016_up'),
+                        n_jets_EC2_2016_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_EC2_2016_down', lambda x:  getattr(x, 'jets_30_EC2_2016_down'),
+                        n_jets_EC2_2016_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_HF_up', lambda x:  getattr(x, 'jets_30_HF_up'),
+                        n_jets_HF_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_HF_down', lambda x:  getattr(x, 'jets_30_HF_down'),
+                        n_jets_HF_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_HF_2016_up', lambda x:  getattr(x, 'jets_30_HF_2016_up'),
+                        n_jets_HF_2016_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_HF_2016_down', lambda x:  getattr(x, 'jets_30_HF_2016_down'),
+                        n_jets_HF_2016_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeBal_up', lambda x:  getattr(x, 'jets_30_RelativeBal_up'),
+                        n_jets_RelativeBal_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeBal_down', lambda x:  getattr(x, 'jets_30_RelativeBal_down'),
+                        n_jets_RelativeBal_down = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeSample_2016_up', lambda x:  getattr(x, 'jets_30_RelativeSample_2016_up'),
+                        n_jets_RelativeSample_2016_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeSample_2016_down', lambda x:  getattr(x, 'jets_30_RelativeSample_2016_down'),
+                        n_jets_RelativeSample_2016_down = v(lambda x: len(x), int))
+                       )
+
+bjets_30_corr = []
+bjets_30_corr.append(  Block(
+                        'bjets_30_Total_up', lambda x:  getattr(x, 'bjets_30_Total_up'),
+                        n_bjets_Total_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_Total_down', lambda x:  getattr(x, 'bjets_30_Total_down'),
+                        n_bjets_Total_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_Absolute_up', lambda x:  getattr(x, 'bjets_30_Absolute_up'),
+                        n_bjets_Absolute_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_Absolute_down', lambda x:  getattr(x, 'bjets_30_Absolute_down'),
+                        n_bjets_Absolute_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_Absolute_2016_up', lambda x:  getattr(x, 'bjets_30_Absolute_2016_up'),
+                        n_bjets_Absolute_2016_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_Absolute_2016_down', lambda x:  getattr(x, 'bjets_30_Absolute_2016_down'),
+                        n_bjets_Absolute_2016_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_FlavorQCD_up', lambda x:  getattr(x, 'bjets_30_FlavorQCD_up'),
+                        n_bjets_FlavorQCD_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_FlavorQCD_down', lambda x:  getattr(x, 'bjets_30_FlavorQCD_down'),
+                        n_bjets_FlavorQCD_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_BBEC1_up', lambda x:  getattr(x, 'bjets_30_BBEC1_up'),
+                        n_bjets_BBEC1_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_BBEC1_down', lambda x:  getattr(x, 'bjets_30_BBEC1_down'),
+                        n_bjets_BBEC1_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_BBEC1_2016_up', lambda x:  getattr(x, 'bjets_30_BBEC1_2016_up'),
+                        n_bjets_BBEC1_2016_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_BBEC1_2016_down', lambda x:  getattr(x, 'bjets_30_BBEC1_2016_down'),
+                        n_bjets_BBEC1_2016_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_EC2_up', lambda x:  getattr(x, 'bjets_30_EC2_up'),
+                        n_bjets_EC2_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_EC2_down', lambda x:  getattr(x, 'bjets_30_EC2_down'),
+                        n_bjets_EC2_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_EC2_2016_up', lambda x:  getattr(x, 'bjets_30_EC2_2016_up'),
+                        n_bjets_EC2_2016_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_EC2_2016_down', lambda x:  getattr(x, 'bjets_30_EC2_2016_down'),
+                        n_bjets_EC2_2016_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_HF_up', lambda x:  getattr(x, 'bjets_30_HF_up'),
+                        n_bjets_HF_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_HF_down', lambda x:  getattr(x, 'bjets_30_HF_down'),
+                        n_bjets_HF_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_HF_2016_up', lambda x:  getattr(x, 'bjets_30_HF_2016_up'),
+                        n_bjets_HF_2016_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_HF_2016_down', lambda x:  getattr(x, 'bjets_30_HF_2016_down'),
+                        n_bjets_HF_2016_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeBal_up', lambda x:  getattr(x, 'bjets_30_RelativeBal_up'),
+                        n_bjets_RelativeBal_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeBal_down', lambda x:  getattr(x, 'bjets_30_RelativeBal_down'),
+                        n_bjets_RelativeBal_down = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeSample_2016_up', lambda x:  getattr(x, 'bjets_30_RelativeSample_2016_up'),
+                        n_bjets_RelativeSample_2016_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeSample_2016_down', lambda x:  getattr(x, 'bjets_30_RelativeSample_2016_down'),
+                        n_bjets_RelativeSample_2016_down = v(lambda x: len(x), int))
+                       )
+
+
+
+
+#for i in range(len(jets_30_corr)):
+#    jets_30_corr_i = jets_30_corr[i]
+#    for vname, variable in jets_30_corr_i.iteritems():
+        #i = 0
+#        for source in redjesunc_sources_2016:
+#            for unc in up_down:
+#                corr_name = source + '_' + unc
+                #newname = vname.replace('jets_30','jets_30_'+corr_name,1)
+	        #newname = newname.replace('n_jets','n_jets_'+corr_name,1)
+	        #newname = vname.replace('n_jets','n_jets_'+corr_name,1)
+	        #newname = newname.replace('dijet_m','dijet_m_'+corr_name,1)
+	        #newname = vname.replace('j1','j1_'+corr_name,1)
+	        #newname = newname.replace('j1','j1_'+corr_name,1)
+    	        #newname = newname.replace('j2','j2_'+corr_name,1)
+                #newname = newname.replace('n_jets','n_jets_'+corr_name,1)
+                #newname = newname.replace('dijet_m','dijet_m_'+corr_name,1)
+	        #jets_30_corr_i = jets_30_corr[i]
+	        #jets_30_corr_i[newname] = variable
+	        #i = i + 1
+
+
 for vname, variable in jets30.iteritems():
-    if vname.startswith('j1_corr'):
-      continue
-    if vname.startswith('j2_corr'):
-      continue
+    #if vname.startswith('j1_corr'):
+    #  continue
+    #if vname.startswith('j2_corr'):
+    #  continue
     if not vname.startswith('j'):
       continue
     newname = vname.replace('j1','b1',1)
     newname = newname.replace('j2','b2',1)
+    #newname = newname.replace('dijet_m','dibjet_m',1)
     bjets[newname] = variable
 
 
@@ -277,9 +524,22 @@ dilepton = Block(
 )
 
 
+sequence_eventcontent = [event, weights, syst, jets30, bjets]
+#for source in redjesunc_sources:
+#    for unc in up_down:
+for i in range(len(jets_30_corr)):
+	sequence_eventcontent.append(jets_30_corr[i])
+        sequence_eventcontent.append(bjets_30_corr[i])
+sequence_eventcontent.append(electron)
+sequence_eventcontent.append(muon)
+sequence_eventcontent.append(dilepton)
+sequence_eventcontent.append(triggers2016)
+
+
 common2016 = EventContent(
     #[event, weights, syst, jets30,  bjets, electron, muon, dilepton, metvars, triggers2016]
-    [event, weights, syst, jets30,  bjets, electron, muon, dilepton, triggers2016]
+    #[event, weights, syst, jets30,  bjets, electron, muon, dilepton, triggers2016]
+    sequence_eventcontent
 )
 
 common2017 = EventContent(
