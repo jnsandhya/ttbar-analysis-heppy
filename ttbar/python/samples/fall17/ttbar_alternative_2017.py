@@ -222,5 +222,5 @@ alt_singletop = [
     alt_MC_tW_antitop_mtop175p5 
 ]
 
-alt_ttbar = alt_ttbar + alt_singletop:
+alt_ttbar = alt_ttbar + alt_singletop
 
