@@ -680,6 +680,7 @@ muon = Block(
 dilepton = Block(
     'dilepton', lambda x: x.dileptons_sorted[0],
     m_dilep = v(lambda x: x.mass()),
+    pt_emu = v(lambda x: x.pt()),
     pt_lead = v(lambda x: x.pt_lead()),
     pt_sublead = v(lambda x: x.pt_sublead()),
     eta_l1 = v(lambda x: x._l1.eta()),
