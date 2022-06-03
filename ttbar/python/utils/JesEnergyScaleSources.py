@@ -54,16 +54,16 @@ redjesunc_sources_2016 = {
 
 redjesunc_sources_2017 = {
     'Absolute'            : ["Absolute"],
-    'Absolute_2016'       : ["Absolute_2017"], 
+    'Absolute_2017'       : ["Absolute_2017"], 
     'FlavorQCD'           : ["FlavorQCD"], 
     'BBEC1'               : ["BBEC1"], 
-    'BBEC1_2016'          : ["BBEC1_2017"], 
+    'BBEC1_2017'          : ["BBEC1_2017"], 
     'EC2'                 : ["EC2"], 
-    'EC2_2016'            : ["EC2_2017"], 
+    'EC2_2017'            : ["EC2_2017"], 
     'HF'                  : ["HF"], 
-    'HF_2016'             : ["HF_2017"], 
+    'HF_2017'             : ["HF_2017"], 
     'RelativeBal'         : ["RelativeBal"],
-    'RelativeSample_2016' : ["RelativeSample_2017"],
+    'RelativeSample_2017' : ["RelativeSample_2017"],
     'Total'               : ["Total"]                        
 }
 
