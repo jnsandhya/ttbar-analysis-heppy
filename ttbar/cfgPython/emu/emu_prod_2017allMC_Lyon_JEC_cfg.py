@@ -170,7 +170,8 @@ if test:
 	#comp = bindex.glob('background_MC_ST_s')[0]
 	#comp = bindex.glob('background_MC_ST_t_top')[0]
 	#comp = bindex.glob('background_MC_tW_top')[0]
-        comp = bindex.glob('MC_signal_dilep')[0]
+        #comp = bindex.glob('MC_signal_dilep')[0]
+        comp = bindex.glob('MC_signal_semilep')[0]
         #comp = bindex.glob('MC_signal_dilep')[1]
 	#comp = MC_signal_dilep
                #MC_signal_dilep
@@ -186,7 +187,7 @@ if test:
         #comp = bindex.glob('MuonEG_Run2017B_31Mar2018')[0]
                 # SingleElectron_Run2017E_31Mar2018
     selectedComponents   = [comp]
-    comp.files           = [comp.files[0]] #was 5
+    comp.files           = [comp.files[19]] #was 5
     comp.splitFactor     = 1
     comp.fineSplitFactor = 1
     #selectedComponents   = mc_resubmit
@@ -291,7 +292,7 @@ reweight_muon = cfg.Analyzer(MuonSF,
 one_muon = cfg.Analyzer(EventFilter, 
                         'one_muon',
                         src = 'select_muon',
-                        filter_func = lambda x : len(x)>0)
+                        filter_func = lambda x : len(x)==1)
                         
 exclude_loose_muon = cfg.Analyzer(EventFilter,
                                  'exlude_loose_muon',
@@ -366,7 +367,7 @@ reweight_electron = cfg.Analyzer(ElectronSF,
 one_electron = cfg.Analyzer(EventFilter, 
                             'one_electron',
                             src = 'select_electron',
-                            filter_func = lambda x : len(x)>0)
+                            filter_func = lambda x : len(x)==1)
 
 exclude_loose_electron = cfg.Analyzer(EventFilter,
                                      'exclude_loose_electron',
@@ -699,18 +700,18 @@ sequence = cfg.Sequence([
 # Muon
     muons,
     select_muon,
-    exclude_muon,
+    #exclude_muon,
     reweight_muon,
     one_muon,
-    exclude_loose_muon,
+    #exclude_loose_muon,
     systematic_muon,
 # Electron
     electrons,
     select_electron,
-    exclude_electron,
+    #exclude_electron,
     reweight_electron,
     one_electron,
-    exclude_loose_electron,
+    #exclude_loose_electron,
     systematic_electron,
 # Dilepton
     dilepton,

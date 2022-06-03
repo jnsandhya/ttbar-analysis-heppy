@@ -78,9 +78,12 @@ background_MC_tW_antitop2.splitFactor = 8
 
 ##############
 
+#<<<<<<< Updated upstream
 background_MC_WW_old = creator.makeMCComponent("MC_dibosons_WW", "/WW_TuneCP5_13TeV-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM", "CMS", ".*root", 118.7)
 background_MC_WW_old.splitFactor = 8
 
+#=======
+#>>>>>>> Stashed changes
 background_MC_WW = creator.makeMCComponent("MC_dibosons_WW", "/WW_TuneCP5_13TeV-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM", "CMS", ".*root", 118.7)
 background_MC_WW.splitFactor = 8
 
@@ -100,9 +103,12 @@ background_MC_WJets2.splitFactor = 45
 
 ##############
 
+#<<<<<<< Updated upstream
 background_MC_DY_old = creator.makeMCComponent("MC_zjets_DY_50", "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM", "CMS", ".*root", 6225.4)
 background_MC_DY_old.splitFactor = 28
 
+#=======
+#>>>>>>> Stashed changes
 background_MC_DY = creator.makeMCComponent("MC_zjets_DY_50", "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM", "CMS", ".*root", 6225.4)
 background_MC_DY.splitFactor = 28
 
@@ -173,12 +179,12 @@ mc_ttbar_Lyon = [
     background_MC_ST_t_antitop,
     background_MC_tW_top2,
     background_MC_tW_antitop2,
-    #background_MC_WW,
+    background_MC_WW,
     background_MC_WZ,
     background_MC_ZZ,
     background_MC_WJets,
     background_MC_WJets2,
-    #background_MC_DY,
+    background_MC_DY,
     background_MC_DY2
 ]
 
@@ -187,8 +193,8 @@ mc_ttbar_AAA  = [
     background_MC_ST_s,
     background_MC_tW_top,
     background_MC_tW_antitop,
-    background_MC_WW_old,
-    background_MC_DY_old,
+    #background_MC_WW_old,
+    #background_MC_DY_old,
     background_MC_DY3
 ]
 

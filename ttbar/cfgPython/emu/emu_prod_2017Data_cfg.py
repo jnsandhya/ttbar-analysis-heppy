@@ -95,6 +95,7 @@ if year == '2017':
     JERFileMC       = "/sps/cms/chanon/CMSSW_10_4_0/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_MC_PtResolution_AK4PFchs.txt"
     JERFileData    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_DATA_PtResolution_AK4PFchs.txt'
 
+
 #print data_triggers 
 for sample in data_files:
     #print sample
@@ -289,7 +290,7 @@ reweight_muon = cfg.Analyzer(MuonSF,
 one_muon = cfg.Analyzer(EventFilter, 
                         'one_muon',
                         src = 'select_muon',
-                        filter_func = lambda x : len(x)>0)
+                        filter_func = lambda x : len(x)==1)
                         
 exclude_loose_muon = cfg.Analyzer(EventFilter,
                                  'exlude_loose_muon',
@@ -364,7 +365,7 @@ reweight_electron = cfg.Analyzer(ElectronSF,
 one_electron = cfg.Analyzer(EventFilter, 
                             'one_electron',
                             src = 'select_electron',
-                            filter_func = lambda x : len(x)>0)
+                            filter_func = lambda x : len(x)==1)
 
 exclude_loose_electron = cfg.Analyzer(EventFilter,
                                      'exclude_loose_electron',
@@ -697,18 +698,18 @@ sequence = cfg.Sequence([
 # Muon
     muons,
     select_muon,
-    exclude_muon,
+    #exclude_muon,
     reweight_muon,
     one_muon,
-    exclude_loose_muon,
+    #exclude_loose_muon,
     systematic_muon,
 # Electron
     electrons,
     select_electron,
-    exclude_electron,
+    #exclude_electron,
     reweight_electron,
     one_electron,
-    exclude_loose_electron,
+    #exclude_loose_electron,
     systematic_electron,
 # Dilepton
     dilepton,
