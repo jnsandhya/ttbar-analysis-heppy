@@ -41,12 +41,61 @@ class PileUpAnalyzer( Analyzer ):
 
     def __init__(self, cfg_ana, cfg_comp, looperName):
         super(PileUpAnalyzer, self).__init__(cfg_ana, cfg_comp, looperName)
-
+        self.datafile = TFile( self.cfg_comp.puFileData )
         self.datafile_up   = TFile(self.cfg_ana.puFileDataUp)
         self.datafile_down = TFile(self.cfg_ana.puFileDataDown)
         
+        self.datahist = self.datafile.Get('pileup')
         self.datahist_up = self.datafile_up.Get('pileup')
         self.datahist_down = self.datafile_down.Get('pileup')
+
+                
+        self.datafiles_pu_time      = []
+        self.datafiles_pu_time_up   = []
+        self.datafiles_pu_time_down = []
+        self.datahists_pu_time      = []
+        self.datahists_pu_time_up   = []
+        self.datahists_pu_time_down = []
+
+        self.fname_inc = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_inc.root'
+        self.fname_inc_up = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_inc_up.root'
+        self.fname_inc_down = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_inc_down.root'
+        
+        self.fname_inc = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_inc]))
+        self.fname_inc_up = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_inc_up]))
+        self.fname_inc_down = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_inc_down]))
+        
+        self.datahists_pu_time_inc      = self.fname_inc.Get('pileup')
+        self.datahists_pu_time_inc_up   = self.fname_inc_up.Get('pileup')
+        self.datahists_pu_time_inc_down = self.fname_inc_down.Get('pileup')
+
+
+        self.fname_new = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'.root'
+        self.fname_new_up = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_up.root'
+        self.fname_new_down = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_down.root'
+        
+        self.fname_new = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_new]))
+        self.fname_new_up = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_new_up]))
+        self.fname_new_down = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_new_down]))
+        
+        self.datahist_new      = self.fname_inc.Get('pileup')
+        self.datahist_new_up   = self.fname_inc_up.Get('pileup')
+        self.datahist_new_down = self.fname_inc_down.Get('pileup')
+        
+        for i in range(24):
+            fname      = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_'+str(i)+'.root'
+            fname_up   = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_'+str(i)+'_up.root'
+            fname_down = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_'+str(i)+'_down.root'
+            fname = TFile('/'.join([os.environ["CMSSW_BASE"],fname]))
+            fname_up = TFile('/'.join([os.environ["CMSSW_BASE"],fname_up]))
+            fname_down = TFile('/'.join([os.environ["CMSSW_BASE"],fname_down]))
+            self.datafiles_pu_time.append(fname)
+            self.datafiles_pu_time_up.append(fname_up)
+            self.datafiles_pu_time_down.append(fname_down)
+            
+            self.datahists_pu_time.append(self.datafiles_pu_time[i].Get('pileup'))
+            self.datahists_pu_time_up.append(self.datafiles_pu_time_up[i].Get('pileup'))
+            self.datahists_pu_time_down.append(self.datafiles_pu_time_down[i].Get('pileup'))
 
         self.doHists=True
         self.currentFile = None
@@ -76,14 +125,27 @@ class PileUpAnalyzer( Analyzer ):
                 self.enable = False
             else:
                 assert( os.path.isfile(os.path.expandvars(self.cfg_comp.puFileData)) )
-                self.datafile = TFile( self.cfg_comp.puFileData )
-                self.datahist = self.datafile.Get('pileup')
-                self.datahist_up = self.datafile_up.Get('pileup')
-                self.datahist_down = self.datafile_down.Get('pileup')
-
+                #self.datafile = TFile( self.cfg_comp.puFileData )
+                #self.datahist = self.datafile.Get('pileup')
+                #self.datahist_up = self.datafile_up.Get('pileup')
+                #self.datahist_down = self.datafile_down.Get('pileup')
                 self.datahist.Scale( 1 / self.datahist.Integral() )
                 self.datahist_up.Scale( 1 / self.datahist_up.Integral() )
                 self.datahist_down.Scale( 1 / self.datahist_down.Integral() )
+
+                self.datahist_new.Scale( 1 / self.datahist_new.Integral() )
+                self.datahist_new_up.Scale( 1 / self.datahist_new_up.Integral() )
+                self.datahist_new_down.Scale( 1 / self.datahist_new_down.Integral() )
+                
+                self.datahists_pu_time_inc.Scale(1/self.datahists_pu_time_inc.Integral() )
+                self.datahists_pu_time_inc_up.Scale(1/self.datahists_pu_time_inc_up.Integral() )
+                self.datahists_pu_time_inc_down.Scale(1/self.datahists_pu_time_inc_down.Integral() )
+                
+                for i in range(24):
+                    self.datahists_pu_time[i].Scale(1/self.datahists_pu_time[i].Integral() )
+                    self.datahists_pu_time_up[i].Scale(1/self.datahists_pu_time_up[i].Integral() )
+                    self.datahists_pu_time_down[i].Scale(1/self.datahists_pu_time_down[i].Integral() )
+                        
 
                 if not self.autoPU:
                     assert( os.path.isfile(os.path.expandvars(self.cfg_comp.puFileMC)) )
@@ -155,6 +217,23 @@ class PileUpAnalyzer( Analyzer ):
         event.puWeightUp = 1
         event.puWeightDown = 1
 
+        event.puWeightNew = 1
+        event.puWeightNewUp = 1
+        event.puWeightNewDown = 1
+
+        event.puWeightInc = 1
+        event.puWeightIncUp = 1
+        event.puWeightIncDown = 1
+
+
+        event.puWeightTime = []
+        event.puWeightTimeUp = []
+        event.puWeightTimeDown = []
+        for i in range(24):
+            event.puWeightTime.append(1)
+            event.puWeightTimeUp.append(1)
+            event.puWeightTimeDown.append(1)
+            
         event.nPU = None
         event.pileUpVertex_z = []
         event.pileUpVertex_ptHat = []
@@ -208,6 +287,75 @@ class PileUpAnalyzer( Analyzer ):
                     event.puWeight = 1
                     event.puWeightUp = 1
                     event.puWeightDown = 1
+
+            bin = self.datahist_new.FindBin(event.nPU)
+            if bin<1 or bin>self.datahist_new.GetNbinsX():
+                event.puWeightNew = 0
+                event.puWeightNewUp = 0
+                event.puWeightNewDown = 0
+            else:
+                data      = self.datahist_new.GetBinContent(bin)
+                mc        = self.mchist.GetBinContent(bin)
+
+                data_up   = self.datahist_new_up.GetBinContent(bin)
+                data_down = self.datahist_new_down.GetBinContent(bin)
+                #Protect 0 division!!!!
+                if mc !=0.0:
+                    event.puWeightNew     = data/mc
+                    event.puWeightNewUp   = data_up/mc
+                    event.puWeightNewDown = data_down/mc
+                else:
+                    event.puWeightNew = 1
+                    event.puWeightNewUp = 1
+                    event.puWeightNewDown = 1
+
+            bin = self.datahists_pu_time_inc.FindBin(event.nPU)
+            if bin<1 or bin>self.datahists_pu_time_inc.GetNbinsX():
+                event.puWeightInc = 0
+                event.puWeightIncUp = 0
+                event.puWeightIncDown = 0
+            else:
+                data      = self.datahists_pu_time_inc.GetBinContent(bin)
+                mc        = self.mchist.GetBinContent(bin)
+
+                data_up   = self.datahists_pu_time_inc_up.GetBinContent(bin)
+                data_down = self.datahists_pu_time_inc_down.GetBinContent(bin)
+                #Protect 0 division!!!!
+                if mc !=0.0:
+                    event.puWeightInc     = data/mc
+                    event.puWeightIncUp   = data_up/mc
+                    event.puWeightIncDown = data_down/mc
+                else:
+                    event.puWeightInc = 1
+                    event.puWeightIncUp = 1
+                    event.puWeightIncDown = 1
+        
+            for i in range(24):
+                bin = self.datahists_pu_time[i].FindBin(event.nPU)
+                if bin<1 or bin>self.datahists_pu_time[i].GetNbinsX():
+                    event.puWeightTime[i] = 0
+                    event.puWeightTimeUp[i] = 0
+                    event.puWeightTimeDown[i] = 0
+                else:
+                    data      = self.datahists_pu_time[i].GetBinContent(bin)
+                    mc        = self.mchist.GetBinContent(bin)
+
+                    data_up   = self.datahists_pu_time_up[i].GetBinContent(bin)
+                    data_down = self.datahists_pu_time_down[i].GetBinContent(bin)
+                    #Protect 0 division!!!!
+                    if mc !=0.0:
+                        event.puWeightTime[i]     = data/mc
+                        event.puWeightTimeUp[i]   = data_up/mc
+                        event.puWeightTimeDown[i] = data_down/mc
+                    else:
+                        event.puWeightTime[i] = 1
+                        event.puWeightTimeUp[i] = 1
+                        event.puWeightTimeDown[i] = 1
+
+        #print "event PU weight orig, up, down : ", event.puWeight, event.puWeightUp, event.puWeightDown
+        #print "event PU weight inc, up, down : ", event.puWeightInc, event.puWeightIncUp, event.puWeightIncDown
+        #for i in range(24):
+        #    print "PU weight time bin ", event.puWeightTime[i], event.puWeightTimeUp[i], event.puWeightTimeDown[i]
 
         #import pdb; pdb.set_trace()
         event.eventWeight *= event.puWeight
