@@ -28,7 +28,7 @@ background_MC_TTW2 = creator.makeMCComponent("MC_ttx_TTW2","/TTWJetsToLNu_TuneCP
 background_MC_TTW2.splitFactor = 5
 
 background_MC_TTW3 = creator.makeMCComponent("MC_ttx_TTW3","/TTWJetsToQQ_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM", "CMS", ".*root",0.4062);
-background_MC_TTW3.splitFactor = 1
+background_MC_TTW3.splitFactor = 2
 
 background_MC_TTZ = creator.makeMCComponent("MC_ttx_TTZ","/TTZToLLNuNu_M-10_TuneCP5_13TeV-amcatnlo-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM", "CMS", ".*root",0.2529);
 background_MC_TTZ.splitFactor = 8
@@ -37,7 +37,7 @@ background_MC_TTZ2 = creator.makeMCComponent("MC_ttx_TTZ2","/TTZToLLNuNu_M-10_Tu
 background_MC_TTZ2.splitFactor = 12
 
 background_MC_TTZ3 = creator.makeMCComponent("MC_ttx_TTZ3","/TTZToQQ_TuneCP5_13TeV-amcatnlo-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM", "CMS", ".*root",0.5297);
-background_MC_TTZ3.splitFactor = 1
+background_MC_TTZ3.splitFactor = 2
 
 #background_MC_TTG = creator.makeMCComponent("MC_ttx_TTG","/TTGJets_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM", "CMS", ".*root",3.697);
 

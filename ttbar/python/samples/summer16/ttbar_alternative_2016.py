@@ -78,16 +78,16 @@ alt_MC_ST_t_antitop_mtop175p5.splitFactor = 4
 
 #Careful: tW alternative mass are either NoFullyHadronic TuneCP5 or InclusiveDecays TuneCUETP8M1
 alt_MC_tW_top_mtop169p5 = creator.makeMCComponent("alt_MC_tW_mtop169p5", "/ST_tW_top_5f_mtop1695_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM", "CMS", ".*root",35.5);
-alt_MC_tW_top_mtop169p5.splitFactor = 1
+alt_MC_tW_top_mtop169p5.splitFactor = 2
 
 alt_MC_tW_antitop_mtop169p5 = creator.makeMCComponent("alt_MC_tW_antitop_mtop169p5", "/ST_tW_antitop_5f_mtop1695_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM", "CMS", ".*root",35.5);
-alt_MC_tW_antitop_mtop169p5.splitFactor = 1
+alt_MC_tW_antitop_mtop169p5.splitFactor = 2
 
 alt_MC_tW_top_mtop175p5 = creator.makeMCComponent("alt_MC_tW_mtop175p5", "/ST_tW_top_5f_mtop1755_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM", "CMS", ".*root",35.5);
-alt_MC_tW_top_mtop175p5.splitFactor = 1
+alt_MC_tW_top_mtop175p5.splitFactor = 2
 
 alt_MC_tW_antitop_mtop175p5 = creator.makeMCComponent("alt_MC_tW_antitop_mtop175p5", "/ST_tW_antitop_5f_mtop1755_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM", "CMS", ".*root",35.5);
-alt_MC_tW_antitop_mtop175p5.splitFactor = 1
+alt_MC_tW_antitop_mtop175p5.splitFactor = 2
 
 
 alt_MC_hdampUp.splitFactor = 10
