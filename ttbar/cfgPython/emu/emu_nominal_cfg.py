@@ -916,7 +916,10 @@ pileup = cfg.Analyzer(PileUpAnalyzer,
                       true=True,
                       autoPU=False,
                       puFileDataUp   = puFileDataUp,
-                      puFileDataDown = puFileDataDown)
+                      puFileDataDown = puFileDataDown,
+                      year = year
+                )
+
 
 lheanalyzer = cfg.Analyzer(LHEWeightAnalyzer,
 			   name='LHEWeightAnalyzer',
