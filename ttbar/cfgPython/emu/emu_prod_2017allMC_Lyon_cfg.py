@@ -44,7 +44,6 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 # Components
 ############################################################################
 if year == '2016':
-
     from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
     #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_remain as mc_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
@@ -86,6 +85,7 @@ if year == '2016':
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup.root'
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup_alternative.root'
     JERFileMC      = '/'.join([os.environ["CMSSW_BASE"],'src/CMGTools/ttbar/data/2016/jer/Summer16_25nsV1b_MC_PtResolution_AK4PFchs.txt'])
+    #JERFileMC      = '/sps/cms/chanon/CMSSW_10_4_0/src/CMGTools/ttbar/data/2016/jer/Summer16_25nsV1b_MC_PtResolution_AK4PFchs.txt'
     JERFileDATA    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/jer/Summer16_25nsV1b_DATA_PtResolution_AK4PFchs.txt'
     
 if year == '2017':
@@ -95,8 +95,8 @@ if year == '2017':
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_2017.root'
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_alt_2017.root'
     JERFileMC      = '/'.join([os.environ["CMSSW_BASE"],'src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_MC_PtResolution_AK4PFchs.txt'])
+    #JERFileMC       = "/sps/cms/chanon/CMSSW_10_4_0/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_MC_PtResolution_AK4PFchs.txt"
     JERFileData    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_DATA_PtResolution_AK4PFchs.txt'
-
 
 #print data_triggers 
 for sample in data_files:
@@ -438,6 +438,7 @@ dilepton_sorted = cfg.Analyzer(
 ############################################################################
 # Jets 
 ############################################################################
+#from CMGTools.ttbar.analyzers.JetAccessor import JetAccessor
 from CMGTools.ttbar.analyzers.JetAnalyzer import JetAnalyzer
 from CMGTools.ttbar.analyzers.JetCleaner  import JetCleaner
 
@@ -509,26 +510,17 @@ jet_sorter = cfg.Analyzer(
     reverse = True
     )
 
-
-
-
-if year == '2016':
-    def select_jets_IDpt(jet): #function use in the next Analyzer
+def select_jets_pteta(jet): #function use in the next Analyzer
         return  jet.pt()>20 and\
-                abs(jet.eta())<2.4 and\
-                jet.jetID("POG_PFID_TightLepVeto2016")
-else : 
-    def select_jets_IDpt(jet): #function use in the next Analyzer
-        return  jet.pt()>20 and\
-                abs(jet.eta())<2.4 and\
-                jet.jetID("POG_PFID_TightLepVeto")
+                abs(jet.eta())<2.4
 
-#Need to do ID before calibration...  But pt eta cuts?
+
+#Need to do ID before calibration (now done in the JetAnalyzer), and pt eta after calibration
 jets_20_unclean = cfg.Analyzer(Selector,
                                'jets_20_unclean',
                                output = 'jets_20_unclean',
                                src = 'jets_sorted',
-                               filter_func = select_jets_IDpt)
+                               filter_func = select_jets_pteta)
 
 jet_20_electron_clean = cfg.Analyzer(JetCleaner,
                       output = 'jets_20_electron_clean',
@@ -1000,6 +992,7 @@ pfmetana = cfg.Analyzer(METAnalyzer,
                         met = 'pfmet',
                         apply_recoil_correction= True,#Recommendation states loose pfjetID for jet multiplicity but this WP is not supported anymore?
                         runFixEE2017= True)
+
 #lheweight = cfg.Analyzer(LHEWeightAnalyzer,
 #                         name="LHEWeightAnalyzer",
 #                         useLumiInfo=False)
@@ -1095,8 +1088,8 @@ sequence_list =  [
     systematic_muon,
 # Electron
     electrons,
-    #select_electron,
-    exclude_electron,
+    select_electron,
+    #exclude_electron,
     reweight_electron,
     one_electron,
     #exclude_loose_electron,
@@ -1125,10 +1118,11 @@ sequence_list =  [
     #one_bjets
 ]
 
-for i in range(len(jets_30_corr)):
-    sequence_list.append(jets_30_corr[i])
-    #sequence_list.append(btaganalyzer_corr[i])
-    sequence_list.append(bjets_30_corr[i])
+if not data:
+    for i in range(len(jets_30_corr)):
+        sequence_list.append(jets_30_corr[i])
+        #sequence_list.append(btaganalyzer_corr[i])
+        sequence_list.append(bjets_30_corr[i])
 
 sequence_list.append(njets_ana)
 sequence_list.append(prefiringana)

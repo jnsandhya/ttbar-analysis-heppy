@@ -46,13 +46,15 @@ btagger    = getHeppyOption('btagger', 'DeepCSV')
 if year == '2016':
     #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_signal_dilep as mc_ttbar
-    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_test
+    #from CMGTools.ttbar.samples.summer16.ttbar2016 import mc_ttbar_remain as mc_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar_alternative_2016   import alt_ttbar
     from CMGTools.ttbar.samples.summer16.ttbar2016 import data_elecmuon
     from CMGTools.ttbar.samples.summer16.trigger   import data_triggers
     from CMGTools.ttbar.samples.summer16.trigger   import mc_triggers
 if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar_AAA as mc_ttbar
+    #from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar_Lyon as mc_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
@@ -84,6 +86,7 @@ if year == '2016':
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup.root'
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/pileup_alternative.root'
     JERFileMC      = '/'.join([os.environ["CMSSW_BASE"],'src/CMGTools/ttbar/data/2016/jer/Summer16_25nsV1b_MC_PtResolution_AK4PFchs.txt'])
+    #JERFileMC      = '/sps/cms/chanon/CMSSW_10_4_0/src/CMGTools/ttbar/data/2016/jer/Summer16_25nsV1b_MC_PtResolution_AK4PFchs.txt'
     JERFileDATA    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2016/jer/Summer16_25nsV1b_DATA_PtResolution_AK4PFchs.txt'
     
 if year == '2017':
@@ -93,6 +96,7 @@ if year == '2017':
     puFileMC       = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_2017.root'
     puFileMCalt    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/pudistributions_mc_alt_2017.root'
     JERFileMC      = '/'.join([os.environ["CMSSW_BASE"],'src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_MC_PtResolution_AK4PFchs.txt'])
+    #JERFileMC       = "/sps/cms/chanon/CMSSW_10_4_0/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_MC_PtResolution_AK4PFchs.txt"
     JERFileData    = '$CMSSW_BASE/src/CMGTools/ttbar/data/2017/jer/Fall17_V3b_DATA_PtResolution_AK4PFchs.txt'
 
 #print data_triggers 
@@ -130,17 +134,17 @@ for sample in selectedComponents:
         sample.puFileMC    = puFileMC
 
         if alternate:
-            sample.splitFactor = 40
+            #sample.splitFactor = 40
             sample.puFileMC = puFileMCalt
 
-        if year=='2016' and 'signal' in sample.name:
+        #if year=='2016' and 'signal' in sample.name:
             #sample.splitFactor = 80
-            print sample.name, sample.splitFactor
+            #print sample.name, sample.splitFactor
 
-        if 'wjets' in sample.name:
-            #sample.splitFactor = 100
-            print sample.name, sample.splitFactor
-       
+        #if 'wjets' in sample.name:
+         #   #sample.splitFactor = 100
+          #  print sample.name, sample.splitFactor
+    print sample.name, sample.splitFactor  
       
 ############################################################################
 # Test
@@ -435,6 +439,7 @@ dilepton_sorted = cfg.Analyzer(
 ############################################################################
 # Jets 
 ############################################################################
+#from CMGTools.ttbar.analyzers.JetAccessor import JetAccessor
 from CMGTools.ttbar.analyzers.JetAnalyzer import JetAnalyzer
 from CMGTools.ttbar.analyzers.JetCleaner  import JetCleaner
 
@@ -506,26 +511,17 @@ jet_sorter = cfg.Analyzer(
     reverse = True
     )
 
-
-
-
-if year == '2016':
-    def select_jets_IDpt(jet): #function use in the next Analyzer
+def select_jets_pteta(jet): #function use in the next Analyzer
         return  jet.pt()>20 and\
-                abs(jet.eta())<2.4 and\
-                jet.jetID("POG_PFID_TightLepVeto2016")
-else : 
-    def select_jets_IDpt(jet): #function use in the next Analyzer
-        return  jet.pt()>20 and\
-                abs(jet.eta())<2.4 and\
-                jet.jetID("POG_PFID_TightLepVeto")
+                abs(jet.eta())<2.4
 
-#Need to do ID before calibration...  But pt eta cuts?
+
+#Need to do ID before calibration (now done in the JetAnalyzer), and pt eta after calibration
 jets_20_unclean = cfg.Analyzer(Selector,
                                'jets_20_unclean',
                                output = 'jets_20_unclean',
                                src = 'jets_sorted',
-                               filter_func = select_jets_IDpt)
+                               filter_func = select_jets_pteta)
 
 jet_20_electron_clean = cfg.Analyzer(JetCleaner,
                       output = 'jets_20_electron_clean',
@@ -667,6 +663,24 @@ for source in redjesunc_sources:
                                 #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
                                 filter_func = lambda x : x.corr_Absolute_2016_JEC_down*x.pt()>30)
                                 )
+                elif source=="Absolute_2017" and unc=="up":
+                        jets_30_corr.append(
+                                cfg.Analyzer(Selector,
+                                jets_30_corr_name,
+                                output = jets_30_corr_name,
+                                src = 'jets_20_clean',
+                                #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
+                                filter_func = lambda x : x.corr_Absolute_2017_JEC_up*x.pt()>30)
+                                )
+                elif source=="Absolute_2017" and unc=="down":
+                        jets_30_corr.append(
+                                cfg.Analyzer(Selector,
+                                jets_30_corr_name,
+                                output = jets_30_corr_name,
+                                src = 'jets_20_clean',
+                                #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
+                                filter_func = lambda x : x.corr_Absolute_2017_JEC_down*x.pt()>30)
+                                )
                 elif source=="FlavorQCD" and unc=="up":
                         jets_30_corr.append(
                                 cfg.Analyzer(Selector,
@@ -721,6 +735,24 @@ for source in redjesunc_sources:
                                 #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
                                 filter_func = lambda x : x.corr_BBEC1_2016_JEC_down*x.pt()>30)
                                 )
+                elif source=="BBEC1_2017" and unc=="up":
+                        jets_30_corr.append(
+                                cfg.Analyzer(Selector,
+                                jets_30_corr_name,
+                                output = jets_30_corr_name,
+                                src = 'jets_20_clean',
+                                #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
+                                filter_func = lambda x : x.corr_BBEC1_2017_JEC_up*x.pt()>30)
+                                )
+                elif source=="BBEC1_2017" and unc=="down":
+                        jets_30_corr.append(
+                                cfg.Analyzer(Selector,
+                                jets_30_corr_name,
+                                output = jets_30_corr_name,
+                                src = 'jets_20_clean',
+                                #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
+                                filter_func = lambda x : x.corr_BBEC1_2017_JEC_down*x.pt()>30)
+                                )
                 elif source=="EC2" and unc=="up":
                         jets_30_corr.append(
                                 cfg.Analyzer(Selector,
@@ -756,6 +788,24 @@ for source in redjesunc_sources:
                                 src = 'jets_20_clean',
                                 #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
                                 filter_func = lambda x : x.corr_EC2_2016_JEC_down*x.pt()>30)
+                                )
+                elif source=="EC2_2017" and unc=="up":
+                        jets_30_corr.append(
+                                cfg.Analyzer(Selector,
+                                jets_30_corr_name,
+                                output = jets_30_corr_name,
+                                src = 'jets_20_clean',
+                                #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
+                                filter_func = lambda x : x.corr_EC2_2017_JEC_up*x.pt()>30)
+                                )
+                elif source=="EC2_2017" and unc=="down":
+                        jets_30_corr.append(
+                                cfg.Analyzer(Selector,
+                                jets_30_corr_name,
+                                output = jets_30_corr_name,
+                                src = 'jets_20_clean',
+                                #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
+                                filter_func = lambda x : x.corr_EC2_2017_JEC_down*x.pt()>30)
                                 )
                 elif source=="HF" and unc=="up":
                         jets_30_corr.append(
@@ -793,6 +843,24 @@ for source in redjesunc_sources:
                                 #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
                                 filter_func = lambda x : x.corr_HF_2016_JEC_down*x.pt()>30)
                                 )
+                elif source=="HF_2017" and unc=="up":
+                        jets_30_corr.append(
+                                cfg.Analyzer(Selector,
+                                jets_30_corr_name,
+                                output = jets_30_corr_name,
+                                src = 'jets_20_clean',
+                                #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
+                                filter_func = lambda x : x.corr_HF_2017_JEC_up*x.pt()>30)
+                                )
+                elif source=="HF_2017" and unc=="down":
+                        jets_30_corr.append(
+                                cfg.Analyzer(Selector,
+                                jets_30_corr_name,
+                                output = jets_30_corr_name,
+                                src = 'jets_20_clean',
+                                #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
+                                filter_func = lambda x : x.corr_HF_2017_JEC_down*x.pt()>30)
+                                )
                 elif source=="RelativeBal" and unc=="up":
                         jets_30_corr.append(
                                 cfg.Analyzer(Selector,
@@ -828,6 +896,24 @@ for source in redjesunc_sources:
                                 src = 'jets_20_clean',
                                 #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
                                 filter_func = lambda x : x.corr_RelativeSample_2016_JEC_down*x.pt()>30)
+                                )
+                elif source=="RelativeSample_2017" and unc=="up":
+                        jets_30_corr.append(
+                                cfg.Analyzer(Selector,
+                                jets_30_corr_name,
+                                output = jets_30_corr_name,
+                                src = 'jets_20_clean',
+                                #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
+                                filter_func = lambda x : x.corr_RelativeSample_2017_JEC_up*x.pt()>30)
+                                )
+                elif source=="RelativeSample_2017" and unc=="down":
+                        jets_30_corr.append(
+                                cfg.Analyzer(Selector,
+                                jets_30_corr_name,
+                                output = jets_30_corr_name,
+                                src = 'jets_20_clean',
+                                #filter_func = lambda x : getattr(x,"corr_{}_JEC_{}".format(source,unc))*x.pt()>30)
+                                filter_func = lambda x : x.corr_RelativeSample_2017_JEC_down*x.pt()>30)
                                 )
 		else:
 	                jets_30_corr.append(
@@ -1033,10 +1119,11 @@ sequence_list =  [
     #one_bjets
 ]
 
-for i in range(len(jets_30_corr)):
-    sequence_list.append(jets_30_corr[i])
-    #sequence_list.append(btaganalyzer_corr[i])
-    sequence_list.append(bjets_30_corr[i])
+if not data:
+    for i in range(len(jets_30_corr)):
+        sequence_list.append(jets_30_corr[i])
+        #sequence_list.append(btaganalyzer_corr[i])
+        sequence_list.append(bjets_30_corr[i])
 
 sequence_list.append(njets_ana)
 sequence_list.append(prefiringana)
