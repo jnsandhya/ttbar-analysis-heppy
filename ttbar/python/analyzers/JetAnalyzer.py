@@ -172,14 +172,16 @@ class JetAnalyzer(Analyzer):
         if self.cfg_ana.year == '2016' :
             for jet in jets:
                 hjet = Jet(jet)
-                output_jets.append(hjet)
+		if hjet.jetID("POG_PFID_TightLepVeto2016")==True:
+                    output_jets.append(hjet)
         else:    
             for jet in jets:
                 hjet = Jet(jet)
                 if not hasattr(self.cfg_ana,'selection'):
                     continue
                 elif self.cfg_ana.selection(hjet):
-                    output_jets.append(hjet)
+		    if hjet.jetID("POG_PFID_TightLepVeto")==True:
+                        output_jets.append(hjet)
 
         if self.cfg_ana.do_jec:
             event.metShift = [0., 0.]

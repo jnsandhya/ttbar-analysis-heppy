@@ -438,6 +438,7 @@ dilepton_sorted = cfg.Analyzer(
 ############################################################################
 # Jets 
 ############################################################################
+#from CMGTools.ttbar.analyzers.JetAccessor import JetAccessor
 from CMGTools.ttbar.analyzers.JetAnalyzer import JetAnalyzer
 from CMGTools.ttbar.analyzers.JetCleaner  import JetCleaner
 
@@ -509,26 +510,17 @@ jet_sorter = cfg.Analyzer(
     reverse = True
     )
 
-
-
-
-if year == '2016':
-    def select_jets_IDpt(jet): #function use in the next Analyzer
+def select_jets_pteta(jet): #function use in the next Analyzer
         return  jet.pt()>20 and\
-                abs(jet.eta())<2.4 and\
-                jet.jetID("POG_PFID_TightLepVeto2016")
-else : 
-    def select_jets_IDpt(jet): #function use in the next Analyzer
-        return  jet.pt()>20 and\
-                abs(jet.eta())<2.4 and\
-                jet.jetID("POG_PFID_TightLepVeto")
+                abs(jet.eta())<2.4
 
-#Need to do ID before calibration...  But pt eta cuts?
+
+#Need to do ID before calibration (now done in the JetAnalyzer), and pt eta after calibration
 jets_20_unclean = cfg.Analyzer(Selector,
                                'jets_20_unclean',
                                output = 'jets_20_unclean',
                                src = 'jets_sorted',
-                               filter_func = select_jets_IDpt)
+                               filter_func = select_jets_pteta)
 
 jet_20_electron_clean = cfg.Analyzer(JetCleaner,
                       output = 'jets_20_electron_clean',
@@ -1126,10 +1118,11 @@ sequence_list =  [
     #one_bjets
 ]
 
-for i in range(len(jets_30_corr)):
-    sequence_list.append(jets_30_corr[i])
-    #sequence_list.append(btaganalyzer_corr[i])
-    sequence_list.append(bjets_30_corr[i])
+if not data:
+    for i in range(len(jets_30_corr)):
+        sequence_list.append(jets_30_corr[i])
+        #sequence_list.append(btaganalyzer_corr[i])
+        sequence_list.append(bjets_30_corr[i])
 
 sequence_list.append(njets_ana)
 sequence_list.append(prefiringana)
