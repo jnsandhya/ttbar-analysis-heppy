@@ -41,62 +41,7 @@ class PileUpAnalyzer( Analyzer ):
 
     def __init__(self, cfg_ana, cfg_comp, looperName):
         super(PileUpAnalyzer, self).__init__(cfg_ana, cfg_comp, looperName)
-        self.datafile = TFile( self.cfg_comp.puFileData )
-        self.datafile_up   = TFile(self.cfg_ana.puFileDataUp)
-        self.datafile_down = TFile(self.cfg_ana.puFileDataDown)
         
-        self.datahist = self.datafile.Get('pileup')
-        self.datahist_up = self.datafile_up.Get('pileup')
-        self.datahist_down = self.datafile_down.Get('pileup')
-
-                
-        self.datafiles_pu_time      = []
-        self.datafiles_pu_time_up   = []
-        self.datafiles_pu_time_down = []
-        self.datahists_pu_time      = []
-        self.datahists_pu_time_up   = []
-        self.datahists_pu_time_down = []
-
-        self.fname_inc = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_inc.root'
-        self.fname_inc_up = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_inc_up.root'
-        self.fname_inc_down = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_inc_down.root'
-        
-        self.fname_inc = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_inc]))
-        self.fname_inc_up = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_inc_up]))
-        self.fname_inc_down = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_inc_down]))
-        
-        self.datahists_pu_time_inc      = self.fname_inc.Get('pileup')
-        self.datahists_pu_time_inc_up   = self.fname_inc_up.Get('pileup')
-        self.datahists_pu_time_inc_down = self.fname_inc_down.Get('pileup')
-
-
-        self.fname_new = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'.root'
-        self.fname_new_up = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_up.root'
-        self.fname_new_down = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_down.root'
-        
-        self.fname_new = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_new]))
-        self.fname_new_up = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_new_up]))
-        self.fname_new_down = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_new_down]))
-        
-        self.datahist_new      = self.fname_inc.Get('pileup')
-        self.datahist_new_up   = self.fname_inc_up.Get('pileup')
-        self.datahist_new_down = self.fname_inc_down.Get('pileup')
-        
-        for i in range(24):
-            fname      = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_'+str(i)+'.root'
-            fname_up   = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_'+str(i)+'_up.root'
-            fname_down = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_'+str(i)+'_down.root'
-            fname = TFile('/'.join([os.environ["CMSSW_BASE"],fname]))
-            fname_up = TFile('/'.join([os.environ["CMSSW_BASE"],fname_up]))
-            fname_down = TFile('/'.join([os.environ["CMSSW_BASE"],fname_down]))
-            self.datafiles_pu_time.append(fname)
-            self.datafiles_pu_time_up.append(fname_up)
-            self.datafiles_pu_time_down.append(fname_down)
-            
-            self.datahists_pu_time.append(self.datafiles_pu_time[i].Get('pileup'))
-            self.datahists_pu_time_up.append(self.datafiles_pu_time_up[i].Get('pileup'))
-            self.datahists_pu_time_down.append(self.datafiles_pu_time_down[i].Get('pileup'))
-
         self.doHists=True
         self.currentFile = None
 
@@ -125,10 +70,66 @@ class PileUpAnalyzer( Analyzer ):
                 self.enable = False
             else:
                 assert( os.path.isfile(os.path.expandvars(self.cfg_comp.puFileData)) )
-                #self.datafile = TFile( self.cfg_comp.puFileData )
-                #self.datahist = self.datafile.Get('pileup')
-                #self.datahist_up = self.datafile_up.Get('pileup')
-                #self.datahist_down = self.datafile_down.Get('pileup')
+                self.datafile = TFile( self.cfg_comp.puFileData )
+                self.datafile_up   = TFile(self.cfg_ana.puFileDataUp)
+                self.datafile_down = TFile(self.cfg_ana.puFileDataDown)
+                
+                self.datahist = self.datafile.Get('pileup')
+                self.datahist_up = self.datafile_up.Get('pileup')
+                self.datahist_down = self.datafile_down.Get('pileup')
+        
+    
+                self.datafiles_pu_time      = []
+                self.datafiles_pu_time_up   = []
+                self.datafiles_pu_time_down = []
+                self.datahists_pu_time      = []
+                self.datahists_pu_time_up   = []
+                self.datahists_pu_time_down = []
+                
+                self.fname_inc = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_inc.root'
+                self.fname_inc_up = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_inc_up.root'
+                self.fname_inc_down = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_inc_down.root'
+                
+                self.fname_inc = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_inc]))
+                self.fname_inc_up = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_inc_up]))
+                self.fname_inc_down = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_inc_down]))
+                
+                self.datahists_pu_time_inc      = self.fname_inc.Get('pileup')
+                self.datahists_pu_time_inc_up   = self.fname_inc_up.Get('pileup')
+                self.datahists_pu_time_inc_down = self.fname_inc_down.Get('pileup')
+                
+                
+                self.fname_new = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'.root'
+                self.fname_new_up = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_up.root'
+                self.fname_new_down = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_down.root'
+                
+                self.fname_new = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_new]))
+                self.fname_new_up = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_new_up]))
+                self.fname_new_down = TFile('/'.join([os.environ["CMSSW_BASE"],self.fname_new_down]))
+                
+                self.datahist_new      = self.fname_inc.Get('pileup')
+                self.datahist_new_up   = self.fname_inc_up.Get('pileup')
+                self.datahist_new_down = self.fname_inc_down.Get('pileup')
+                
+                for i in range(24):
+                    fname      = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_'+str(i)+'.root'
+                    fname_up   = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_'+str(i)+'_up.root'
+                    fname_down = 'src/CMGTools/ttbar/data/'+str(self.cfg_ana.year)+'/pu_timebins/MyDataPileupHistogram_'+str(self.cfg_ana.year)+'_'+str(i)+'_down.root'
+                    fname = TFile('/'.join([os.environ["CMSSW_BASE"],fname]))
+                    fname_up = TFile('/'.join([os.environ["CMSSW_BASE"],fname_up]))
+                    fname_down = TFile('/'.join([os.environ["CMSSW_BASE"],fname_down]))
+                    self.datafiles_pu_time.append(fname)
+                    self.datafiles_pu_time_up.append(fname_up)
+                    self.datafiles_pu_time_down.append(fname_down)
+                    
+                    self.datahists_pu_time.append(self.datafiles_pu_time[i].Get('pileup'))
+                    self.datahists_pu_time_up.append(self.datafiles_pu_time_up[i].Get('pileup'))
+                    self.datahists_pu_time_down.append(self.datafiles_pu_time_down[i].Get('pileup'))
+                    #self.datafile = TFile( self.cfg_comp.puFileData )
+                    #self.datahist = self.datafile.Get('pileup')
+                    #self.datahist_up = self.datafile_up.Get('pileup')
+                    #self.datahist_down = self.datafile_down.Get('pileup')
+
                 self.datahist.Scale( 1 / self.datahist.Integral() )
                 self.datahist_up.Scale( 1 / self.datahist_up.Integral() )
                 self.datahist_down.Scale( 1 / self.datahist_down.Integral() )
