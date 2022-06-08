@@ -343,19 +343,19 @@ jets_30_corr_2017 = []
 #			 n_jets_corr = v(lambda x: len(x), int))
 #			)
 jets_30_corr.append(  Block(
-                        'jets_30_Total_up', lambda x:  getattr(x, 'jets_30_Total_up', default),
+                        'jets_30_Total_up', lambda x:  getattr(x, 'jets_30_Total_up', []),
                         n_jets_Total_up = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_Total_down', lambda x:  getattr(x, 'jets_30_Total_down', default),
+                        'jets_30_Total_down', lambda x:  getattr(x, 'jets_30_Total_down', []),
                         n_jets_Total_down = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_Absolute_up', lambda x:  getattr(x, 'jets_30_Absolute_up', default),
+                        'jets_30_Absolute_up', lambda x:  getattr(x, 'jets_30_Absolute_up', []),
                         n_jets_Absolute_up = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_Absolute_down', lambda x:  getattr(x, 'jets_30_Absolute_down', default),
+                        'jets_30_Absolute_down', lambda x:  getattr(x, 'jets_30_Absolute_down', []),
                         n_jets_Absolute_down = v(lambda x: len(x), int))
                        )
 jets_30_corr_2016.append(  Block(
@@ -375,19 +375,19 @@ jets_30_corr_2017.append(  Block(
                         n_jets_Absolute_2017_down = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_FlavorQCD_up', lambda x:  getattr(x, 'jets_30_FlavorQCD_up'),
+                        'jets_30_FlavorQCD_up', lambda x:  getattr(x, 'jets_30_FlavorQCD_up', []),
                         n_jets_FlavorQCD_up = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_FlavorQCD_down', lambda x:  getattr(x, 'jets_30_FlavorQCD_down'),
+                        'jets_30_FlavorQCD_down', lambda x:  getattr(x, 'jets_30_FlavorQCD_down', []),
                         n_jets_FlavorQCD_down = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_BBEC1_up', lambda x:  getattr(x, 'jets_30_BBEC1_up'),
+                        'jets_30_BBEC1_up', lambda x:  getattr(x, 'jets_30_BBEC1_up', []),
                         n_jets_BBEC1_up = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_BBEC1_down', lambda x:  getattr(x, 'jets_30_BBEC1_down'),
+                        'jets_30_BBEC1_down', lambda x:  getattr(x, 'jets_30_BBEC1_down', []),
                         n_jets_BBEC1_down = v(lambda x: len(x), int))
                        )
 jets_30_corr_2016.append(  Block(
@@ -407,11 +407,11 @@ jets_30_corr_2017.append(  Block(
                         n_jets_BBEC1_2017_down = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_EC2_up', lambda x:  getattr(x, 'jets_30_EC2_up'),
+                        'jets_30_EC2_up', lambda x:  getattr(x, 'jets_30_EC2_up', []),
                         n_jets_EC2_up = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_EC2_down', lambda x:  getattr(x, 'jets_30_EC2_down'),
+                        'jets_30_EC2_down', lambda x:  getattr(x, 'jets_30_EC2_down', []),
                         n_jets_EC2_down = v(lambda x: len(x), int))
                        )
 jets_30_corr_2016.append(  Block(
@@ -431,11 +431,11 @@ jets_30_corr_2017.append(  Block(
                         n_jets_EC2_2017_down = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_HF_up', lambda x:  getattr(x, 'jets_30_HF_up'),
+                        'jets_30_HF_up', lambda x:  getattr(x, 'jets_30_HF_up', []),
                         n_jets_HF_up = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_HF_down', lambda x:  getattr(x, 'jets_30_HF_down'),
+                        'jets_30_HF_down', lambda x:  getattr(x, 'jets_30_HF_down', []),
                         n_jets_HF_down = v(lambda x: len(x), int))
                        )
 jets_30_corr_2016.append(  Block(
@@ -455,11 +455,11 @@ jets_30_corr_2017.append(  Block(
                         n_jets_HF_2017_down = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_RelativeBal_up', lambda x:  getattr(x, 'jets_30_RelativeBal_up'),
+                        'jets_30_RelativeBal_up', lambda x:  getattr(x, 'jets_30_RelativeBal_up', []),
                         n_jets_RelativeBal_up = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
-                        'jets_30_RelativeBal_down', lambda x:  getattr(x, 'jets_30_RelativeBal_down'),
+                        'jets_30_RelativeBal_down', lambda x:  getattr(x, 'jets_30_RelativeBal_down', []),
                         n_jets_RelativeBal_down = v(lambda x: len(x), int))
                        )
 jets_30_corr_2016.append(  Block(
@@ -484,19 +484,19 @@ bjets_30_corr_2016 = []
 bjets_30_corr_2017 = []
 
 bjets_30_corr.append(  Block(
-                        'bjets_30_Total_up', lambda x:  getattr(x, 'bjets_30_Total_up'),
+                        'bjets_30_Total_up', lambda x:  getattr(x, 'bjets_30_Total_up', []),
                         n_bjets_Total_up = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_Total_down', lambda x:  getattr(x, 'bjets_30_Total_down'),
+                        'bjets_30_Total_down', lambda x:  getattr(x, 'bjets_30_Total_down',[]),
                         n_bjets_Total_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_Absolute_up', lambda x:  getattr(x, 'bjets_30_Absolute_up'),
+                        'bjets_30_Absolute_up', lambda x:  getattr(x, 'bjets_30_Absolute_up',[]),
                         n_bjets_Absolute_up = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_Absolute_down', lambda x:  getattr(x, 'bjets_30_Absolute_down'),
+                        'bjets_30_Absolute_down', lambda x:  getattr(x, 'bjets_30_Absolute_down',[]),
                         n_bjets_Absolute_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr_2016.append(  Block(
@@ -516,19 +516,19 @@ bjets_30_corr_2017.append(  Block(
                         n_bjets_Absolute_2017_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_FlavorQCD_up', lambda x:  getattr(x, 'bjets_30_FlavorQCD_up'),
+                        'bjets_30_FlavorQCD_up', lambda x:  getattr(x, 'bjets_30_FlavorQCD_up',[]),
                         n_bjets_FlavorQCD_up = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_FlavorQCD_down', lambda x:  getattr(x, 'bjets_30_FlavorQCD_down'),
+                        'bjets_30_FlavorQCD_down', lambda x:  getattr(x, 'bjets_30_FlavorQCD_down',[]),
                         n_bjets_FlavorQCD_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_BBEC1_up', lambda x:  getattr(x, 'bjets_30_BBEC1_up'),
+                        'bjets_30_BBEC1_up', lambda x:  getattr(x, 'bjets_30_BBEC1_up',[]),
                         n_bjets_BBEC1_up = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_BBEC1_down', lambda x:  getattr(x, 'bjets_30_BBEC1_down'),
+                        'bjets_30_BBEC1_down', lambda x:  getattr(x, 'bjets_30_BBEC1_down',[]),
                         n_bjets_BBEC1_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr_2016.append(  Block(
@@ -548,11 +548,11 @@ bjets_30_corr_2017.append(  Block(
                         n_bjets_BBEC1_2017_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_EC2_up', lambda x:  getattr(x, 'bjets_30_EC2_up'),
+                        'bjets_30_EC2_up', lambda x:  getattr(x, 'bjets_30_EC2_up',[]),
                         n_bjets_EC2_up = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_EC2_down', lambda x:  getattr(x, 'bjets_30_EC2_down'),
+                        'bjets_30_EC2_down', lambda x:  getattr(x, 'bjets_30_EC2_down',[]),
                         n_bjets_EC2_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr_2016.append(  Block(
@@ -572,11 +572,11 @@ bjets_30_corr_2017.append(  Block(
                         n_bjets_EC2_2017_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_HF_up', lambda x:  getattr(x, 'bjets_30_HF_up'),
+                        'bjets_30_HF_up', lambda x:  getattr(x, 'bjets_30_HF_up',[]),
                         n_bjets_HF_up = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_HF_down', lambda x:  getattr(x, 'bjets_30_HF_down'),
+                        'bjets_30_HF_down', lambda x:  getattr(x, 'bjets_30_HF_down',[]),
                         n_bjets_HF_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr_2016.append(  Block(
@@ -596,11 +596,11 @@ bjets_30_corr_2017.append(  Block(
                         n_bjets_HF_2017_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_RelativeBal_up', lambda x:  getattr(x, 'bjets_30_RelativeBal_up'),
+                        'bjets_30_RelativeBal_up', lambda x:  getattr(x, 'bjets_30_RelativeBal_up',[]),
                         n_bjets_RelativeBal_up = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
-                        'bjets_30_RelativeBal_down', lambda x:  getattr(x, 'bjets_30_RelativeBal_down'),
+                        'bjets_30_RelativeBal_down', lambda x:  getattr(x, 'bjets_30_RelativeBal_down',[]),
                         n_bjets_RelativeBal_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr_2016.append(  Block(
