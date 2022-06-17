@@ -7,6 +7,7 @@ class ComponentCreator(object):
 
     useAAA = None
     useLyonAAA = None
+    useCCin2p3AAA = None
 
     def makeMCComponent(self,name,dataset,user,pattern,xSec=1,useAAA=False,unsafe=False,fracNegWeights=None,dbsInstance=None):
         if self.__class__.useAAA is not None:
@@ -200,6 +201,7 @@ class ComponentCreator(object):
         mapping = 'root://eoscms.cern.ch//eos/cms%s'
         if useAAA: mapping = 'root://cms-xrd-global.cern.ch/%s'
         if self.useLyonAAA: mapping = 'root://lyogrid06.in2p3.fr//dpm/in2p3.fr/home/cms/data%s'
+	if self.useCCin2p3AAA: mapping = 'root://ccxrootdcms.in2p3.fr:1094//pnfs/in2p3.fr/data/grid/cms/disk/data%s'
         return [ str(mapping % f) for f in files]
 
     def getPrimaryDatasetEntries(self, dataset, user, pattern, useAAA=False, run_range=None):
