@@ -248,6 +248,8 @@ syst = Block(
 #    weight_syst = v(lambda x : x.eventSystWeight),
     syst_muon_id = v(lambda x : getattr(x, 'systMuonIdWeight', 0.)),
     syst_muon_iso = v(lambda x : getattr(x, 'systMuonIsoWeight',0.)),
+    stat_muon_id = v(lambda x : getattr(x, 'statMuonIdWeight', 0.)),
+    stat_muon_iso = v(lambda x : getattr(x, 'statMuonIsoWeight',0.)),
     syst_elec_id = v(lambda x : getattr(x, 'systElecIdWeight',0.)),
     syst_elec_reco = v(lambda x : getattr(x, 'systElecRecoWeight',0.)),
 
