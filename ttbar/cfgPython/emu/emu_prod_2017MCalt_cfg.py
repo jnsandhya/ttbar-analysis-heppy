@@ -152,8 +152,8 @@ if year == '2016':
     import CMGTools.ttbar.samples.summer16.ttbar2016 as backgrounds_forindex
     #import CMGTools.ttbar.samples.summer16.ttbar_alternative_2016 as backgrounds_forindex    
 if year == '2017':
-    import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
-    #import CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 as backgrounds_forindex    
+    #import CMGTools.ttbar.samples.fall17.ttbar2017 as backgrounds_forindex    
+    import CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 as backgrounds_forindex    
 
 from CMGTools.ttbar.samples.component_index import ComponentIndex
 bindex = ComponentIndex(backgrounds_forindex)
@@ -171,8 +171,9 @@ if test:
 	#comp = bindex.glob('background_MC_ST_s')[0]
 	#comp = bindex.glob('background_MC_ST_t_top')[0]
 	#comp = bindex.glob('background_MC_tW_top')[0]
-        comp = bindex.glob('MC_signal_dilep')[0]
+        #comp = bindex.glob('MC_signal_dilep')[0]
         #comp = bindex.glob('MC_signal_dilep')[1]
+	comp = bindex.glob('alt_MC_GluonMove_cc')[0]
 	#comp = MC_signal_dilep
                #MC_signal_dilep
                #alt_MC_hdampUp

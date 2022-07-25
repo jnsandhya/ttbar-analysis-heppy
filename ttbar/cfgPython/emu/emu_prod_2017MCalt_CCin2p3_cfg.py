@@ -16,7 +16,8 @@ Event.print_patterns = ['*taus*',
 
 #import pdb; pdb.set_trace()
 
-ComponentCreator.useAAA = True
+ComponentCreator.useCCin2p3AAA = True
+#ComponentCreator.useAAA = True
 #ComponentCreator.useLyonAAA = True
 
 import logging
@@ -54,7 +55,8 @@ if year == '2017':
     from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar_AAA as mc_ttbar
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import mc_ttbar_Lyon as mc_ttbar
-    from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar_remain as alt_ttbar
+    #from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar
+    from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017   import alt_ttbar_CCin2p3 as alt_ttbar
     from CMGTools.ttbar.samples.fall17.ttbar2017   import data_elecmuon
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_singles ##
     #from CMGTools.ttbar.samples.fall17.ttbar2017   import data_muon_electron ##
@@ -172,7 +174,7 @@ if test:
 	#comp = bindex.glob('background_MC_ST_t_top')[0]
 	#comp = bindex.glob('background_MC_tW_top')[0]
         #comp = bindex.glob('MC_signal_dilep')[0]
-        comp = bindex.glob('alt_MC_GluonMove_cc')[0]
+	comp = bindex.glob('alt_MCsemilep_erdOn')[0]
         #comp = bindex.glob('MC_signal_dilep')[1]
 	#comp = MC_signal_dilep
                #MC_signal_dilep

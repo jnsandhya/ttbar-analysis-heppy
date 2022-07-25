@@ -266,19 +266,39 @@ alt_singletop = [
 alt_ttbar = alt_ttbar + alt_singletop
 
 alt_ttbar_CCin2p3 = [
+#    alt_MC_hdampUp_cc,
+#    alt_MC_hdampDown_cc,
+#    alt_MC_CP5Up_cc,
+#    alt_MC_CP5Down_cc,
+#    alt_MC_erdOn_cc,
+#    alt_MC_QCDbased_cc,
+#    alt_MC_GluonMove_cc,
+#    alt_MC_mtop169p5_cc,
+#    alt_MC_mtop175p5_cc,
+#    alt_MCsemilep_CP5Down_cc,
+#empty directories at CC
+    alt_MCsemilep_erdOn,
+    alt_MCsemilep_mtop175p5,
+    alt_MC_ST_t_antitop_mtop169p5,
+]
+
+#alt_ttbar_remain = [
+#    alt_MC_GluonMove
+#]
+
+alt_ttbar_more = [
+    alt_MC_GluonMove_ext,
     alt_MC_hdampUp_cc,
     alt_MC_hdampDown_cc,
-    alt_MC_CP5Up_cc,
     alt_MC_CP5Down_cc,
     alt_MC_erdOn_cc,
     alt_MC_QCDbased_cc,
     alt_MC_GluonMove_cc,
     alt_MC_mtop169p5_cc,
     alt_MC_mtop175p5_cc,
-    alt_MCsemilep_CP5Down_cc,
-    alt_MCsemilep_erdOn_cc,
-    alt_MCsemilep_mtop175p5_cc,
-    alt_MC_ST_t_antitop_mtop169p5,
+    alt_MCsemilep_CP5Down_cc
 ]
+
+alt_ttbar_remain = alt_ttbar_more
 
 
