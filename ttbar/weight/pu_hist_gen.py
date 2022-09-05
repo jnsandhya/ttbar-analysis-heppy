@@ -22,7 +22,7 @@ if options.year == '2016':
 else: 
     from CMGTools.ttbar.samples.fall17.ttbar2017              import mc_ttbar
     if is_alternative_sample:
-        from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 import alt_ttbar as mc_ttbar
+        from CMGTools.ttbar.samples.fall17.ttbar_alternative_2017 import alt_ttbar_more as mc_ttbar
 
 if is_alternative_sample:
     name_alt = '_alternative'

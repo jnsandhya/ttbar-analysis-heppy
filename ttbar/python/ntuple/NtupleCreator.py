@@ -392,13 +392,14 @@ jets_30_corr_2017.append(  Block(
                         'jets_30_AbsoluteStat_2017_down', lambda x:  getattr(x, 'jets_30_AbsoluteStat_2017_down', []),
                         n_jets_AbsoluteStat_2017_down = v(lambda x: len(x), int))
                        )
+
 jets_30_corr_2016.append(  Block(
 			'jets_30_Absolute_2016_up', lambda x:  getattr(x, 'jets_30_Absolute_2016_up', []),
                         n_jets_Absolute_2016_up = v(lambda x: len(x), int))
                        )
 jets_30_corr_2016.append(  Block(
                         'jets_30_Absolute_2016_down', lambda x:  getattr(x, 'jets_30_Absolute_2016_down', []),
-                        n_jets_Absolute_2016_down = v(lambda x: len(x)))
+                        n_jets_Absolute_2016_down = v(lambda x: len(x), int))
                        )
 jets_30_corr_2017.append(  Block(
                         'jets_30_Absolute_2017_up', lambda x:  getattr(x, 'jets_30_Absolute_2017_up', []),
@@ -836,6 +837,7 @@ bjets_30_corr_2017.append(  Block(
                         'bjets_30_AbsoluteStat_2017_down', lambda x:  getattr(x, 'bjets_30_AbsoluteStat_2017_down', []),
                         n_bjets_AbsoluteStat_2017_down = v(lambda x: len(x), int))
                        )
+
 bjets_30_corr_2016.append(  Block(
 			'bjets_30_Absolute_2016_up', lambda x:  getattr(x, 'bjets_30_Absolute_2016_up', []),
                         n_bjets_Absolute_2016_up = v(lambda x: len(x), int))
