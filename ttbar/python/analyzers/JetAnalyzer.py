@@ -3,8 +3,8 @@ from PhysicsTools.Heppy.analyzers.core.AutoHandle import AutoHandle
 from PhysicsTools.Heppy.physicsobjects.Jet import Jet
 from PhysicsTools.HeppyCore.utils.deltar import deltaR2, deltaPhi, matchObjectCollection, matchObjectCollection2, bestMatch,matchObjectCollection3
 
-#from CMGTools.ttbar.utils.JesEnergyScaleSources import fulljesunc_sources_2016
-from CMGTools.ttbar.utils.JesEnergyScaleSources import fulljesunc_sources
+from CMGTools.ttbar.utils.JesEnergyScaleSources import fulljesunc_sources_2016
+from CMGTools.ttbar.utils.JesEnergyScaleSources import fulljesunc_sources_2017
 from CMGTools.ttbar.utils.JesEnergyScaleSources import redjesunc_sources_2016
 from CMGTools.ttbar.utils.JesEnergyScaleSources import redjesunc_sources_2017
 import os 
@@ -99,7 +99,7 @@ class JetAnalyzer(Analyzer):
                     if self.cfg_ana.redsetJEC:
                         jesunc_sources = redjesunc_sources_2016
                     else:
-                        jesunc_sources = fulljesunc_sources
+                        jesunc_sources = fulljesunc_sources_2016
 
                     self.jet_calibrator = JetReCalibrator(
                         global_tag, 'AK4PFchs', do_residual, self.cfg_ana.redsetJEC,
@@ -126,7 +126,7 @@ class JetAnalyzer(Analyzer):
                     if self.cfg_ana.redsetJEC:
                         jesunc_sources = redjesunc_sources_2017
                     else:
-                        jesunc_sources = fulljesunc_sources
+                        jesunc_sources = fulljesunc_sources_2017
 
                     self.jet_calibrator = JetReCalibrator(
                         global_tag, 'AK4PFchs', do_residual, self.cfg_ana.redsetJEC,

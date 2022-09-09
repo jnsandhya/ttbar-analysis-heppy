@@ -141,6 +141,8 @@ class JetReCalibrator:
            The type1METCorr vector, will accumulate the x, y, sumEt type1 MET corrections, to be
            applied to the *RAW MET* (if the feature was turned on in the constructor of the class).
         """
+        
+        print("new jet with pt, eta, phi :::::::: ", jet.pt(), jet.eta(), jet.phi())
         if not metShift:
             metShift = [0,0]
         if not type1METCorr:
@@ -155,14 +157,74 @@ class JetReCalibrator:
             for cdelta,shift in [(1.0, "JECUp"), (-1.0, "JECDown")]:
                 cshift = self.getCorrection(jet,rho,delta+cdelta)
                 setattr(jet, "corr"+shift, cshift)
+            
             if self.groupForUncertaintySources:
                 for group, sources in self.groupForUncertaintySources.iteritems():
                     shift_up = self.getCorrection(jet,rho,delta+1.0,sources=sources)
                     shift_down = self.getCorrection(jet,rho,delta-1.0,sources=sources)
-                    #print("corr_"+group+"_JEC_up", shift_up/jet.corr)
-                    #print("corr_"+group+"_JEC_down", shift_down/jet.corr)
+                    print("corr_"+group+"_JEC_up",  format(shift_up/jet.corr, ".4f"))
+                    print("corr_"+group+"_JEC_down",  format(shift_down/jet.corr, ".4f"))
                     setattr(jet, "corr_"+group+"_JEC_up", shift_up/jet.corr)
                     setattr(jet, "corr_"+group+"_JEC_down", shift_down/jet.corr)
+            
+            
+                #if not self.doredsetJEC:
+                #    print("Now checking my calculation with reduced set:")
+                #
+                #    HF = 0.
+                #    BBEC1_year = 0.
+                #    Absolute = 0. 
+                #    Absolute_year = 0.
+                #    EC2_year = 0. 
+                #    BBEC1 = 0.
+                #    
+                #    HF_up = 0.
+                #    BBEC1_year_up = 0.
+                #    Absolute_up = 0. 
+                #    Absolute_year_up = 0.
+                #    EC2_year_up = 0. 
+                #    BBEC1_up = 0.
+                #    
+                #    HF_down = 0.
+                #    BBEC1_year_down = 0.
+                #    Absolute_down = 0. 
+                #    Absolute_year_down = 0.
+                #    EC2_year_down = 0. 
+                #    BBEC1_down = 0.
+                #
+                #    shift = 0.
+                #
+                #    for group, sources in self.groupForUncertaintySources.iteritems():
+                #        if group not in self.JetUncertaintyBySources:
+                #            print("not defined for this group")
+                #        else:
+                #            self.JetUncertaintyBySources[group].setJetEta(jet.eta())
+                #            self.JetUncertaintyBySources[group].setJetPt(corr * jet.pt() * jet.rawFactor())
+                #            shift = self.JetUncertaintyBySources[group].getUncertainty(True) #self.JetUncertaintyBySources[group].getUncertainty(1) 
+                #            if(group=="PileUpPtBB" or group=="PileUpPtEC1" ):
+                #                BBEC1   += shift**2
+                #               
+                #            if(group=="AbsoluteMPFBias" or group=="AbsoluteScale" or group=="Fragmentation" or group=="PileUpDataMC" or group=="PileUpPtRef" or group=="RelativeFSR" or group=="SinglePionECAL" or group=="SinglePionHCAL"):
+                #                Absolute   += shift**2
+                #           
+                #            if(group=="AbsoluteStat" or group=="RelativeStatFSR" or group=="TimePtEta" ):
+                #                Absolute_year   += shift**2
+                #
+                #    BBEC1_up           = (1+math.sqrt(BBEC1))#/jet.corr                      
+                #    Absolute_up        = (1+math.sqrt(Absolute))#/jet.corr
+                #    Absolute_year_up   = (1+math.sqrt(Absolute_year))#/jet.corr
+                #    BBEC1_down         = (1-math.sqrt(BBEC1))#/jet.corr            
+                #    Absolute_down      = (1-math.sqrt(Absolute))#/jet.corr
+                #    Absolute_year_down = (1-math.sqrt(Absolute_year))#/jet.corr
+                #    
+                #    
+                #    print("BBEC1_up",  BBEC1_up)            
+                #    print("BBEC1_down", BBEC1_down)
+                #    print("Absolute_up",   Absolute_up)
+                #    print("Absolute_down", Absolute_down)
+                #    print("Absolute_year_up",   Absolute_year_up)
+                #    print("Absolute_year_down", Absolute_year_down)
+                    
         if corr <= 0:
             #print("this is where the problem is?")
             return False
@@ -183,6 +245,7 @@ class JetReCalibrator:
                     type1METCorr[2] += rawP4forT1.Et() * (corr - l1corr) 
         jet.setCorrP4(jet.p4() * (corr * raw))
         return True
+
 
     def correctAll(self,jets,rho,delta=0, addCorr=False, addShifts=False, metShift=None, type1METCorr=None):
         """Applies 'correct' to all the jets, discard the ones that have bad corrections (corrected pt <= 0)"""

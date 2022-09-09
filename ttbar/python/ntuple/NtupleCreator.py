@@ -376,23 +376,14 @@ jets_30_corr.append(  Block(
                         'jets_30_AbsoluteScale_down', lambda x:  getattr(x, 'jets_30_AbsoluteScale_down', []),
                         n_jets_AbsoluteScale_down = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_AbsoluteStat_2016_up', lambda x:  getattr(x, 'jets_30_AbsoluteStat_2016_up', []),
-                        n_jets_AbsoluteStat_2016_up = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_AbsoluteStat_up', lambda x:  getattr(x, 'jets_30_AbsoluteStat_up', []),
+                        n_jets_AbsoluteStat_up = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_AbsoluteStat_2016_down', lambda x:  getattr(x, 'jets_30_AbsoluteStat_2016_down', []),
-                        n_jets_AbsoluteStat_2016_down = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_AbsoluteStat_down', lambda x:  getattr(x, 'jets_30_AbsoluteStat_down', []),
+                        n_jets_AbsoluteStat_down = v(lambda x: len(x), int))
                        )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_AbsoluteStat_2017_up', lambda x:  getattr(x, 'jets_30_AbsoluteStat_2017_up', []),
-                        n_jets_AbsoluteStat_2017_up = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_AbsoluteStat_2017_down', lambda x:  getattr(x, 'jets_30_AbsoluteStat_2017_down', []),
-                        n_jets_AbsoluteStat_2017_down = v(lambda x: len(x), int))
-                       )
-
 jets_30_corr_2016.append(  Block(
 			'jets_30_Absolute_2016_up', lambda x:  getattr(x, 'jets_30_Absolute_2016_up', []),
                         n_jets_Absolute_2016_up = v(lambda x: len(x), int))
@@ -517,39 +508,21 @@ jets_30_corr.append(  Block(
                         'jets_30_RelativeFSR_down', lambda x:  getattr(x, 'jets_30_RelativeFSR_down', []),
                         n_jets_RelativeFSR_down = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativeJEREC1_2016_up', lambda x:  getattr(x, 'jets_30_RelativeJEREC1_2016_up', []),
-                        n_jets_RelativeJEREC1_2016_up = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeJEREC1_up', lambda x:  getattr(x, 'jets_30_RelativeJEREC1_up', []),
+                        n_jets_RelativeJEREC1_up = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativeJEREC1_2016_down', lambda x:  getattr(x, 'jets_30_RelativeJEREC1_2016_down', []),
-                        n_jets_RelativeJEREC1_2016_down = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeJEREC1_down', lambda x:  getattr(x, 'jets_30_RelativeJEREC1_down', []),
+                        n_jets_RelativeJEREC1_down = v(lambda x: len(x), int))
                        )
-
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativeJEREC1_2017_up', lambda x:  getattr(x, 'jets_30_RelativeJEREC1_2017_up', []),
-                        n_jets_RelativeJEREC1_2017_up = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeJEREC2_up', lambda x:  getattr(x, 'jets_30_RelativeJEREC2_up', []),
+                        n_jets_RelativeJEREC2_up = v(lambda x: len(x), int))
                        )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativeJEREC1_2017_down', lambda x:  getattr(x, 'jets_30_RelativeJEREC1_2017_down', []),
-                        n_jets_RelativeJEREC1_2017_down = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativeJEREC2_2016_up', lambda x:  getattr(x, 'jets_30_RelativeJEREC2_2016_up', []),
-                        n_jets_RelativeJEREC2_2016_up = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativeJEREC2_2016_down', lambda x:  getattr(x, 'jets_30_RelativeJEREC2_2016_down', []),
-                        n_jets_RelativeJEREC2_2016_down = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativeJEREC2_2017_up', lambda x:  getattr(x, 'jets_30_RelativeJEREC2_2017_up', []),
-                        n_jets_RelativeJEREC2_2017_up = v(lambda x: len(x), int))
-                       )
-
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativeJEREC2_2017_down', lambda x:  getattr(x, 'jets_30_RelativeJEREC2_2017_down', []),
-                        n_jets_RelativeJEREC2_2017_down = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeJEREC2_down', lambda x:  getattr(x, 'jets_30_RelativeJEREC2_down', []),
+                        n_jets_RelativeJEREC2_down = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
                         'jets_30_RelativeJERHF_up', lambda x:  getattr(x, 'jets_30_RelativeJERHF_up', []),
@@ -567,37 +540,21 @@ jets_30_corr.append(  Block(
                         'jets_30_RelativePtBB_down', lambda x:  getattr(x, 'jets_30_RelativePtBB_down', []),
                         n_jets_RelativePtBB_down = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativePtEC1_2016_up', lambda x:  getattr(x, 'jets_30_RelativePtEC1_2016_up', []),
-                        n_jets_RelativePtEC1_2016_up = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativePtEC1_up', lambda x:  getattr(x, 'jets_30_RelativePtEC1_up', []),
+                        n_jets_RelativePtEC1_up = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativePtEC1_2016_down', lambda x:  getattr(x, 'jets_30_RelativePtEC1_2016_down', []),
-                        n_jets_RelativePtEC1_2016_down = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativePtEC1_down', lambda x:  getattr(x, 'jets_30_RelativePtEC1_down', []),
+                        n_jets_RelativePtEC1_down = v(lambda x: len(x), int))
                        )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativePtEC1_2017_up', lambda x:  getattr(x, 'jets_30_RelativePtEC1_2017_up', []),
-                        n_jets_RelativePtEC1_2017_up = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativePtEC2_up', lambda x:  getattr(x, 'jets_30_RelativePtEC2_up', []),
+                        n_jets_RelativePtEC2_up = v(lambda x: len(x), int))
                        )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativePtEC1_2017_down', lambda x:  getattr(x, 'jets_30_RelativePtEC1_2017_down', []),
-                        n_jets_RelativePtEC1_2017_down = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativePtEC2_2016_up', lambda x:  getattr(x, 'jets_30_RelativePtEC2_2016_up', []),
-                        n_jets_RelativePtEC2_2016_up = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativePtEC2_2016_down', lambda x:  getattr(x, 'jets_30_RelativePtEC2_2016_down', []),
-                        n_jets_RelativePtEC2_2016_down = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativePtEC2_2017_up', lambda x:  getattr(x, 'jets_30_RelativePtEC2_2017_up', []),
-                        n_jets_RelativePtEC2_2017_up = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativePtEC2_2017_down', lambda x:  getattr(x, 'jets_30_RelativePtEC2_2017_down', []),
-                        n_jets_RelativePtEC2_2017_down = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativePtEC2_down', lambda x:  getattr(x, 'jets_30_RelativePtEC2_down', []),
+                        n_jets_RelativePtEC2_down = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
                         'jets_30_RelativePtHF_up', lambda x:  getattr(x, 'jets_30_RelativePtHF_up', []),
@@ -607,53 +564,29 @@ jets_30_corr.append(  Block(
                         'jets_30_RelativePtHF_down', lambda x:  getattr(x, 'jets_30_RelativePtHF_down', []),
                         n_jets_RelativePtHF_down = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativeStatEC_2016_up', lambda x:  getattr(x, 'jets_30_RelativeStatEC_2016_up', []),
-                        n_jets_RelativeStatEC_2016_up = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeStatEC_up', lambda x:  getattr(x, 'jets_30_RelativeStatEC_up', []),
+                        n_jets_RelativeStatEC_up = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativeStatEC_2016_down', lambda x:  getattr(x, 'jets_30_RelativeStatEC_2016_down', []),
-                        n_jets_RelativeStatEC_2016_down = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeStatEC_down', lambda x:  getattr(x, 'jets_30_RelativeStatEC_down', []),
+                        n_jets_RelativeStatEC_down = v(lambda x: len(x), int))
                        )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativeStatEC_2017_up', lambda x:  getattr(x, 'jets_30_RelativeStatEC_2017_up', []),
-                        n_jets_RelativeStatEC_2017_up = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeStatFSR_up', lambda x:  getattr(x, 'jets_30_RelativeStatFSR_up', []),
+                        n_jets_RelativeStatFSR_up = v(lambda x: len(x), int))
                        )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativeStatEC_2017_down', lambda x:  getattr(x, 'jets_30_RelativeStatEC_2017_down', []),
-                        n_jets_RelativeStatEC_2017_down = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeStatFSR_down', lambda x:  getattr(x, 'jets_30_RelativeStatFSR_down', []),
+                        n_jets_RelativeStatFSR_down = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativeStatFSR_2016_up', lambda x:  getattr(x, 'jets_30_RelativeStatFSR_2016_up', []),
-                        n_jets_RelativeStatFSR_2016_up = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeStatHF_up', lambda x:  getattr(x, 'jets_30_RelativeStatHF_up', []),
+                        n_jets_RelativeStatHF_up = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativeStatFSR_2016_down', lambda x:  getattr(x, 'jets_30_RelativeStatFSR_2016_down', []),
-                        n_jets_RelativeStatFSR_2016_down = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativeStatFSR_2017_up', lambda x:  getattr(x, 'jets_30_RelativeStatFSR_2017_up', []),
-                        n_jets_RelativeStatFSR_2017_up = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativeStatFSR_2017_down', lambda x:  getattr(x, 'jets_30_RelativeStatFSR_2017_down', []),
-                        n_jets_RelativeStatFSR_2017_down = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativeStatHF_2016_up', lambda x:  getattr(x, 'jets_30_RelativeStatHF_2016_up', []),
-                        n_jets_RelativeStatHF_2016_up = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_RelativeStatHF_2016_down', lambda x:  getattr(x, 'jets_30_RelativeStatHF_2016_down', []),
-                        n_jets_RelativeStatHF_2016_down = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativeStatHF_2017_up', lambda x:  getattr(x, 'jets_30_RelativeStatHF_2017_up', []),
-                        n_jets_RelativeStatHF_2017_up = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_RelativeStatHF_2017_down', lambda x:  getattr(x, 'jets_30_RelativeStatHF_2017_down', []),
-                        n_jets_RelativeStatHF_2017_down = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeStatHF_down', lambda x:  getattr(x, 'jets_30_RelativeStatHF_down', []),
+                        n_jets_RelativeStatHF_down = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
                         'jets_30_SinglePionECAL_up', lambda x:  getattr(x, 'jets_30_SinglePionECAL_up', []),
@@ -671,21 +604,13 @@ jets_30_corr.append(  Block(
                         'jets_30_SinglePionHCAL_down', lambda x:  getattr(x, 'jets_30_SinglePionHCAL_down', []),
                         n_jets_SinglePionHCAL_down = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_TimePtEta_2016_up', lambda x:  getattr(x, 'jets_30_TimePtEta_2016_up', []),
-                        n_jets_TimePtEta_2016_up = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_TimePtEta_up', lambda x:  getattr(x, 'jets_30_TimePtEta_up', []),
+                        n_jets_TimePtEta_up = v(lambda x: len(x), int))
                        )
-jets_30_corr_2016.append(  Block(
-                        'jets_30_TimePtEta_2016_down', lambda x:  getattr(x, 'jets_30_TimePtEta_2016_down', []),
-                        n_jets_TimePtEta_2016_down = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_TimePtEta_2017_up', lambda x:  getattr(x, 'jets_30_TimePtEta_2017_up', []),
-                        n_jets_TimePtEta_2017_up = v(lambda x: len(x), int))
-                       )
-jets_30_corr_2017.append(  Block(
-                        'jets_30_TimePtEta_2017_down', lambda x:  getattr(x, 'jets_30_TimePtEta_2017_down', []),
-                        n_jets_TimePtEta_2017_down = v(lambda x: len(x), int))
+jets_30_corr.append(  Block(
+                        'jets_30_TimePtEta_down', lambda x:  getattr(x, 'jets_30_TimePtEta_down', []),
+                        n_jets_TimePtEta_down = v(lambda x: len(x), int))
                        )
 jets_30_corr.append(  Block(
                         'jets_30_BBEC1_up', lambda x:  getattr(x, 'jets_30_BBEC1_up', []),
@@ -767,6 +692,14 @@ jets_30_corr.append(  Block(
                         'jets_30_RelativeBal_down', lambda x:  getattr(x, 'jets_30_RelativeBal_down', []),
                         n_jets_RelativeBal_down = v(lambda x: len(x), int))
                        )
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeSample_up', lambda x:  getattr(x, 'jets_30_RelativeSample_up', []),
+                        n_jets_RelativeSample_up = v(lambda x: len(x), int))
+                       )
+jets_30_corr.append(  Block(
+                        'jets_30_RelativeSample_down', lambda x:  getattr(x, 'jets_30_RelativeSample_down', []),
+                        n_jets_RelativeSample_down = v(lambda x: len(x), int))
+                       )
 jets_30_corr_2016.append(  Block(
                         'jets_30_RelativeSample_2016_up', lambda x:  getattr(x, 'jets_30_RelativeSample_2016_up', []),
                         n_jets_RelativeSample_2016_up = v(lambda x: len(x), int))
@@ -821,23 +754,14 @@ bjets_30_corr.append(  Block(
                         'bjets_30_AbsoluteScale_down', lambda x:  getattr(x, 'bjets_30_AbsoluteScale_down', []),
                         n_bjets_AbsoluteScale_down = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_AbsoluteStat_2016_up', lambda x:  getattr(x, 'bjets_30_AbsoluteStat_2016_up', []),
-                        n_bjets_AbsoluteStat_2016_up = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_AbsoluteStat_up', lambda x:  getattr(x, 'bjets_30_AbsoluteStat_up', []),
+                        n_bjets_AbsoluteStat_up = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_AbsoluteStat_2016_down', lambda x:  getattr(x, 'bjets_30_AbsoluteStat_2016_down', []),
-                        n_bjets_AbsoluteStat_2016_down = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_AbsoluteStat_down', lambda x:  getattr(x, 'bjets_30_AbsoluteStat_down', []),
+                        n_bjets_AbsoluteStat_down = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_AbsoluteStat_2017_up', lambda x:  getattr(x, 'bjets_30_AbsoluteStat_2017_up', []),
-                        n_bjets_AbsoluteStat_2017_up = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_AbsoluteStat_2017_down', lambda x:  getattr(x, 'bjets_30_AbsoluteStat_2017_down', []),
-                        n_bjets_AbsoluteStat_2017_down = v(lambda x: len(x), int))
-                       )
-
 bjets_30_corr_2016.append(  Block(
 			'bjets_30_Absolute_2016_up', lambda x:  getattr(x, 'bjets_30_Absolute_2016_up', []),
                         n_bjets_Absolute_2016_up = v(lambda x: len(x), int))
@@ -962,39 +886,21 @@ bjets_30_corr.append(  Block(
                         'bjets_30_RelativeFSR_down', lambda x:  getattr(x, 'bjets_30_RelativeFSR_down', []),
                         n_bjets_RelativeFSR_down = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativeJEREC1_2016_up', lambda x:  getattr(x, 'bjets_30_RelativeJEREC1_2016_up', []),
-                        n_bjets_RelativeJEREC1_2016_up = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeJEREC1_up', lambda x:  getattr(x, 'bjets_30_RelativeJEREC1_up', []),
+                        n_bjets_RelativeJEREC1_up = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativeJEREC1_2016_down', lambda x:  getattr(x, 'bjets_30_RelativeJEREC1_2016_down', []),
-                        n_bjets_RelativeJEREC1_2016_down = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeJEREC1_down', lambda x:  getattr(x, 'bjets_30_RelativeJEREC1_down', []),
+                        n_bjets_RelativeJEREC1_down = v(lambda x: len(x), int))
                        )
-
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativeJEREC1_2017_up', lambda x:  getattr(x, 'bjets_30_RelativeJEREC1_2017_up', []),
-                        n_bjets_RelativeJEREC1_2017_up = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeJEREC2_up', lambda x:  getattr(x, 'bjets_30_RelativeJEREC2_up', []),
+                        n_bjets_RelativeJEREC2_up = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativeJEREC1_2017_down', lambda x:  getattr(x, 'bjets_30_RelativeJEREC1_2017_down', []),
-                        n_bjets_RelativeJEREC1_2017_down = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativeJEREC2_2016_up', lambda x:  getattr(x, 'bjets_30_RelativeJEREC2_2016_up', []),
-                        n_bjets_RelativeJEREC2_2016_up = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativeJEREC2_2016_down', lambda x:  getattr(x, 'bjets_30_RelativeJEREC2_2016_down', []),
-                        n_bjets_RelativeJEREC2_2016_down = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativeJEREC2_2017_up', lambda x:  getattr(x, 'bjets_30_RelativeJEREC2_2017_up', []),
-                        n_bjets_RelativeJEREC2_2017_up = v(lambda x: len(x), int))
-                       )
-
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativeJEREC2_2017_down', lambda x:  getattr(x, 'bjets_30_RelativeJEREC2_2017_down', []),
-                        n_bjets_RelativeJEREC2_2017_down = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeJEREC2_down', lambda x:  getattr(x, 'bjets_30_RelativeJEREC2_down', []),
+                        n_bjets_RelativeJEREC2_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
                         'bjets_30_RelativeJERHF_up', lambda x:  getattr(x, 'bjets_30_RelativeJERHF_up', []),
@@ -1012,37 +918,21 @@ bjets_30_corr.append(  Block(
                         'bjets_30_RelativePtBB_down', lambda x:  getattr(x, 'bjets_30_RelativePtBB_down', []),
                         n_bjets_RelativePtBB_down = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativePtEC1_2016_up', lambda x:  getattr(x, 'bjets_30_RelativePtEC1_2016_up', []),
-                        n_bjets_RelativePtEC1_2016_up = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativePtEC1_up', lambda x:  getattr(x, 'bjets_30_RelativePtEC1_up', []),
+                        n_bjets_RelativePtEC1_up = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativePtEC1_2016_down', lambda x:  getattr(x, 'bjets_30_RelativePtEC1_2016_down', []),
-                        n_bjets_RelativePtEC1_2016_down = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativePtEC1_down', lambda x:  getattr(x, 'bjets_30_RelativePtEC1_down', []),
+                        n_bjets_RelativePtEC1_down = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativePtEC1_2017_up', lambda x:  getattr(x, 'bjets_30_RelativePtEC1_2017_up', []),
-                        n_bjets_RelativePtEC1_2017_up = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativePtEC2_up', lambda x:  getattr(x, 'bjets_30_RelativePtEC2_up', []),
+                        n_bjets_RelativePtEC2_up = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativePtEC1_2017_down', lambda x:  getattr(x, 'bjets_30_RelativePtEC1_2017_down', []),
-                        n_bjets_RelativePtEC1_2017_down = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativePtEC2_2016_up', lambda x:  getattr(x, 'bjets_30_RelativePtEC2_2016_up', []),
-                        n_bjets_RelativePtEC2_2016_up = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativePtEC2_2016_down', lambda x:  getattr(x, 'bjets_30_RelativePtEC2_2016_down', []),
-                        n_bjets_RelativePtEC2_2016_down = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativePtEC2_2017_up', lambda x:  getattr(x, 'bjets_30_RelativePtEC2_2017_up', []),
-                        n_bjets_RelativePtEC2_2017_up = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativePtEC2_2017_down', lambda x:  getattr(x, 'bjets_30_RelativePtEC2_2017_down', []),
-                        n_bjets_RelativePtEC2_2017_down = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativePtEC2_down', lambda x:  getattr(x, 'bjets_30_RelativePtEC2_down', []),
+                        n_bjets_RelativePtEC2_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
                         'bjets_30_RelativePtHF_up', lambda x:  getattr(x, 'bjets_30_RelativePtHF_up', []),
@@ -1052,53 +942,29 @@ bjets_30_corr.append(  Block(
                         'bjets_30_RelativePtHF_down', lambda x:  getattr(x, 'bjets_30_RelativePtHF_down', []),
                         n_bjets_RelativePtHF_down = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativeStatEC_2016_up', lambda x:  getattr(x, 'bjets_30_RelativeStatEC_2016_up', []),
-                        n_bjets_RelativeStatEC_2016_up = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeStatEC_up', lambda x:  getattr(x, 'bjets_30_RelativeStatEC_up', []),
+                        n_bjets_RelativeStatEC_up = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativeStatEC_2016_down', lambda x:  getattr(x, 'bjets_30_RelativeStatEC_2016_down', []),
-                        n_bjets_RelativeStatEC_2016_down = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeStatEC_down', lambda x:  getattr(x, 'bjets_30_RelativeStatEC_down', []),
+                        n_bjets_RelativeStatEC_down = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativeStatEC_2017_up', lambda x:  getattr(x, 'bjets_30_RelativeStatEC_2017_up', []),
-                        n_bjets_RelativeStatEC_2017_up = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeStatFSR_up', lambda x:  getattr(x, 'bjets_30_RelativeStatFSR_up', []),
+                        n_bjets_RelativeStatFSR_up = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativeStatEC_2017_down', lambda x:  getattr(x, 'bjets_30_RelativeStatEC_2017_down', []),
-                        n_bjets_RelativeStatEC_2017_down = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeStatFSR_down', lambda x:  getattr(x, 'bjets_30_RelativeStatFSR_down', []),
+                        n_bjets_RelativeStatFSR_down = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativeStatFSR_2016_up', lambda x:  getattr(x, 'bjets_30_RelativeStatFSR_2016_up', []),
-                        n_bjets_RelativeStatFSR_2016_up = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeStatHF_up', lambda x:  getattr(x, 'bjets_30_RelativeStatHF_up', []),
+                        n_bjets_RelativeStatHF_up = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativeStatFSR_2016_down', lambda x:  getattr(x, 'bjets_30_RelativeStatFSR_2016_down', []),
-                        n_bjets_RelativeStatFSR_2016_down = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativeStatFSR_2017_up', lambda x:  getattr(x, 'bjets_30_RelativeStatFSR_2017_up', []),
-                        n_bjets_RelativeStatFSR_2017_up = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativeStatFSR_2017_down', lambda x:  getattr(x, 'bjets_30_RelativeStatFSR_2017_down', []),
-                        n_bjets_RelativeStatFSR_2017_down = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativeStatHF_2016_up', lambda x:  getattr(x, 'bjets_30_RelativeStatHF_2016_up', []),
-                        n_bjets_RelativeStatHF_2016_up = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_RelativeStatHF_2016_down', lambda x:  getattr(x, 'bjets_30_RelativeStatHF_2016_down', []),
-                        n_bjets_RelativeStatHF_2016_down = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativeStatHF_2017_up', lambda x:  getattr(x, 'bjets_30_RelativeStatHF_2017_up', []),
-                        n_bjets_RelativeStatHF_2017_up = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_RelativeStatHF_2017_down', lambda x:  getattr(x, 'bjets_30_RelativeStatHF_2017_down', []),
-                        n_bjets_RelativeStatHF_2017_down = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeStatHF_down', lambda x:  getattr(x, 'bjets_30_RelativeStatHF_down', []),
+                        n_bjets_RelativeStatHF_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
                         'bjets_30_SinglePionECAL_up', lambda x:  getattr(x, 'bjets_30_SinglePionECAL_up', []),
@@ -1116,21 +982,13 @@ bjets_30_corr.append(  Block(
                         'bjets_30_SinglePionHCAL_down', lambda x:  getattr(x, 'bjets_30_SinglePionHCAL_down', []),
                         n_bjets_SinglePionHCAL_down = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_TimePtEta_2016_up', lambda x:  getattr(x, 'bjets_30_TimePtEta_2016_up', []),
-                        n_bjets_TimePtEta_2016_up = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_TimePtEta_up', lambda x:  getattr(x, 'bjets_30_TimePtEta_up', []),
+                        n_bjets_TimePtEta_up = v(lambda x: len(x), int))
                        )
-bjets_30_corr_2016.append(  Block(
-                        'bjets_30_TimePtEta_2016_down', lambda x:  getattr(x, 'bjets_30_TimePtEta_2016_down', []),
-                        n_bjets_TimePtEta_2016_down = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_TimePtEta_2017_up', lambda x:  getattr(x, 'bjets_30_TimePtEta_2017_up', []),
-                        n_bjets_TimePtEta_2017_up = v(lambda x: len(x), int))
-                       )
-bjets_30_corr_2017.append(  Block(
-                        'bjets_30_TimePtEta_2017_down', lambda x:  getattr(x, 'bjets_30_TimePtEta_2017_down', []),
-                        n_bjets_TimePtEta_2017_down = v(lambda x: len(x), int))
+bjets_30_corr.append(  Block(
+                        'bjets_30_TimePtEta_down', lambda x:  getattr(x, 'bjets_30_TimePtEta_down', []),
+                        n_bjets_TimePtEta_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr.append(  Block(
                         'bjets_30_BBEC1_up', lambda x:  getattr(x, 'bjets_30_BBEC1_up', []),
@@ -1212,6 +1070,14 @@ bjets_30_corr.append(  Block(
                         'bjets_30_RelativeBal_down', lambda x:  getattr(x, 'bjets_30_RelativeBal_down', []),
                         n_bjets_RelativeBal_down = v(lambda x: len(x), int))
                        )
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeSample_up', lambda x:  getattr(x, 'bjets_30_RelativeSample_up', []),
+                        n_bjets_RelativeSample_up = v(lambda x: len(x), int))
+                       )
+bjets_30_corr.append(  Block(
+                        'bjets_30_RelativeSample_down', lambda x:  getattr(x, 'bjets_30_RelativeSample_down', []),
+                        n_bjets_RelativeSample_down = v(lambda x: len(x), int))
+                       )
 bjets_30_corr_2016.append(  Block(
                         'bjets_30_RelativeSample_2016_up', lambda x:  getattr(x, 'bjets_30_RelativeSample_2016_up', []),
                         n_bjets_RelativeSample_2016_up = v(lambda x: len(x), int))
@@ -1228,11 +1094,6 @@ bjets_30_corr_2017.append(  Block(
                         'bjets_30_RelativeSample_2017_down', lambda x:  getattr(x, 'bjets_30_RelativeSample_2017_down', []),
                         n_bjets_RelativeSample_2017_down = v(lambda x: len(x), int))
                        )
-
-
-
-
-
 
 #for i in range(len(jets_30_corr)):
 #    jets_30_corr_i = jets_30_corr[i]

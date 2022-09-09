@@ -1,10 +1,9 @@
 ### list and groupment of sources for Jet Energy Scales systematic shifts
 
-fulljesunc_sources = {
+fulljesunc_sources_2016 = {
     'AbsoluteMPFBias'          : ["AbsoluteMPFBias"], 
     'AbsoluteScale'            : ["AbsoluteScale"], 
     'AbsoluteStat'             : ["AbsoluteStat"], 
-    'FlavorQCD'                : ["FlavorQCD"], 
     'FlavorPureGluon'          : ["FlavorPureGluon"], 
     'FlavorPureQuark'          : ["FlavorPureQuark"], 
     'FlavorPureCharm'          : ["FlavorPureCharm"], 
@@ -24,15 +23,25 @@ fulljesunc_sources = {
     'RelativePtEC1'            : ["RelativePtEC1"], 
     'RelativePtEC2'            : ["RelativePtEC2"], 
     'RelativePtHF'             : ["RelativePtHF"], 
-    'RelativeBal'              : ["RelativeBal"],
-    'RelativeSample'           : ["RelativeSample"],
     'RelativeStatEC'           : ["RelativeStatEC"],
     'RelativeStatFSR'          : ["RelativeStatFSR"],
     'RelativeStatHF'           : ["RelativeStatHF"],
     'SinglePionECAL'           : ["SinglePionECAL"],
     'SinglePionHCAL'           : ["SinglePionHCAL"], 
     'TimePtEta'                : ["TimePtEta"], 
-    'Total'                    : ["Total"]                        
+    'FlavorQCD'                : ["FlavorQCD"], 
+    'Total'                    : ["Total"],
+    'RelativeSample'           : ["RelativeSample"],
+    'RelativeSample_2016'      : ["RelativeSample"],
+    'RelativeBal'              : ["RelativeBal"],
+    'EC2'                      : ["PileUpPtEC2"], 
+    'BBEC1'                    : ["PileUpPtBB","PileUpPtEC1","RelativePtBB"],
+    'Absolute'                 : ["AbsoluteMPFBias","AbsoluteScale","Fragmentation","PileUpDataMC","PileUpPtRef","RelativeFSR","SinglePionECAL","SinglePionHCAL"],
+    'Absolute_2016'            : ["AbsoluteStat","RelativeStatFSR","TimePtEta"],
+    'BBEC1_2016'               : ["RelativeJEREC1","RelativePtEC1","RelativeStatEC"],
+    'HF'                       : ["PileUpPtHF","RelativeJERHF","RelativePtHF"],
+    'HF_2016'                  : ["RelativeStatHF"],
+    'EC2_2016'                 : ["RelativeJEREC2","RelativePtEC2"]
     #'SubTotalPileUp'      : ["SubTotalPileUp"],
     #'SubTotalRelative'    : ["SubTotalRelative"],
     #'SubTotalPt'          : ["SubTotalPt"],
@@ -48,6 +57,51 @@ fulljesunc_sources = {
     #                              : ["PileUpPtHF"], 
     #                              : ["RelativeJERHF"
     #                              ]],
+}
+
+fulljesunc_sources_2017 = {
+    'AbsoluteMPFBias'          : ["AbsoluteMPFBias"], 
+    'AbsoluteScale'            : ["AbsoluteScale"], 
+    'AbsoluteStat'             : ["AbsoluteStat"], 
+    'FlavorPureGluon'          : ["FlavorPureGluon"], 
+    'FlavorPureQuark'          : ["FlavorPureQuark"], 
+    'FlavorPureCharm'          : ["FlavorPureCharm"], 
+    'FlavorPureBottom'         : ["FlavorPureBottom"], 
+    'Fragmentation'            : ["Fragmentation"], 
+    'PileUpDataMC'             : ["PileUpDataMC"],
+    'PileUpPtBB'               : ["PileUpPtBB"], 
+    'PileUpPtEC1'              : ["PileUpPtEC1"], 
+    'PileUpPtEC2'              : ["PileUpPtEC2"], 
+    'PileUpPtHF'               : ["PileUpPtHF"], 
+    'PileUpPtRef'              : ["PileUpPtRef"],
+    'RelativeFSR'              : ["RelativeFSR"],
+    'RelativeJEREC1'           : ["RelativeJEREC1"], 
+    'RelativeJEREC2'           : ["RelativeJEREC2"], 
+    'RelativeJERHF'            : ["RelativeJERHF"], 
+    'RelativePtBB'             : ["RelativePtBB"],
+    'RelativePtEC1'            : ["RelativePtEC1"], 
+    'RelativePtEC2'            : ["RelativePtEC2"], 
+    'RelativePtHF'             : ["RelativePtHF"], 
+    'RelativeStatEC'           : ["RelativeStatEC"],
+    'RelativeStatFSR'          : ["RelativeStatFSR"],
+    'RelativeStatHF'           : ["RelativeStatHF"],
+    'SinglePionECAL'           : ["SinglePionECAL"],
+    'SinglePionHCAL'           : ["SinglePionHCAL"], 
+    'TimePtEta'                : ["TimePtEta"], 
+    'FlavorQCD'                : ["FlavorQCD"], 
+    'Total'                    : ["Total"],
+    'RelativeSample'           : ["RelativeSample"],
+    'RelativeSample_2017'      : ["RelativeSample"],
+    'RelativeBal'              : ["RelativeBal"],
+    'EC2'                      : ["PileUpPtEC2"], 
+    'BBEC1'                    : ["PileUpPtBB","PileUpPtEC1","RelativePtBB"],
+    'Absolute'                 : ["AbsoluteMPFBias","AbsoluteScale","Fragmentation","PileUpDataMC","PileUpPtRef","RelativeFSR","SinglePionECAL","SinglePionHCAL"],
+    'Absolute_2017'            : ["AbsoluteStat","RelativeStatFSR","TimePtEta"],
+    'BBEC1_2017'               : ["RelativeJEREC1","RelativePtEC1","RelativeStatEC"],
+    'HF'                       : ["PileUpPtHF","RelativeJERHF","RelativePtHF"],
+    'HF_2017'                  : ["RelativeStatHF"],
+    'EC2_2017'                 : ["RelativeJEREC2","RelativePtEC2"]
+
 }
 
 
