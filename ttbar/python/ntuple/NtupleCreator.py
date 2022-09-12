@@ -330,10 +330,6 @@ up_down = ['up','down']
 #        bjets_30_corr.append(bjets = Block(
 #					'bjets_30', lambda x: x.bjets_30,
 #    					n_bjets = v(lambda x: len(x), int),
-
-
-
-
 jets_30_corr = []
 jets_30_corr_2016 = []
 jets_30_corr_2017 = []
@@ -768,7 +764,7 @@ bjets_30_corr_2016.append(  Block(
                        )
 bjets_30_corr_2016.append(  Block(
                         'bjets_30_Absolute_2016_down', lambda x:  getattr(x, 'bjets_30_Absolute_2016_down', []),
-                        n_bjets_Absolute_2016_down = v(lambda x: len(x)))
+                        n_bjets_Absolute_2016_down = v(lambda x: len(x), int))
                        )
 bjets_30_corr_2017.append(  Block(
                         'bjets_30_Absolute_2017_up', lambda x:  getattr(x, 'bjets_30_Absolute_2017_up', []),

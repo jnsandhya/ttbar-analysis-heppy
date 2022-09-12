@@ -142,7 +142,7 @@ class JetReCalibrator:
            applied to the *RAW MET* (if the feature was turned on in the constructor of the class).
         """
         
-        print("new jet with pt, eta, phi :::::::: ", jet.pt(), jet.eta(), jet.phi())
+        #print("new jet with pt, eta, phi :::::::: ", jet.pt(), jet.eta(), jet.phi())
         if not metShift:
             metShift = [0,0]
         if not type1METCorr:
@@ -162,8 +162,8 @@ class JetReCalibrator:
                 for group, sources in self.groupForUncertaintySources.iteritems():
                     shift_up = self.getCorrection(jet,rho,delta+1.0,sources=sources)
                     shift_down = self.getCorrection(jet,rho,delta-1.0,sources=sources)
-                    print("corr_"+group+"_JEC_up",  format(shift_up/jet.corr, ".4f"))
-                    print("corr_"+group+"_JEC_down",  format(shift_down/jet.corr, ".4f"))
+                    #print("corr_"+group+"_JEC_up",  format(shift_up/jet.corr, ".4f"))
+                    #print("corr_"+group+"_JEC_down",  format(shift_down/jet.corr, ".4f"))
                     setattr(jet, "corr_"+group+"_JEC_up", shift_up/jet.corr)
                     setattr(jet, "corr_"+group+"_JEC_down", shift_down/jet.corr)
             
