@@ -744,7 +744,7 @@ for source in jesunc_sources:
                                 jets_30_corr_name,
                                 output = jets_30_corr_name,
                                 src = 'jets_20_clean',
-                                filter_func = lambda x : (abs(x.partonFlavour())<4 and abs(x.partonFlavour())>0 and x.corr_FlavorPureQuark_JEC_up*x.pt()>30) or (abs(x.partonFlavour())>4 and x.pt()>30))
+                                filter_func = lambda x : (abs(x.partonFlavour())<4 and abs(x.partonFlavour())>0 and x.corr_FlavorPureQuark_JEC_up*x.pt()>30) or (abs(x.partonFlavour())>4 and abs(x.partonFlavour()) < 1 and x.pt()>30))
                         )
                 elif source=="FlavorPureQuark" and unc=="down":
                         jets_30_corr.append(
@@ -752,7 +752,7 @@ for source in jesunc_sources:
                                 jets_30_corr_name,
                                 output = jets_30_corr_name,
                                 src = 'jets_20_clean',
-                                filter_func = lambda x : (abs(x.partonFlavour())<4 and abs(x.partonFlavour())>0 and x.corr_FlavorPureQuark_JEC_down*x.pt()>30) or (abs(x.partonFlavour())>4 and x.pt()>30))
+                                filter_func = lambda x : (abs(x.partonFlavour())<4 and abs(x.partonFlavour())>0 and x.corr_FlavorPureQuark_JEC_down*x.pt()>30) or (abs(x.partonFlavour())>4 and abs(x.partonFlavour()) < 1 and x.pt()>30))
                                 )
 
                 elif source=="FlavorPureCharm" and unc=="up":
